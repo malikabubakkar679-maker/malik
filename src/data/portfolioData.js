@@ -8,7 +8,7 @@ export const PERSONAL_INFO = {
   location: "Lahore, Pakistan • Available Globally",
   status: "AVAILABLE FOR SELECT PROJECTS & FULL-TIME COMMISSIONS",
   email: "malikabubakkar523@gmail.com",
-  heroImage: "/images/malik-abubakkar.webp",
+  heroImage: "/images/malik-cutout-transparent.png",
   workingImage: "/images/malik-working.webp",
   heroIntro:
     "I build thoughtful digital experiences, modern web applications and interactive interfaces with a strong focus on performance, usability and visual quality.",
