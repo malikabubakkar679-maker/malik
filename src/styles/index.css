@@ -469,12 +469,12 @@ button {
 }
 
 .nav-logo-img {
-  height: clamp(46px, 5.5vw, 66px);
+  height: clamp(54px, 6.8vw, 78px);
   width: auto;
-  max-width: 250px;
+  max-width: 260px;
   object-fit: contain;
   mix-blend-mode: multiply;
-  filter: contrast(1.15) brightness(0.95);
+  filter: contrast(1.2) brightness(0.9);
   transition: transform var(--transition-fast);
 }
 
@@ -2258,8 +2258,8 @@ button {
   }
 
   .nav-logo-img {
-    height: 48px !important;
-    max-width: 190px !important;
+    height: 58px !important;
+    max-width: 220px !important;
   }
 
   /* Projects Mobile: Enable Slider, Disable Desktop Spreads */
