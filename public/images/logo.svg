@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 320" width="100%" height="100%">
+  <defs>
+    <style>
+      .monogram {
+        font-family: 'Playfair Display', 'Cinzel', Georgia, serif;
+        font-size: 210px;
+        font-weight: 700;
+        fill: #141416;
+      }
+      .name-text {
+        font-family: 'Playfair Display', 'Cinzel', Georgia, serif;
+        font-size: 34px;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        fill: #141416;
+      }
+    </style>
+  </defs>
+  
+  <!-- Interlocking MA Monogram -->
+  <g transform="translate(45, 10)">
+    <!-- Letter M -->
+    <text x="30" y="195" class="monogram" letter-spacing="-0.04em">M</text>
+    <!-- Letter A intersecting -->
+    <text x="175" y="195" class="monogram" letter-spacing="-0.04em">A</text>
+    <!-- Custom elegant diagonal cut line -->
+    <line x1="185" y1="35" x2="250" y2="200" stroke="#FAF8F5" stroke-width="6" />
+    <line x1="183" y1="35" x2="248" y2="200" stroke="#141416" stroke-width="2" />
+  </g>
+
+  <!-- Subtitle Text: MALIK ABUBAKKAR -->
+  <text x="250" y="275" text-anchor="middle" class="name-text">MALIK ABUBAKKAR</text>
+</svg>
