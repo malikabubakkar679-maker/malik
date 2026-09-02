@@ -8,18 +8,19 @@ function Navigation({ onOpenInquiry }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("hero");
 
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Smart Hide on Scroll Down, Show on Scroll Up
+  // Smart Hide on Scroll Down, Show on Scroll Up + Active Section Spy
   useEffect(() => {
     let lastScrollY = window.scrollY;
 
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
-      if (currentScrollY > 60) {
+      if (currentScrollY > 40) {
         setIsScrolled(true);
       } else {
         setIsScrolled(false);
@@ -32,6 +33,19 @@ function Navigation({ onOpenInquiry }) {
       }
 
       lastScrollY = currentScrollY;
+
+      // Section highlight spy
+      const sections = ["hero", "work", "about", "services", "skills", "experience", "contact"];
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const el = document.getElementById(sections[i]);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= 200) {
+            setActiveSection(sections[i]);
+            break;
+          }
+        }
+      }
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -41,6 +55,7 @@ function Navigation({ onOpenInquiry }) {
   const handleNavClick = (anchorId) => {
     soundEngine.playClick();
     setIsMobileMenuOpen(false);
+    setActiveSection(anchorId);
 
     if (location.pathname !== "/") {
       navigate("/");
@@ -61,7 +76,7 @@ function Navigation({ onOpenInquiry }) {
           isHidden ? "nav-hidden" : ""
         }`}
       >
-        {/* Official Transparent Logo — Large & Crisp */}
+        {/* Official Transparent Logo */}
         <Link
           to="/"
           className="nav-logo-brand"
@@ -80,65 +95,72 @@ function Navigation({ onOpenInquiry }) {
           <ul className="nav-links">
             <li>
               <button
-                className="nav-link-item"
+                className={`nav-link-item ${activeSection === "hero" ? "active" : ""}`}
                 onClick={() => handleNavClick("hero")}
                 data-cursor="link"
               >
-                Home
+                <span>HOME</span>
+                {activeSection === "hero" && <span className="nav-active-dot" />}
               </button>
             </li>
             <li>
               <button
-                className="nav-link-item"
+                className={`nav-link-item ${activeSection === "work" ? "active" : ""}`}
                 onClick={() => handleNavClick("work")}
                 data-cursor="link"
               >
-                Work
+                <span>WORK</span>
+                {activeSection === "work" && <span className="nav-active-dot" />}
               </button>
             </li>
             <li>
               <button
-                className="nav-link-item"
+                className={`nav-link-item ${activeSection === "about" ? "active" : ""}`}
                 onClick={() => handleNavClick("about")}
                 data-cursor="link"
               >
-                About
+                <span>ABOUT</span>
+                {activeSection === "about" && <span className="nav-active-dot" />}
               </button>
             </li>
             <li>
               <button
-                className="nav-link-item"
+                className={`nav-link-item ${activeSection === "services" ? "active" : ""}`}
                 onClick={() => handleNavClick("services")}
                 data-cursor="link"
               >
-                Services
+                <span>SERVICES</span>
+                {activeSection === "services" && <span className="nav-active-dot" />}
               </button>
             </li>
             <li>
               <button
-                className="nav-link-item"
+                className={`nav-link-item ${activeSection === "skills" ? "active" : ""}`}
                 onClick={() => handleNavClick("skills")}
                 data-cursor="link"
               >
-                Skills
+                <span>SKILLS</span>
+                {activeSection === "skills" && <span className="nav-active-dot" />}
               </button>
             </li>
             <li>
               <button
-                className="nav-link-item"
+                className={`nav-link-item ${activeSection === "experience" ? "active" : ""}`}
                 onClick={() => handleNavClick("experience")}
                 data-cursor="link"
               >
-                Experience
+                <span>EXPERIENCE</span>
+                {activeSection === "experience" && <span className="nav-active-dot" />}
               </button>
             </li>
             <li>
               <button
-                className="nav-link-item"
+                className={`nav-link-item ${activeSection === "contact" ? "active" : ""}`}
                 onClick={() => handleNavClick("contact")}
                 data-cursor="link"
               >
-                Contact
+                <span>CONTACT</span>
+                {activeSection === "contact" && <span className="nav-active-dot" />}
               </button>
             </li>
           </ul>
@@ -154,7 +176,8 @@ function Navigation({ onOpenInquiry }) {
             className="btn-primary-editorial nav-desktop-cta"
             data-cursor="link"
           >
-            LET'S TALK
+            <span>LET'S TALK</span>
+            <ArrowUpRight size={14} className="nav-cta-arrow" />
           </button>
 
           {/* Mobile Hamburger Menu Trigger */}
@@ -173,7 +196,7 @@ function Navigation({ onOpenInquiry }) {
         </div>
       </header>
 
-      {/* Fullscreen Mobile Drawer Containing All Navigation Buttons */}
+      {/* Fullscreen Mobile Drawer */}
       <div className={`mobile-drawer ${isMobileMenuOpen ? "open" : ""}`}>
         <div className="mobile-drawer-top">
           <div className="badge-tag" style={{ marginBottom: "1.5rem" }}>
