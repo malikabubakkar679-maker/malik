@@ -173,11 +173,11 @@ function Navigation({ onOpenInquiry }) {
               soundEngine.playWhoosh("open");
               onOpenInquiry?.();
             }}
-            className="btn-primary-editorial nav-desktop-cta"
+            className="btn-primary-editorial nav-header-cta"
             data-cursor="link"
           >
             <span>LET'S TALK</span>
-            <ArrowUpRight size={14} className="nav-cta-arrow" />
+            <ArrowUpRight size={13} className="nav-cta-arrow" />
           </button>
 
           {/* Mobile Hamburger Menu Trigger */}

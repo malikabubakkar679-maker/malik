@@ -1168,6 +1168,162 @@ button {
 }
 
 /* ==========================================================================
+   MOBILE HERO STAGE STYLING (Hidden on desktop, active <=960px)
+   ========================================================================== */
+.hero-mobile-stage,
+.editorial-hero-mobile-stage {
+  display: none;
+}
+
+.hero-desktop-stage {
+  display: grid;
+}
+
+.hero-desktop-proof {
+  display: flex;
+}
+
+.editorial-hero-mobile-stage {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  z-index: 5;
+}
+
+.hero-mobile-greeting-wrap {
+  margin: 0.35rem auto 0.2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-mobile-serif {
+  font-family: var(--font-serif), Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(2.8rem, 11vw, 4.4rem);
+  line-height: 1;
+  letter-spacing: -0.025em;
+  color: #121214;
+  display: block;
+}
+
+.hero-mobile-portrait-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin: 0.15rem auto 0.35rem;
+  min-height: clamp(270px, 42vh, 340px);
+}
+
+.hero-mobile-portrait-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(230px, 66vw, 280px);
+  height: clamp(230px, 66vw, 280px);
+  border-radius: 50%;
+  background: radial-gradient(circle, #f4dfc3 0%, #faeee0 60%, rgba(255, 253, 249, 0) 100%);
+  box-shadow: 0 16px 50px rgba(220, 180, 130, 0.22);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero-mobile-portrait-frame {
+  position: relative;
+  z-index: 2;
+  height: clamp(270px, 42vh, 340px);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.hero-mobile-portrait-img {
+  height: 100%;
+  max-height: 100%;
+  width: auto;
+  object-fit: contain;
+  object-position: bottom center;
+  -webkit-mask-image: linear-gradient(to bottom, #000 80%, rgba(0, 0, 0, 0) 100%);
+  mask-image: linear-gradient(to bottom, #000 80%, rgba(0, 0, 0, 0) 100%);
+  user-select: none;
+  pointer-events: none;
+}
+
+.hero-mobile-name-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+  margin-top: 0.6rem;
+}
+
+.hero-mobile-iam {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #71717a;
+}
+
+.hero-mobile-fullname {
+  font-family: 'Bebas Neue', 'Anton', var(--font-display), sans-serif;
+  font-size: clamp(2.4rem, 9.8vw, 3.8rem);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #121214;
+  margin: 0;
+  text-align: center;
+}
+
+.hero-mobile-role {
+  font-family: var(--font-mono);
+  font-size: clamp(0.78rem, 2.6vw, 0.92rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #d97706;
+  margin-top: 0.35rem;
+  text-align: center;
+}
+
+.hero-mobile-desc {
+  font-family: var(--font-sans);
+  font-size: clamp(0.85rem, 2.8vw, 0.94rem);
+  line-height: 1.55;
+  color: #52525d;
+  max-width: 320px;
+  margin: 0.65rem auto 0;
+  text-align: center;
+}
+
+.hero-mobile-ctas {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  margin-top: 1.25rem;
+  width: 100%;
+  max-width: 340px;
+}
+
+.hero-mobile-scroll-wrap {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+/* ==========================================================================
    STATEMENT & EDITORIAL STATS SECTION
    ========================================================================== */
 
@@ -2458,7 +2614,7 @@ button {
     max-width: 100vw !important;
   }
 
-  .nav-links, .desktop-nav-wrap, .nav-desktop-cta {
+  .nav-links, .desktop-nav-wrap, .nav-desktop-cta, .nav-header-cta {
     display: none !important;
   }
 
@@ -2484,137 +2640,21 @@ button {
     display: block !important;
   }
 
-  /* Editorial Hero Mobile Responsive Overrides */
+  /* Editorial Hero Mobile Stage Activation */
   .editorial-hero-section {
-    padding: 5rem 1.15rem 1.5rem !important;
+    padding: 5.25rem 1.15rem 1.75rem !important;
     min-height: auto !important;
     max-width: 100vw !important;
     overflow-x: hidden !important;
   }
 
-  .editorial-hero-stage {
-    min-height: auto !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    text-align: center !important;
-    gap: 2.2rem !important;
-    padding: 0.5rem 0 1rem !important;
-    width: 100% !important;
-  }
-
-  .editorial-hero-left {
-    align-items: center !important;
-    text-align: center !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    gap: 1.25rem !important;
-  }
-
-  .hero-pill-badge {
-    margin: 0 auto !important;
-  }
-
-  .hero-typography-group {
-    align-items: center !important;
-    text-align: center !important;
-    width: 100% !important;
-    gap: 0.6rem !important;
-  }
-
-  .hero-editorial-headline {
-    align-items: center !important;
-    text-align: center !important;
-  }
-
-  .hero-editorial-greeting,
-  .hero-editorial-name {
-    font-size: clamp(2.2rem, 9vw, 3.2rem) !important;
-    line-height: 1.08 !important;
-    text-align: center !important;
-  }
-
-  .hero-editorial-role {
-    font-size: 0.9rem !important;
-    text-align: center !important;
-  }
-
-  .hero-editorial-desc {
-    border-left: none !important;
-    border-top: 2px solid #e7d8c5 !important;
-    padding-left: 0 !important;
-    padding-top: 0.65rem !important;
-    font-size: 0.88rem !important;
-    line-height: 1.55 !important;
-    text-align: center !important;
-    max-width: 340px !important;
-  }
-
-  .hero-editorial-ctas {
-    width: 100% !important;
-    max-width: 320px !important;
-    justify-content: center !important;
-    flex-direction: column !important;
-    gap: 0.55rem !important;
-    margin-top: 0.25rem !important;
-  }
-
-  .hero-btn-primary, .hero-btn-secondary {
-    width: 100% !important;
-    justify-content: center !important;
-    padding: 0.75rem 1.25rem !important;
-  }
-
-  .editorial-hero-right {
-    min-height: auto !important;
-    width: 100% !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    position: relative !important;
-  }
-
-  .hero-dot-grid-accent {
+  .hero-desktop-stage,
+  .hero-desktop-proof {
     display: none !important;
   }
 
-  .hero-portrait-disk-backdrop {
-    width: clamp(260px, 75vw, 320px) !important;
-    height: clamp(260px, 75vw, 320px) !important;
-    top: 42% !important;
-    left: 50% !important;
-  }
-
-  .hero-portrait-stage {
-    height: clamp(320px, 50vh, 420px) !important;
-    width: 100% !important;
-    margin-bottom: 0.75rem !important;
-  }
-
-  .hero-cutout-image {
-    max-height: 100% !important;
-    width: auto !important;
-  }
-
-  .hero-floating-stats-card {
-    position: relative !important;
-    top: auto !important;
-    right: auto !important;
-    transform: none !important;
-    animation: none !important;
-    width: 100% !important;
-    max-width: 340px !important;
-    margin: 0.5rem auto 0 !important;
-    padding: 0.9rem 1.1rem !important;
-  }
-
-  .hero-bottom-proof-bar {
-    margin-top: 1.5rem !important;
-    gap: 1rem !important;
-  }
-
-  .hero-partner-logos-row {
-    gap: 1.25rem 2rem !important;
+  .hero-mobile-stage {
+    display: flex !important;
   }
 
   /* Statement & 2-Column Stats on Mobile */

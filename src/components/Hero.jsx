@@ -4,7 +4,7 @@ import { PERSONAL_INFO } from "../data/portfolioData";
 import { soundEngine } from "../utils/audioUtils";
 import { ArrowDown, ArrowUpRight, User, Code2, Rocket, Users } from "lucide-react";
 
-// Crisp SVG Logos for Trusted Clients & Partners
+// Crisp SVG Logos for Trusted Clients & Partners (Desktop)
 const PARTNER_LOGOS = [
   {
     name: "Google",
@@ -93,42 +93,49 @@ export default function Hero({ isIntroReady }) {
       );
 
       tl.fromTo(
-        ".hero-editorial-greeting",
-        { opacity: 0, y: 25 },
+        ".hero-mobile-serif",
+        { opacity: 0, y: 20 },
         { opacity: 1, y: 0, duration: 0.8 },
         "-=0.5"
       );
 
       tl.fromTo(
-        ".hero-editorial-name",
-        { opacity: 0, y: 30, scale: 0.98 },
+        ".hero-editorial-greeting",
+        { opacity: 0, y: 25 },
+        { opacity: 1, y: 0, duration: 0.8 },
+        "-=0.6"
+      );
+
+      tl.fromTo(
+        ".hero-editorial-name, .hero-mobile-fullname",
+        { opacity: 0, y: 25, scale: 0.98 },
         { opacity: 1, y: 0, scale: 1, duration: 0.9, ease: "power4.out" },
         "-=0.6"
       );
 
       tl.fromTo(
-        ".hero-editorial-role",
-        { opacity: 0, y: 20 },
+        ".hero-editorial-role, .hero-mobile-role",
+        { opacity: 0, y: 15 },
         { opacity: 1, y: 0, duration: 0.7 },
         "-=0.6"
       );
 
       tl.fromTo(
-        ".hero-editorial-desc",
-        { opacity: 0, y: 20 },
+        ".hero-editorial-desc, .hero-mobile-desc",
+        { opacity: 0, y: 15 },
         { opacity: 1, y: 0, duration: 0.7 },
         "-=0.5"
       );
 
       tl.fromTo(
-        ".hero-editorial-ctas",
-        { opacity: 0, y: 20 },
+        ".hero-editorial-ctas, .hero-mobile-ctas",
+        { opacity: 0, y: 15 },
         { opacity: 1, y: 0, duration: 0.6 },
         "-=0.4"
       );
 
       tl.fromTo(
-        ".hero-portrait-disk-backdrop",
+        ".hero-portrait-disk-backdrop, .hero-mobile-portrait-glow",
         { opacity: 0, scale: 0.85 },
         { opacity: 1, scale: 1, duration: 1.1, ease: "power3.out" },
         "-=0.9"
@@ -136,7 +143,7 @@ export default function Hero({ isIntroReady }) {
 
       tl.fromTo(
         ".hero-cutout-image",
-        { opacity: 0, y: 40 },
+        { opacity: 0, y: 35 },
         { opacity: 1, y: 0, duration: 1.1, ease: "power4.out" },
         "-=0.9"
       );
@@ -149,7 +156,7 @@ export default function Hero({ isIntroReady }) {
       );
 
       tl.fromTo(
-        ".hero-bottom-proof-bar",
+        ".hero-bottom-proof-bar, .hero-mobile-scroll-wrap",
         { opacity: 0, y: 15 },
         { opacity: 1, y: 0, duration: 0.8 },
         "-=0.5"
@@ -159,14 +166,14 @@ export default function Hero({ isIntroReady }) {
     return () => ctx.revert();
   }, [isIntroReady]);
 
-  // Subtle Interactive Parallax Tilt
+  // Subtle Interactive Parallax Tilt on Desktop
   useEffect(() => {
     const heroEl = heroRef.current;
     const portrait = portraitFrameRef.current;
     const stats = statsCardRef.current;
     const disk = backdropDiskRef.current;
     if (!heroEl || !portrait) return;
-    if (window.matchMedia("(pointer: coarse)").matches) return;
+    if (window.matchMedia("(pointer: coarse), (max-width: 960px)").matches) return;
 
     const handleMouseMove = (e) => {
       const rect = heroEl.getBoundingClientRect();
@@ -212,8 +219,10 @@ export default function Hero({ isIntroReady }) {
       <div className="hero-amber-glow left-halo" aria-hidden="true" />
       <div className="hero-amber-glow right-halo" aria-hidden="true" />
 
-      {/* 2. Main Two-Column Editorial Stage */}
-      <div className="editorial-hero-stage">
+      {/* =========================================================================
+         2A. DESKTOP STAGE (Two-Column Layout)
+         ========================================================================= */}
+      <div className="editorial-hero-stage hero-desktop-stage">
         {/* Left Column: Headline, Bio & Action Buttons */}
         <div className="editorial-hero-left">
           {/* Availability Badge */}
@@ -320,8 +329,89 @@ export default function Hero({ isIntroReady }) {
         </div>
       </div>
 
-      {/* 3. Bottom Proof Bar: Trusted Clients & Scroll Indicator */}
-      <div className="hero-bottom-proof-bar">
+      {/* =========================================================================
+         2B. MOBILE STAGE (Artistic Editorial Vertical Flow)
+         ========================================================================= */}
+      <div className="editorial-hero-mobile-stage hero-mobile-stage">
+        {/* 1. Availability Badge */}
+        <div className="hero-pill-badge" data-cursor="badge">
+          <span className="hero-amber-dot-wrap">
+            <span className="hero-amber-dot-glow" />
+            <span className="hero-amber-dot-core" />
+          </span>
+          <span className="hero-pill-badge-label">Available for new opportunities</span>
+        </div>
+
+        {/* 2. Editorial Greeting "Hey, there" */}
+        <div className="hero-mobile-greeting-wrap" aria-label="Hey, there">
+          <span className="hero-mobile-serif">Hey, there</span>
+        </div>
+
+        {/* 3. Centered Portrait with Subtle Glow Backdrop & Soft Bottom Fade */}
+        <div className="hero-mobile-portrait-wrapper">
+          <div className="hero-mobile-portrait-glow" aria-hidden="true" />
+          <div className="hero-mobile-portrait-frame">
+            <img
+              src="/images/malik-cutout-transparent.png"
+              alt={PERSONAL_INFO.name}
+              className="hero-cutout-image hero-mobile-portrait-img"
+              loading="eager"
+            />
+          </div>
+        </div>
+
+        {/* 4. Name Block: "I AM MALIK ABUBAKKAR" */}
+        <div className="hero-mobile-name-group">
+          <div className="hero-mobile-iam">I AM</div>
+          <h1 className="hero-mobile-fullname">MALIK ABUBAKKAR</h1>
+        </div>
+
+        {/* 5. Professional Title */}
+        <div className="hero-mobile-role">DIGITAL PRODUCT ENGINEER</div>
+
+        {/* 6. Description */}
+        <p className="hero-mobile-desc">
+          Specialized in Web Design, UX / UI, Webflow, and Front End Development.
+        </p>
+
+        {/* 7. Action Buttons */}
+        <div className="hero-mobile-ctas">
+          <button
+            onClick={() => scrollToSection("work")}
+            className="hero-btn-primary"
+            data-cursor="link"
+          >
+            <span>VIEW PROJECTS</span>
+            <ArrowUpRight size={15} />
+          </button>
+
+          <button
+            onClick={() => scrollToSection("about")}
+            className="hero-btn-secondary"
+            data-cursor="link"
+          >
+            <User size={14} />
+            <span>ABOUT ME</span>
+          </button>
+        </div>
+
+        {/* 8. Mobile Scroll Indicator */}
+        <div className="hero-mobile-scroll-wrap">
+          <button
+            className="hero-scroll-indicator-btn"
+            onClick={() => scrollToSection("statement")}
+            data-cursor="link"
+          >
+            <span>SCROLL TO EXPLORE</span>
+            <ArrowDown size={14} className="hero-scroll-bounce-arrow" />
+          </button>
+        </div>
+      </div>
+
+      {/* =========================================================================
+         3. DESKTOP BOTTOM PROOF BAR (Trusted Clients & Scroll Indicator)
+         ========================================================================= */}
+      <div className="hero-bottom-proof-bar hero-desktop-proof">
         <div className="hero-trusted-container">
           <div className="hero-trusted-label">TRUSTED BY CLIENTS & PARTNERS</div>
           <div className="hero-partner-logos-row">
