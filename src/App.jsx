@@ -6,26 +6,29 @@ import Preloader from "./components/Preloader";
 import Home from "./components/Home";
 import ProjectDetail from "./components/ProjectDetail";
 import InquiryDrawer from "./components/InquiryDrawer";
+import AdminPanel from "./components/AdminPanel";
 import { useSmoothScroll } from "./hooks/useSmoothScroll";
 import "./styles/index.css";
 
 function AppContent() {
   const [isIntroReady, setIsIntroReady] = useState(false);
   const [isInquiryOpen, setIsInquiryOpen] = useState(false);
+  const location = useLocation();
+  const isAdminRoute = location.pathname.startsWith("/admin");
 
-  // Initialize Lenis smooth scroll; locks when modal is open
-  useSmoothScroll(isInquiryOpen);
+  // Initialize Lenis smooth scroll; locks when modal is open or disabled on admin
+  useSmoothScroll(isInquiryOpen || isAdminRoute);
 
   return (
     <div className="portfolio-app-root">
       {/* Custom Cursor System */}
       <CustomCursor />
 
-      {/* Cinematic Session-Aware Preloader */}
-      <Preloader onComplete={() => setIsIntroReady(true)} />
+      {/* Cinematic Session-Aware Preloader (Disabled on Admin) */}
+      {!isAdminRoute && <Preloader onComplete={() => setIsIntroReady(true)} />}
 
-      {/* Floating Glass Navigation */}
-      <Navigation onOpenInquiry={() => setIsInquiryOpen(true)} />
+      {/* Floating Glass Navigation (Disabled on Admin) */}
+      {!isAdminRoute && <Navigation onOpenInquiry={() => setIsInquiryOpen(true)} />}
 
       {/* Route Switcher */}
       <Routes>
@@ -39,6 +42,7 @@ function AppContent() {
           }
         />
         <Route path="/work/:slug" element={<ProjectDetail />} />
+        <Route path="/admin" element={<AdminPanel />} />
         <Route
           path="*"
           element={
@@ -51,10 +55,12 @@ function AppContent() {
       </Routes>
 
       {/* Interactive Project Inquiry Drawer */}
-      <InquiryDrawer
-        isOpen={isInquiryOpen}
-        onClose={() => setIsInquiryOpen(false)}
-      />
+      {!isAdminRoute && (
+        <InquiryDrawer
+          isOpen={isInquiryOpen}
+          onClose={() => setIsInquiryOpen(false)}
+        />
+      )}
     </div>
   );
 }

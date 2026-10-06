@@ -1,0 +1,26 @@
+{
+  "name": "Malik Abubakkar — Software Engineer",
+  "short_name": "Malik A.",
+  "description": "Portfolio of Malik Abubakkar — Software Engineer, Full-Stack Developer & Problem Solver",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#FAF8F5",
+  "theme_color": "#121214",
+  "categories": ["portfolio", "technology", "business"],
+  "icons": [
+    {
+      "src": "/images/malik-abubakkar.jpg",
+      "sizes": "192x192 256x256 384x384 512x512",
+      "type": "image/jpeg",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/malik-abubakkar.jpg",
+      "sizes": "192x192 512x512",
+      "type": "image/jpeg",
+      "purpose": "maskable"
+    }
+  ]
+}

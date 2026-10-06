@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { soundEngine } from "../utils/audioUtils";
+import { sendContactEmail } from "../utils/resendEmail";
 import { X, Check, Send } from "lucide-react";
 import confetti from "canvas-confetti";
 
@@ -39,10 +40,23 @@ export default function InquiryDrawer({ isOpen, onClose }) {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     soundEngine.playChime(660, 0.4, "sine");
     setIsSubmitted(true);
+
+    try {
+      await sendContactEmail({
+        name: formData.name,
+        email: formData.email,
+        projectType: formData.services.length > 0 ? formData.services.join(", ") : "Inquiry Drawer Consultation",
+        budget: formData.budget,
+        timeline: "Flexible",
+        message: `${formData.company ? `Company: ${formData.company}\n` : ""}${formData.message || "Requested collaboration via drawer."}`,
+      });
+    } catch (err) {
+      console.warn("Drawer email dispatch handled:", err);
+    }
 
     try {
       confetti({

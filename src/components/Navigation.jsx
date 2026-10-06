@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { soundEngine } from "../utils/audioUtils";
 import { PERSONAL_INFO } from "../data/portfolioData";
-import { ArrowUpRight, MessageSquare } from "lucide-react";
+import { ArrowUpRight, MessageSquare, X } from "lucide-react";
 
 function Navigation({ onOpenInquiry }) {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -52,6 +52,27 @@ function Navigation({ onOpenInquiry }) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isMobileMenuOpen]);
 
+  // Lock body scroll and handle Escape key when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape" && isMobileMenuOpen) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isMobileMenuOpen]);
+
   const handleNavClick = (anchorId) => {
     soundEngine.playClick();
     setIsMobileMenuOpen(false);
@@ -74,7 +95,7 @@ function Navigation({ onOpenInquiry }) {
       <header
         className={`nav-header ${isScrolled ? "nav-scrolled" : ""} ${
           isHidden ? "nav-hidden" : ""
-        }`}
+        } ${isMobileMenuOpen ? "nav-drawer-open" : ""}`}
       >
         {/* Official Transparent Logo */}
         <Link
@@ -180,18 +201,25 @@ function Navigation({ onOpenInquiry }) {
             <ArrowUpRight size={13} className="nav-cta-arrow" />
           </button>
 
-          {/* Mobile Hamburger Menu Trigger */}
+          {/* Mobile Hamburger (2 Lines) & Close Menu Trigger */}
           <button
             className={`mobile-menu-trigger ${isMobileMenuOpen ? "open" : ""}`}
             onClick={() => {
               soundEngine.playClick();
               setIsMobileMenuOpen(!isMobileMenuOpen);
             }}
-            aria-label="Toggle mobile menu"
+            aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+            title={isMobileMenuOpen ? "Close menu" : "Open menu"}
+            data-cursor="link"
           >
-            <span />
-            <span />
-            <span />
+            {isMobileMenuOpen ? (
+              <X size={20} className="mobile-close-x-icon" />
+            ) : (
+              <div className="hamburger-two-bars" aria-hidden="true">
+                <span className="hamburger-bar-top" />
+                <span className="hamburger-bar-bottom" />
+              </div>
+            )}
           </button>
         </div>
       </header>

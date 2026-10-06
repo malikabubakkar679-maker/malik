@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { PROJECTS } from "../data/portfolioData";
+import { useProjects } from "../utils/projectStore";
 import { soundEngine } from "../utils/audioUtils";
 import Lightbox from "./Lightbox";
 import { ArrowLeft, ArrowUpRight, ExternalLink, Code2, Sparkles, CheckCircle2 } from "lucide-react";
@@ -11,13 +11,15 @@ export default function ProjectDetail() {
   const [activeLightboxImg, setActiveLightboxImg] = useState(null);
   const [lightboxIndex, setLightboxIndex] = useState(0);
 
+  const { projects } = useProjects();
+
   // Find current project
-  const projectIndex = PROJECTS.findIndex((p) => p.slug === slug);
-  const project = PROJECTS[projectIndex] || PROJECTS[0];
+  const projectIndex = projects.findIndex((p) => p.slug === slug);
+  const project = projects[projectIndex] || projects[0] || {};
 
   // Find next project for seamless bottom transition
-  const nextIndex = (projectIndex + 1) % PROJECTS.length;
-  const nextProject = PROJECTS[nextIndex];
+  const nextIndex = (projectIndex + 1) % (projects.length || 1);
+  const nextProject = projects[nextIndex] || projects[0] || {};
 
   // Scroll to top on slug change
   useEffect(() => {

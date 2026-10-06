@@ -1,17 +1,19 @@
 import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
-import { PROJECTS, CATEGORIES } from "../data/portfolioData";
+import { CATEGORIES } from "../data/portfolioData";
+import { useProjects } from "../utils/projectStore";
 import { soundEngine } from "../utils/audioUtils";
 import { ArrowUpRight, Sparkles, ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function FeaturedProjects() {
+  const { projects } = useProjects();
   const [selectedCategory, setSelectedCategory] = useState("ALL");
   const [mobileSlideIndex, setMobileSlideIndex] = useState(0);
   const touchStartXRef = useRef(0);
 
   const filteredProjects = selectedCategory === "ALL"
-    ? PROJECTS
-    : PROJECTS.filter((p) => p.category === selectedCategory);
+    ? projects
+    : projects.filter((p) => p.category === selectedCategory);
 
   const handleNextSlide = () => {
     soundEngine.playClick();
@@ -135,11 +137,18 @@ export default function FeaturedProjects() {
               <p className="mobile-project-desc">{currentMobileProject.shortDescription}</p>
 
               <div className="spread-tech-pills" style={{ marginBottom: "1.25rem" }}>
-                {currentMobileProject.technologies.slice(0, 3).map((tech, i) => (
-                  <span key={i} className="spread-tech-pill">
-                    {tech}
-                  </span>
-                ))}
+                {(Array.isArray(currentMobileProject.technologies)
+                  ? currentMobileProject.technologies
+                  : String(currentMobileProject.technologies || "").split(",")
+                )
+                  .map((t) => String(t).trim())
+                  .filter(Boolean)
+                  .slice(0, 3)
+                  .map((tech, i) => (
+                    <span key={i} className="spread-tech-pill">
+                      {tech}
+                    </span>
+                  ))}
               </div>
 
               <Link
@@ -221,11 +230,18 @@ export default function FeaturedProjects() {
                   <p className="spread-project-desc">{project.shortDescription}</p>
 
                   <div className="spread-tech-pills">
-                    {project.technologies.slice(0, 4).map((tech, i) => (
-                      <span key={i} className="spread-tech-pill">
-                        {tech}
-                      </span>
-                    ))}
+                    {(Array.isArray(project.technologies)
+                      ? project.technologies
+                      : String(project.technologies || "").split(",")
+                    )
+                      .map((t) => String(t).trim())
+                      .filter(Boolean)
+                      .slice(0, 4)
+                      .map((tech, i) => (
+                        <span key={i} className="spread-tech-pill">
+                          {tech}
+                        </span>
+                      ))}
                   </div>
 
                   <Link

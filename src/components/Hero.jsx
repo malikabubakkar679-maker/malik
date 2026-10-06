@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { PERSONAL_INFO } from "../data/portfolioData";
 import { soundEngine } from "../utils/audioUtils";
@@ -75,8 +75,63 @@ const PARTNER_LOGOS = [
   },
 ];
 
+const ROTATING_ROLES = [
+  "Software Engineer",
+  "Web Developer",
+  "App Developer",
+  "Problem Solver",
+];
+
+function useTypewriter(words, {
+  typingSpeed = 85,
+  deletingSpeed = 45,
+  pauseAfterType = 1800,
+  pauseAfterDelete = 350,
+} = {}) {
+  const [index, setIndex] = useState(0);
+  const [subIndex, setSubIndex] = useState(words[0] ? words[0].length : 0);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    if (!words || words.length === 0) return;
+
+    const currentWord = words[index];
+
+    if (!isDeleting && subIndex === currentWord.length) {
+      const timeout = setTimeout(() => {
+        setIsDeleting(true);
+      }, pauseAfterType);
+      return () => clearTimeout(timeout);
+    }
+
+    if (isDeleting && subIndex === 0) {
+      const timeout = setTimeout(() => {
+        setIsDeleting(false);
+        setIndex((prev) => (prev + 1) % words.length);
+      }, pauseAfterDelete);
+      return () => clearTimeout(timeout);
+    }
+
+    const timeout = setTimeout(() => {
+      setSubIndex((prev) => prev + (isDeleting ? -1 : 1));
+    }, isDeleting ? deletingSpeed : typingSpeed);
+
+    return () => clearTimeout(timeout);
+  }, [subIndex, index, isDeleting, words, typingSpeed, deletingSpeed, pauseAfterType, pauseAfterDelete]);
+
+  const currentWord = words[index] || "";
+  const displayedText = currentWord.substring(0, subIndex);
+
+  return {
+    text: displayedText,
+    isDeleting,
+    currentWord,
+  };
+}
+
 export default function Hero({ isIntroReady }) {
   const heroRef = useRef(null);
+  const { text: roleText, currentWord } = useTypewriter(ROTATING_ROLES);
   const portraitFrameRef = useRef(null);
   const statsCardRef = useRef(null);
   const backdropDiskRef = useRef(null);
@@ -241,7 +296,14 @@ export default function Hero({ isIntroReady }) {
               <span className="hero-editorial-name">Malik Abubakkar</span>
             </h1>
 
-            <div className="hero-editorial-role">DIGITAL PRODUCT ENGINEER</div>
+            <div
+              className="hero-editorial-role"
+              role="region"
+              aria-label={`Role: ${currentWord}`}
+            >
+              <span className="hero-role-text">{roleText}</span>
+              <span className="hero-typewriter-cursor" aria-hidden="true" />
+            </div>
 
             <p className="hero-editorial-desc">
               I design and build scalable, user-centered digital products that solve real problems and deliver measurable results.
@@ -367,7 +429,14 @@ export default function Hero({ isIntroReady }) {
         </div>
 
         {/* 5. Professional Title */}
-        <div className="hero-mobile-role">DIGITAL PRODUCT ENGINEER</div>
+        <div
+          className="hero-mobile-role"
+          role="region"
+          aria-label={`Role: ${currentWord}`}
+        >
+          <span className="hero-role-text">{roleText}</span>
+          <span className="hero-typewriter-cursor" aria-hidden="true" />
+        </div>
 
         {/* 6. Description */}
         <p className="hero-mobile-desc">
