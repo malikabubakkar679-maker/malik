@@ -3,6 +3,8 @@ import { PERSONAL_INFO } from "../data/portfolioData";
 import { soundEngine } from "../utils/audioUtils";
 import { ArrowUpRight } from "lucide-react";
 
+export { Footer } from './Footer.tsx';
+
 export default function Footer() {
   const [timeStr, setTimeStr] = useState("");
 

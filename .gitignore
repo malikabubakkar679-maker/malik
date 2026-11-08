@@ -28,3 +28,8 @@ dist-ssr
 .env.local
 .env.*
 !.env.example
+
+# Temporary test screenshots
+screenshot_*.png
+webgl_ribbon_*.png
+hero_matched_*.png

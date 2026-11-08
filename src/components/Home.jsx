@@ -15,13 +15,13 @@ import Footer from "./Footer";
 export default function Home({ isIntroReady, onOpenInquiry }) {
   return (
     <main className="home-editorial-wrap">
-      {/* 1. Hero with Kinetic Typography & Liquid Portrait */}
+      {/* 1. Hero with Kinetic Typography & Upgraded Studio Portrait */}
       <Hero isIntroReady={isIntroReady} />
 
       {/* 2. Editorial Statement & Stats */}
       <IntroStatement />
 
-      {/* 3. Featured Projects (Asymmetric Magazine Spreads) */}
+      {/* 3. Featured Projects with Premium Infinite Gallery Scroll Animation */}
       <FeaturedProjects />
 
       {/* 4. About Me (Malik Abubakkar Engineering Profile) */}

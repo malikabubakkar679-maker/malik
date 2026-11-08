@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
-import Navigation from "./components/Navigation";
 import CustomCursor from "./components/CustomCursor";
 import Preloader from "./components/Preloader";
 import Home from "./components/Home";
@@ -26,9 +25,6 @@ function AppContent() {
 
       {/* Cinematic Session-Aware Preloader (Disabled on Admin) */}
       {!isAdminRoute && <Preloader onComplete={() => setIsIntroReady(true)} />}
-
-      {/* Floating Glass Navigation (Disabled on Admin) */}
-      {!isAdminRoute && <Navigation onOpenInquiry={() => setIsInquiryOpen(true)} />}
 
       {/* Route Switcher */}
       <Routes>

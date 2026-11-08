@@ -44,8 +44,6 @@ export default function IntroStatement() {
   const sectionRef = useRef(null);
   const [isInView, setIsInView] = useState(false);
 
-  const statementWords = PERSONAL_INFO.editorialStatement.split(" ");
-
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -65,27 +63,6 @@ export default function IntroStatement() {
 
   return (
     <section id="statement" ref={sectionRef} className="editorial-statement-section">
-      <div className="badge-tag" style={{ alignSelf: "flex-start" }}>
-        <span className="status-dot" />
-        CORE PHILOSOPHY
-      </div>
-
-      {/* Large Editorial Headline */}
-      <h2 className="statement-giant-heading">
-        {statementWords.map((word, idx) => (
-          <React.Fragment key={idx}>
-            <span
-              className={`word ${isInView ? "active" : ""}`}
-              style={{
-                transitionDelay: `${idx * 0.04 + 0.1}s`,
-              }}
-            >
-              {word}
-            </span>{" "}
-          </React.Fragment>
-        ))}
-      </h2>
-
       {/* Stats / Numbers Editorial Grid with Live Animated Counters */}
       <div className="stats-editorial-grid">
         {PERSONAL_INFO.stats.map((stat, idx) => {

@@ -2,6 +2,8 @@ import React from "react";
 import { PERSONAL_INFO } from "../data/portfolioData";
 import { User, Code, Layers, Cpu, Compass } from "lucide-react";
 
+export { AboutSection } from './AboutSection.tsx';
+
 export default function AboutSection() {
   return (
     <section id="about" className="editorial-about-section">

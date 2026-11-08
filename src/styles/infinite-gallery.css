@@ -1,0 +1,263 @@
+/* ==========================================================================
+   PREMIUM INFINITE PROJECT GALLERY & HERO BACKDROP TYPOGRAPHY STYLES
+   ========================================================================== */
+
+/* 1. Hero Behind-Portrait Typographic Watermark */
+.hero-behind-name-marquee {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 140%;
+  z-index: 2;
+  pointer-events: none;
+  overflow: hidden;
+  user-select: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-behind-name-text {
+  font-family: 'Syne', 'Anton', sans-serif;
+  font-size: clamp(4.2rem, 9.5vw, 8.8rem);
+  font-weight: 900;
+  line-height: 0.88;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+  color: rgba(18, 18, 20, 0.055);
+  white-space: nowrap;
+  display: block;
+}
+
+.hero-mobile-behind-name {
+  position: absolute;
+  top: 42%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Syne', 'Anton', sans-serif;
+  font-size: clamp(3rem, 13vw, 5rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: rgba(18, 18, 20, 0.06);
+  text-transform: uppercase;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Ensure stats card is always crisp and visible */
+.hero-floating-stats-card {
+  opacity: 1;
+  visibility: visible;
+  display: flex;
+}
+
+/* 2. Premium Infinite Project Gallery Section */
+.infinite-gallery-section {
+  position: relative;
+  width: 100%;
+  padding: clamp(3rem, 6vw, 5.5rem) 0 clamp(4rem, 8vw, 7rem);
+  overflow: hidden;
+}
+
+.infinite-gallery-header-wrap {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-pad);
+  margin-bottom: 2.75rem;
+}
+
+.infinite-gallery-viewport {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: pan-y;
+  padding: 1rem 0 2rem;
+}
+
+.infinite-gallery-viewport.is-dragging {
+  cursor: grabbing !important;
+}
+
+.infinite-gallery-track {
+  display: flex;
+  width: max-content;
+  gap: clamp(1.25rem, 2.5vw, 2.25rem);
+  will-change: transform;
+}
+
+/* Individual Infinite Project Card */
+.infinite-project-card {
+  flex: 0 0 clamp(290px, 30vw, 440px);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s ease, border-color 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.infinite-project-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.09);
+  border-color: var(--border-medium);
+}
+
+/* Media Box */
+.infinite-project-media-wrap {
+  position: relative;
+  width: 100%;
+  height: clamp(210px, 24vh, 290px);
+  overflow: hidden;
+  background: #edeae4;
+  display: block;
+}
+
+.infinite-project-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
+}
+
+.infinite-project-card:hover .infinite-project-img {
+  transform: scale(1.05);
+}
+
+.infinite-project-badge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: rgba(18, 18, 20, 0.75);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: #faf8f5;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 0.32rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  text-transform: uppercase;
+}
+
+/* Card Body */
+.infinite-project-body {
+  padding: 1.5rem 1.6rem 1.6rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.infinite-project-meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.6rem;
+}
+
+.infinite-project-number {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: var(--accent-gold);
+}
+
+.infinite-project-year {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.infinite-project-title {
+  font-family: var(--font-sans);
+  font-size: clamp(1.15rem, 1.4vw, 1.35rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.28;
+  margin-bottom: 0.65rem;
+}
+
+.infinite-project-desc {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+  margin-bottom: 1.15rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.infinite-project-tech-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-bottom: 1.35rem;
+  margin-top: auto;
+}
+
+.infinite-project-tech-tag {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 0.28rem 0.65rem;
+  border-radius: 6px;
+  background: var(--bg-muted);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-subtle);
+}
+
+.infinite-project-cta-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--border-subtle);
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.infinite-project-card:hover .infinite-project-cta-link {
+  color: var(--accent-gold);
+}
+
+/* Gallery Controls & Hint Bar */
+.infinite-gallery-hint-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: var(--container-max);
+  margin: 1.25rem auto 0;
+  padding: 0 var(--container-pad);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.infinite-gallery-drag-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
