@@ -169,7 +169,7 @@ export default function SkillsFigmaSection() {
       />
 
       {/* 1. TOP CENTER PINNED HEADING & ACTIVE CATEGORY */}
-      <header className="relative z-20 flex flex-col items-center text-center max-w-2xl mx-auto">
+      <header className="relative z-20 flex flex-col items-center text-center max-w-2xl mx-auto shrink-0">
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-200/80 border border-neutral-300 text-neutral-800 text-[10px] sm:text-xs font-mono uppercase tracking-[0.2em] mb-2 shadow-sm">
           <TrendingUp className="w-3.5 h-3.5 text-[#BA9B70]" />
           <span>TECHNICAL ARSENAL</span>
@@ -201,8 +201,8 @@ export default function SkillsFigmaSection() {
         </div>
       </header>
 
-      {/* 2. PAGE CENTER: PURE DIRECT CONTENT WITHOUT ANY BOXES OR CONTAINERS */}
-      <div className="relative z-10 w-full max-w-4xl mx-auto my-auto flex items-center justify-center min-h-[46vh] sm:min-h-[48vh]">
+      {/* 2. PAGE CENTER: PURE DIRECT CONTENT WITHOUT ANY BOXES OR CONTAINERS (DEAD-CENTER IN VIEWPORT) */}
+      <div className="relative z-10 w-full flex-1 flex items-center justify-center max-w-4xl lg:max-w-5xl mx-auto px-4 sm:px-6 my-auto">
         {SKILLS_DATA.map((cat, catIdx) => (
           <div
             key={catIdx}
@@ -210,12 +210,12 @@ export default function SkillsFigmaSection() {
             style={catIdx !== 0 ? { opacity: 0 } : undefined}
             className="absolute inset-0 w-full flex items-center justify-center will-change-transform"
           >
-            {/* Skills Progress Bar Graphs Grid - Perfectly Centered & Inline Side-by-Side */}
-            <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-x-8 lg:gap-x-14 gap-y-3 sm:gap-y-4 px-4 sm:px-6">
+            {/* Skills Progress Bar Graphs Grid - Perfectly Centered Horizontally & Vertically */}
+            <div className="w-full max-w-3xl lg:max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-x-10 lg:gap-x-16 gap-y-3.5 sm:gap-y-4">
               {cat.skills.map((skill, sIdx) => (
-                <div key={sIdx} className="flex items-center gap-3 sm:gap-4 py-1">
+                <div key={sIdx} className="flex items-center gap-3 sm:gap-4 py-1.5">
                   {/* Left: Icon + Technology Name */}
-                  <div className="flex items-center gap-2 w-36 sm:w-44 shrink-0 text-[#121214]">
+                  <div className="flex items-center gap-2.5 w-36 sm:w-44 shrink-0 text-[#121214]">
                     <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#BA9B70] shrink-0" />
                     <span className="font-bold text-xs sm:text-sm tracking-tight text-[#121214] truncate">
                       {skill.name}
@@ -244,7 +244,7 @@ export default function SkillsFigmaSection() {
       </div>
 
       {/* 3. FOOTER HINT */}
-      <footer className="relative z-20 flex items-center justify-between border-t border-neutral-300/80 pt-3 text-[10px] sm:text-xs font-mono text-neutral-500 max-w-4xl w-full mx-auto">
+      <footer className="relative z-20 flex items-center justify-between border-t border-neutral-300/80 pt-3 text-[10px] sm:text-xs font-mono text-neutral-500 max-w-4xl w-full mx-auto shrink-0">
         <span className="uppercase tracking-widest font-semibold text-neutral-800">
           STAGE 0{activeCategoryIndex + 1} OF 04
         </span>

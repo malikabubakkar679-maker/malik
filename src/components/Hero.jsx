@@ -226,12 +226,12 @@ export default function Hero({ isIntroReady, onOpenInquiry }) {
           </div>
         </div>
 
-        {/* Layer 4: Main Content Container (Hero Text Block, Shifted Down, Clean & Balanced) */}
-        <div className="relative z-30 flex-1 flex flex-col justify-between pt-24 sm:pt-28 md:pt-36 pb-12 sm:pb-16 px-8 sm:px-12 md:px-16 lg:px-20 pointer-events-none max-w-7xl w-full mx-auto">
-          {/* Top/Left Text Block */}
-          <div className="max-w-md lg:max-w-lg pointer-events-auto text-left">
+        {/* Layer 4: Main Content Container (Hero Details vertically centered alongside the portrait) */}
+        <div className="relative z-30 flex-1 flex flex-col justify-center px-8 sm:px-12 md:px-16 lg:px-20 pointer-events-none max-w-7xl w-full mx-auto">
+          {/* Details Block positioned comfortably alongside image, away from top logo */}
+          <div className="max-w-md lg:max-w-lg xl:max-w-xl pointer-events-auto text-left">
             {/* Availability Badge */}
-            <div className="flex items-center gap-2.5 mb-3 sm:mb-4 anim-fade-up">
+            <div className="flex items-center gap-2.5 mb-3.5 sm:mb-4 anim-fade-up">
               <span className="relative flex h-2 w-2 sm:h-2.5 sm:w-2.5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 sm:h-2.5 sm:w-2.5 bg-emerald-500"></span>
@@ -239,12 +239,12 @@ export default function Hero({ isIntroReady, onOpenInquiry }) {
               <span className="text-[10px] sm:text-xs font-semibold tracking-widest uppercase text-neutral-800">
                 AVAILABLE FOR NEW PROJECTS
               </span>
-              <span className="h-[1px] w-10 sm:w-14 bg-neutral-300 ml-1"></span>
+              <span className="h-[1px] w-12 sm:w-16 bg-neutral-300 ml-1"></span>
             </div>
 
-            {/* Main Typewriter Heading (Smaller, refined size, shifted down) */}
-            <div className="min-h-[2.8rem] sm:min-h-[3.2rem] md:min-h-[3.8rem] flex items-center anim-fade-up">
-              <h1 className="font-sans text-xl sm:text-2xl md:text-3xl lg:text-[2.25rem] xl:text-[2.5rem] font-bold tracking-tight text-[#121214] leading-[1.2]">
+            {/* Main Typewriter Heading */}
+            <div className="min-h-[3rem] sm:min-h-[3.6rem] md:min-h-[4.2rem] flex items-center anim-fade-up">
+              <h1 className="font-sans text-2xl sm:text-3xl md:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-[#121214] leading-[1.18]">
                 <span>{displayedText}</span>
                 <span
                   className="inline-block w-[3px] h-[0.9em] bg-[#121214] ml-2 align-middle animate-pulse opacity-90"
@@ -253,8 +253,8 @@ export default function Hero({ isIntroReady, onOpenInquiry }) {
               </h1>
             </div>
 
-            {/* Static Description (Adjusted and positioned downwards cleanly) */}
-            <p className="text-neutral-600 text-xs sm:text-sm md:text-base leading-relaxed max-w-sm sm:max-w-md mt-2.5 sm:mt-3.5 anim-fade-up">
+            {/* Static Description */}
+            <p className="text-neutral-600 text-sm sm:text-base leading-relaxed max-w-md sm:max-w-lg mt-3 sm:mt-4 anim-fade-up">
               {HERO_STATIC_DESCRIPTION}
             </p>
           </div>
