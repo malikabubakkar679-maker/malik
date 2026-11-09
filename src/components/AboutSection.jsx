@@ -1,22 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import {
-  Sparkles,
-  Code2,
-  Cpu,
-  ArrowRight,
-  ArrowUpRight,
-  CheckCircle2,
-  Zap,
-  Compass,
-  Terminal,
-  Mail,
-  ShieldCheck,
-  Rocket
-} from "lucide-react";
+import { Palette } from "lucide-react";
 
-// Register GSAP ScrollTrigger plugin safely
+// Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
 
 // 12 Exact Architectural Ring Paths from the PARALLAX template
@@ -36,56 +23,142 @@ export const RING_PATHS = [
 ];
 
 export default function AboutSection() {
-  const triggerRef = useRef(null);
-  const trackRef = useRef(null);
-  const progressLineRef = useRef(null);
-  const [activeStep, setActiveStep] = useState(0);
-
-  const SLIDES_COUNT = 5;
+  const sectionRef = useRef(null);
+  const imageRef = useRef(null);
+  const stage1Ref = useRef(null);
+  const stage2Ref = useRef(null);
+  const stage3Ref = useRef(null);
+  const stage4Ref = useRef(null);
 
   useEffect(() => {
-    const trigger = triggerRef.current;
-    const track = trackRef.current;
-    if (!trigger || !track) return;
+    const section = sectionRef.current;
+    if (!section) return;
 
-    // Use gsap.context for clean cleanup and scoping
     const ctx = gsap.context(() => {
-      // Function to dynamically compute scroll translation distance
-      const getScrollDistance = () => {
-        return Math.max(0, track.scrollWidth - window.innerWidth);
-      };
-
       const tl = gsap.timeline({
         scrollTrigger: {
-          id: "aboutHorizontalScroll",
-          trigger: trigger,
+          trigger: section,
           start: "top top",
-          end: () => `+=${Math.max(2200, getScrollDistance() + 400)}`,
-          pin: true,
-          scrub: 1, // Smooth inertia scrub
-          anticipatePin: 1,
+          end: "bottom bottom",
+          scrub: 1, // Smooth momentum
           invalidateOnRefresh: true,
-          onUpdate: (self) => {
-            const p = self.progress;
-            if (progressLineRef.current) {
-              progressLineRef.current.style.transform = `scaleX(${p})`;
-            }
-            const current = Math.min(SLIDES_COUNT - 1, Math.floor(p * SLIDES_COUNT));
-            setActiveStep(current);
-          },
         },
       });
 
-      tl.to(track, {
-        x: () => -getScrollDistance(),
-        ease: "none",
-      });
-    }, triggerRef);
+      // Subtle scale and 3D breathe on the centered image as you scroll
+      tl.to(
+        imageRef.current,
+        {
+          scale: 1.06,
+          y: -20,
+          ease: "none",
+          duration: 12,
+        },
+        0
+      );
 
-    // Refresh ScrollTrigger after DOM has fully settled
+      // --- STAGE 1: Initial Name & Quote ---
+      // Stays visible initially, then smoothly fades out
+      tl.to(
+        stage1Ref.current,
+        {
+          opacity: 0,
+          y: -60,
+          scale: 0.96,
+          ease: "power2.inOut",
+          duration: 1.2,
+        },
+        1.2
+      );
+
+      // --- STAGE 2: "I am a Software Engineer and Web Developer..." ---
+      tl.fromTo(
+        stage2Ref.current,
+        {
+          opacity: 0,
+          y: 60,
+          scale: 0.96,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          ease: "power2.out",
+          duration: 1.2,
+        },
+        2.6
+      );
+
+      // Hold Stage 2 comfortably, then fade out
+      tl.to(
+        stage2Ref.current,
+        {
+          opacity: 0,
+          y: -60,
+          scale: 0.96,
+          ease: "power2.in",
+          duration: 1.2,
+        },
+        4.8
+      );
+
+      // --- STAGE 3: "With experience in React, Next.js, and WebGL..." ---
+      tl.fromTo(
+        stage3Ref.current,
+        {
+          opacity: 0,
+          y: 60,
+          scale: 0.96,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          ease: "power2.out",
+          duration: 1.2,
+        },
+        6.2
+      );
+
+      // Hold Stage 3, then fade out
+      tl.to(
+        stage3Ref.current,
+        {
+          opacity: 0,
+          y: -60,
+          scale: 0.96,
+          ease: "power2.in",
+          duration: 1.2,
+        },
+        8.4
+      );
+
+      // --- STAGE 4: Final Tech Badges (React, Next.js, Web Design, Figma, Node.js) ---
+      tl.fromTo(
+        stage4Ref.current,
+        {
+          opacity: 0,
+          y: 50,
+          scale: 0.92,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          ease: "power2.out",
+          duration: 1.4,
+        },
+        9.8
+      );
+
+      // Settle at end
+      tl.to({}, { duration: 1.2 });
+    }, sectionRef);
+
+    // Refresh after DOM layout calculation
     const timer = setTimeout(() => {
       ScrollTrigger.refresh();
-    }, 250);
+    }, 200);
 
     return () => {
       clearTimeout(timer);
@@ -93,519 +166,158 @@ export default function AboutSection() {
     };
   }, []);
 
-  // Jump to specific slide on indicator dot click
-  const scrollToStep = (index) => {
-    const trigger = triggerRef.current;
-    const track = trackRef.current;
-    if (!trigger || !track) return;
-    const getScrollDistance = Math.max(0, track.scrollWidth - window.innerWidth);
-    const totalScroll = Math.max(2200, getScrollDistance + 400);
-    const targetScroll = trigger.offsetTop + (index / (SLIDES_COUNT - 1)) * totalScroll;
-    window.scrollTo({ top: targetScroll, behavior: "smooth" });
-  };
-
   return (
     <section
       id="about"
-      ref={triggerRef}
-      className="relative w-full bg-[#0B0C0E] text-white selection:bg-[#BA9B70] selection:text-black overflow-hidden"
+      ref={sectionRef}
+      className="relative w-full h-[380vh] bg-[#FAF8F5] text-[#121214] select-none"
     >
-      {/* Dynamic Top Progress Line */}
-      <div className="absolute top-0 left-0 right-0 h-[2px] bg-white/10 z-50">
-        <div
-          ref={progressLineRef}
-          className="h-full w-full bg-gradient-to-r from-[#BA9B70] via-[#E5D3B8] to-[#BA9B70] origin-left scale-x-0 will-change-transform shadow-[0_0_12px_rgba(186,155,112,0.8)]"
-        />
-      </div>
-
-      {/* Pinned Sticky Stage Container: Exactly 100vh pinned by ScrollTrigger */}
-      <div className="relative w-full h-screen overflow-hidden flex flex-col justify-between p-4 sm:p-6 md:p-8 lg:p-10">
+      {/* Pinned 100vh Full-Screen Stage */}
+      <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden px-6 sm:px-12">
         
-        {/* Background Ambient Glow & Mesh Elements */}
-        <div className="absolute inset-0 pointer-events-none z-0">
-          <div className="absolute top-1/4 -left-32 w-96 h-96 bg-[#BA9B70]/10 rounded-full blur-[140px]" />
-          <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-amber-600/5 rounded-full blur-[150px]" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.02),transparent_70%)]" />
-        </div>
+        {/* Soft Ambient Radial Vignette & Warm Glow */}
+        <div
+          className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,rgba(235,224,210,0.55)_0%,transparent_70%)] z-0"
+          aria-hidden="true"
+        />
 
-        {/* 1. Header Navigation Bar */}
-        <header className="relative z-30 flex items-center justify-between border-b border-white/10 pb-4 pt-1 sm:pt-2">
-          <div className="flex items-center gap-3">
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
-            <div className="flex flex-col">
-              <span className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.22em] text-[#BA9B70] font-semibold">
-                ABOUT MALIK ABUBAKKAR
-              </span>
-              <span className="text-[11px] text-neutral-400 font-sans hidden sm:inline-block">
-                Software Engineer & Web Developer · Interactive Chronicle
-              </span>
-            </div>
-          </div>
-
-          {/* Interactive Step Dots */}
-          <div className="flex items-center gap-2">
-            {[0, 1, 2, 3, 4].map((idx) => (
-              <button
+        {/* 12 Architectural Ring Lines from PARALLAX template */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 flex items-center justify-center">
+          <svg
+            viewBox="0 0 1280 800"
+            preserveAspectRatio="xMidYMid slice"
+            className="w-full h-full opacity-15 stroke-[#121214]"
+            aria-hidden="true"
+          >
+            {RING_PATHS.map((d, idx) => (
+              <path
                 key={idx}
-                onClick={() => scrollToStep(idx)}
-                aria-label={`Jump to slide ${idx + 1}`}
-                className={`transition-all duration-300 rounded-full cursor-pointer ${
-                  activeStep === idx
-                    ? "w-7 sm:w-8 h-2 bg-[#BA9B70] shadow-[0_0_10px_rgba(186,155,112,0.9)]"
-                    : "w-2 h-2 bg-white/20 hover:bg-white/50"
-                }`}
+                d={d}
+                fill="none"
+                strokeWidth="1.15"
+                strokeLinecap="butt"
               />
             ))}
-          </div>
-
-          {/* Slide Numeric Indicator */}
-          <div className="font-mono text-xs text-neutral-400 tracking-widest">
-            <span className="text-white font-bold">[ 0{activeStep + 1}</span>
-            <span className="text-neutral-500"> / 05 ]</span>
-          </div>
-        </header>
-
-        {/* 2. Pinned Horizontal Track */}
-        <div className="relative w-full my-auto z-20 overflow-visible py-2">
-          <div
-            ref={trackRef}
-            className="flex flex-row items-stretch gap-6 sm:gap-8 lg:gap-10 w-max will-change-transform"
-          >
-            {/* ============================================================== */}
-            {/* SLIDE 1: Identity & Vision (Portrait + 12 SVG Ring Lines) */}
-            {/* ============================================================== */}
-            <article className="w-[88vw] sm:w-[680px] lg:w-[840px] xl:w-[920px] shrink-0 h-[68vh] sm:h-[66vh] max-h-[640px] bg-[#121316]/90 backdrop-blur-2xl border border-white/10 rounded-3xl p-6 sm:p-8 lg:p-10 shadow-[0_24px_60px_rgba(0,0,0,0.7)] flex flex-col justify-between relative overflow-hidden group">
-              {/* Subtle 12 Architectural Ring Lines Overlay from template */}
-              <div className="absolute inset-0 pointer-events-none opacity-20 overflow-hidden z-0">
-                <svg
-                  viewBox="0 0 1280 800"
-                  preserveAspectRatio="xMidYMid slice"
-                  className="w-full h-full text-white stroke-current"
-                  aria-hidden="true"
-                >
-                  {RING_PATHS.map((d, idx) => (
-                    <path
-                      key={idx}
-                      d={d}
-                      fill="none"
-                      strokeWidth="1.2"
-                      stroke="#BA9B70"
-                      className="opacity-40"
-                    />
-                  ))}
-                </svg>
-              </div>
-
-              {/* Card Top Tag */}
-              <div className="relative z-10 flex items-center justify-between pb-3 border-b border-white/10">
-                <div className="flex items-center gap-2">
-                  <Sparkles className="w-4 h-4 text-[#BA9B70]" />
-                  <span className="text-[11px] font-mono tracking-widest uppercase text-neutral-300">
-                    01 / ESSENCE & IDENTITY
-                  </span>
-                </div>
-                <span className="px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-wider bg-white/5 border border-white/10 text-[#E5D3B8]">
-                  Available For Select Roles
-                </span>
-              </div>
-
-              {/* Card Body: Profile Portrait on Left + Editorial Text on Right */}
-              <div className="relative z-10 grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8 items-center my-auto">
-                {/* Photo Column */}
-                <div className="md:col-span-5 flex justify-center">
-                  <div className="relative w-44 sm:w-52 lg:w-60 aspect-[3/4] rounded-2xl overflow-hidden border border-white/15 bg-neutral-900 shadow-2xl group/img">
-                    <img
-                      src="/images/malik-about-profile.png"
-                      alt="Malik Abubakkar - Software Engineer"
-                      className="w-full h-full object-cover object-top contrast-[1.05] brightness-95 group-hover/img:scale-105 transition-transform duration-700 ease-out"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-                    <div className="absolute bottom-3 left-3 right-3 text-left">
-                      <span className="text-[9px] font-mono uppercase tracking-wider text-[#BA9B70] block">
-                        CREATIVE DEVELOPER
-                      </span>
-                      <span className="text-xs font-semibold text-white">
-                        Malik Abubakkar
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Text Column */}
-                <div className="md:col-span-7 flex flex-col justify-center text-left">
-                  <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black uppercase tracking-tight text-white leading-none">
-                    MALIK ABUBAKKAR
-                  </h2>
-                  <h3 className="text-base sm:text-lg lg:text-xl font-serif italic text-[#BA9B70] mt-2 font-normal">
-                    Software Engineer & Web Developer
-                  </h3>
-
-                  <blockquote className="my-4 pl-4 border-l-2 border-[#BA9B70] text-neutral-300 font-serif italic text-sm sm:text-base leading-relaxed">
-                    “Turning ideas into meaningful digital experiences.”
-                  </blockquote>
-
-                  <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed font-sans line-clamp-3 sm:line-clamp-none">
-                    Focused on building scalable applications, modern interfaces, and engaging digital experiences through clean architecture, creative design, and rigorous problem-solving.
-                  </p>
-
-                  <div className="flex flex-wrap gap-2 mt-4 pt-3 border-t border-white/5">
-                    {["Full-Stack Engineering", "Modern WebGL", "Interactive UI/UX", "Scalable Systems"].map((tag, i) => (
-                      <span
-                        key={i}
-                        className="px-2.5 py-1 rounded-md text-[10px] font-mono uppercase tracking-wider bg-white/5 border border-white/10 text-neutral-300"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* Card Footer */}
-              <div className="relative z-10 flex items-center justify-between pt-3 border-t border-white/10 text-[11px] font-mono text-neutral-400">
-                <span>SCROLL HORIZONTALLY TO EXPLORE</span>
-                <span className="text-[#BA9B70] flex items-center gap-1">
-                  DISCOVER CRAFT <ArrowRight className="w-3.5 h-3.5" />
-                </span>
-              </div>
-            </article>
-
-            {/* ============================================================== */}
-            {/* SLIDE 2: Philosophy & Engineering Architecture */}
-            {/* ============================================================== */}
-            <article className="w-[88vw] sm:w-[680px] lg:w-[840px] xl:w-[920px] shrink-0 h-[68vh] sm:h-[66vh] max-h-[640px] bg-[#121316]/90 backdrop-blur-2xl border border-white/10 rounded-3xl p-6 sm:p-8 lg:p-10 shadow-[0_24px_60px_rgba(0,0,0,0.7)] flex flex-col justify-between text-left relative overflow-hidden group">
-              <div className="flex items-center justify-between pb-3 border-b border-white/10">
-                <div className="flex items-center gap-2">
-                  <Terminal className="w-4 h-4 text-[#BA9B70]" />
-                  <span className="text-[11px] font-mono tracking-widest uppercase text-neutral-300">
-                    02 / ARCHITECTURE & METHODOLOGY
-                  </span>
-                </div>
-                <span className="font-mono text-[11px] text-neutral-400">
-                  CLEAN CODE · ROBUST SYSTEM DESIGN
-                </span>
-              </div>
-
-              <div className="my-auto space-y-5">
-                <div>
-                  <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white tracking-tight">
-                    Clean Architecture. Resilient Digital Products.
-                  </h3>
-                  <p className="text-xs sm:text-sm text-neutral-300 mt-2 leading-relaxed max-w-2xl">
-                    I am a Software Engineer and Web Developer focused on building scalable applications, modern interfaces, and engaging digital experiences with clean architecture and problem-solving.
-                  </p>
-                </div>
-
-                {/* 3 Core Architecture Cards */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
-                  <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-[#BA9B70]/50 transition-all">
-                    <div className="w-8 h-8 rounded-xl bg-[#BA9B70]/20 flex items-center justify-center text-[#BA9B70] mb-3">
-                      <Code2 className="w-4 h-4" />
-                    </div>
-                    <h4 className="text-sm font-semibold text-white">Full-Stack Precision</h4>
-                    <p className="text-[11px] text-neutral-400 mt-1 leading-normal">
-                      Modular component state, strict TypeScript contracts, and performant REST/GraphQL data layers.
-                    </p>
-                  </div>
-
-                  <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-[#BA9B70]/50 transition-all">
-                    <div className="w-8 h-8 rounded-xl bg-[#BA9B70]/20 flex items-center justify-center text-[#BA9B70] mb-3">
-                      <Zap className="w-4 h-4" />
-                    </div>
-                    <h4 className="text-sm font-semibold text-white">Extreme Performance</h4>
-                    <p className="text-[11px] text-neutral-400 mt-1 leading-normal">
-                      Zero unnecessary re-renders, dynamic code splitting, and sub-second Core Web Vitals across devices.
-                    </p>
-                  </div>
-
-                  <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-[#BA9B70]/50 transition-all">
-                    <div className="w-8 h-8 rounded-xl bg-[#BA9B70]/20 flex items-center justify-center text-[#BA9B70] mb-3">
-                      <ShieldCheck className="w-4 h-4" />
-                    </div>
-                    <h4 className="text-sm font-semibold text-white">Production Durability</h4>
-                    <p className="text-[11px] text-neutral-400 mt-1 leading-normal">
-                      Rigorous testing, graceful fallbacks, accessible semantic markup, and reliable deployments.
-                    </p>
-                  </div>
-                </div>
-
-                {/* Primary Arsenal */}
-                <div className="flex flex-wrap items-center gap-2 pt-2">
-                  <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-400 mr-2">
-                    CORE ARSENAL:
-                  </span>
-                  {["React 19", "Next.js", "TypeScript", "Node.js", "Tailwind CSS", "Vite", "RESTful APIs"].map((item, idx) => (
-                    <span
-                      key={idx}
-                      className="px-2.5 py-1 rounded-md text-[10px] font-mono bg-[#BA9B70]/10 border border-[#BA9B70]/30 text-[#E5D3B8]"
-                    >
-                      {item}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              <div className="flex items-center justify-between pt-3 border-t border-white/10 text-[11px] font-mono text-neutral-400">
-                <span>STAGE 02 OF 05</span>
-                <span className="text-[#BA9B70]">SYSTEMS & PATTERNS</span>
-              </div>
-            </article>
-
-            {/* ============================================================== */}
-            {/* SLIDE 3: Immersive 3D & Creative WebGL Lab */}
-            {/* ============================================================== */}
-            <article className="w-[88vw] sm:w-[680px] lg:w-[840px] xl:w-[920px] shrink-0 h-[68vh] sm:h-[66vh] max-h-[640px] bg-[#121316]/90 backdrop-blur-2xl border border-white/10 rounded-3xl p-6 sm:p-8 lg:p-10 shadow-[0_24px_60px_rgba(0,0,0,0.7)] flex flex-col justify-between text-left relative overflow-hidden group">
-              <div className="flex items-center justify-between pb-3 border-b border-white/10">
-                <div className="flex items-center gap-2">
-                  <Cpu className="w-4 h-4 text-[#BA9B70]" />
-                  <span className="text-[11px] font-mono tracking-widest uppercase text-neutral-300">
-                    03 / CREATIVE MOTION & WEBGL
-                  </span>
-                </div>
-                <span className="font-mono text-[11px] text-neutral-400">
-                  GPU RENDERING · KINETIC PHYSICS
-                </span>
-              </div>
-
-              <div className="my-auto grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-                <div className="md:col-span-7 space-y-4">
-                  <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white tracking-tight">
-                    Creative Design Meets Realtime Shaders.
-                  </h3>
-                  <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed">
-                    With experience in React, Next.js, and WebGL, I combine clean architecture, creative design, and problem-solving to build high-performance digital products — from concept to implementation.
-                  </p>
-
-                  <div className="space-y-2.5 pt-2">
-                    <div className="flex items-start gap-3">
-                      <CheckCircle2 className="w-4 h-4 text-[#BA9B70] shrink-0 mt-0.5" />
-                      <span className="text-xs text-neutral-300">
-                        <strong className="text-white">Custom GLSL Shaders:</strong> Fragment and vertex computation for organic light refraction, depth distortion, and ribbon ribbons.
-                      </span>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <CheckCircle2 className="w-4 h-4 text-[#BA9B70] shrink-0 mt-0.5" />
-                      <span className="text-xs text-neutral-300">
-                        <strong className="text-white">Virtual Scroll & Physics:</strong> Friction-modeled kinetic curves, gesture smoothing, and mobile-friendly touch kinematics.
-                      </span>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <CheckCircle2 className="w-4 h-4 text-[#BA9B70] shrink-0 mt-0.5" />
-                      <span className="text-xs text-neutral-300">
-                        <strong className="text-white">Spatial Scene Graphs:</strong> Three.js camera perspectives, texture mipmapping, and hardware-accelerated animations.
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Right Interactive Visual Card */}
-                <div className="md:col-span-5 p-5 rounded-2xl bg-gradient-to-b from-white/[0.06] to-transparent border border-white/10 flex flex-col justify-between h-full">
-                  <div>
-                    <div className="flex items-center justify-between text-[10px] font-mono text-neutral-400 pb-2 border-b border-white/10">
-                      <span>GL_FRAGMENT_SHADER</span>
-                      <span className="text-emerald-400">60 FPS LOCKED</span>
-                    </div>
-                    <pre className="text-[10px] font-mono text-neutral-300 py-3 leading-relaxed overflow-x-hidden">
-                      <code>
-                        {`vec3 color = mix(
-  baseColor, 
-  glowColor, 
-  fresnel * 0.75
-);
-gl_FragColor = vec4(color, 1.0);`}
-                      </code>
-                    </pre>
-                  </div>
-
-                  <div className="pt-3 border-t border-white/10 flex items-center justify-between text-[11px] font-mono">
-                    <span className="text-neutral-400">TECHNIQUES:</span>
-                    <span className="text-[#BA9B70]">Three.js · GLSL · GSAP</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex items-center justify-between pt-3 border-t border-white/10 text-[11px] font-mono text-neutral-400">
-                <span>STAGE 03 OF 05</span>
-                <span className="text-[#BA9B70]">IMMERSIVE INTERFACES</span>
-              </div>
-            </article>
-
-            {/* ============================================================== */}
-            {/* SLIDE 4: Production Track Record & Verified Metrics */}
-            {/* ============================================================== */}
-            <article className="w-[88vw] sm:w-[680px] lg:w-[840px] xl:w-[920px] shrink-0 h-[68vh] sm:h-[66vh] max-h-[640px] bg-[#121316]/90 backdrop-blur-2xl border border-white/10 rounded-3xl p-6 sm:p-8 lg:p-10 shadow-[0_24px_60px_rgba(0,0,0,0.7)] flex flex-col justify-between text-left relative overflow-hidden group">
-              <div className="flex items-center justify-between pb-3 border-b border-white/10">
-                <div className="flex items-center gap-2">
-                  <Compass className="w-4 h-4 text-[#BA9B70]" />
-                  <span className="text-[11px] font-mono tracking-widest uppercase text-neutral-300">
-                    04 / IMPACT & METRICS
-                  </span>
-                </div>
-                <span className="font-mono text-[11px] text-neutral-400">
-                  SHIPPED EXCELLENCE · PROVEN RESULTS
-                </span>
-              </div>
-
-              <div className="my-auto space-y-6">
-                <div>
-                  <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white tracking-tight">
-                    Measurable Engineering Standards.
-                  </h3>
-                  <p className="text-xs sm:text-sm text-neutral-300 mt-2 max-w-xl">
-                    Every project is architected with purpose, engineered with clean maintainability, and verified against high-traffic performance demands.
-                  </p>
-                </div>
-
-                {/* 4 Metric Blocks */}
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 font-mono">
-                  <div className="p-4 rounded-2xl bg-white/[0.04] border border-white/10 hover:border-[#BA9B70]/50 transition-all">
-                    <span className="text-3xl sm:text-4xl font-extrabold text-[#BA9B70] block">04+</span>
-                    <span className="text-[11px] uppercase tracking-wider text-neutral-300 font-sans block mt-1">
-                      Years Experience
-                    </span>
-                    <span className="text-[10px] text-neutral-500 font-mono block mt-0.5">
-                      Full-Stack Architecture
-                    </span>
-                  </div>
-
-                  <div className="p-4 rounded-2xl bg-white/[0.04] border border-white/10 hover:border-[#BA9B70]/50 transition-all">
-                    <span className="text-3xl sm:text-4xl font-extrabold text-white block">24+</span>
-                    <span className="text-[11px] uppercase tracking-wider text-neutral-300 font-sans block mt-1">
-                      Shipped Apps
-                    </span>
-                    <span className="text-[10px] text-neutral-500 font-mono block mt-0.5">
-                      Production Web Apps
-                    </span>
-                  </div>
-
-                  <div className="p-4 rounded-2xl bg-white/[0.04] border border-white/10 hover:border-[#BA9B70]/50 transition-all">
-                    <span className="text-3xl sm:text-4xl font-extrabold text-[#BA9B70] block">16+</span>
-                    <span className="text-[11px] uppercase tracking-wider text-neutral-300 font-sans block mt-1">
-                      Core Frameworks
-                    </span>
-                    <span className="text-[10px] text-neutral-500 font-mono block mt-0.5">
-                      Modern Tech Stack
-                    </span>
-                  </div>
-
-                  <div className="p-4 rounded-2xl bg-white/[0.04] border border-white/10 hover:border-[#BA9B70]/50 transition-all">
-                    <span className="text-3xl sm:text-4xl font-extrabold text-emerald-400 block">100%</span>
-                    <span className="text-[11px] uppercase tracking-wider text-neutral-300 font-sans block mt-1">
-                      Dedicated Craft
-                    </span>
-                    <span className="text-[10px] text-neutral-500 font-mono block mt-0.5">
-                      Precision Execution
-                    </span>
-                  </div>
-                </div>
-
-                <div className="p-4 rounded-xl bg-[#BA9B70]/10 border border-[#BA9B70]/30 flex items-center justify-between text-xs font-mono text-[#E5D3B8]">
-                  <span>STANDARD: LIGHTHOUSE 95+ · ZERO UNHANDLED REJECTIONS · RESPONSIVE ACROSS ALL DEVICES</span>
-                </div>
-              </div>
-
-              <div className="flex items-center justify-between pt-3 border-t border-white/10 text-[11px] font-mono text-neutral-400">
-                <span>STAGE 04 OF 05</span>
-                <span className="text-[#BA9B70]">EXECUTION & DELIVERY</span>
-              </div>
-            </article>
-
-            {/* ============================================================== */}
-            {/* SLIDE 5: Direct Collaboration & Call to Action */}
-            {/* ============================================================== */}
-            <article className="w-[88vw] sm:w-[680px] lg:w-[840px] xl:w-[920px] shrink-0 h-[68vh] sm:h-[66vh] max-h-[640px] bg-[#121316]/90 backdrop-blur-2xl border border-white/10 rounded-3xl p-6 sm:p-8 lg:p-10 shadow-[0_24px_60px_rgba(0,0,0,0.7)] flex flex-col justify-between text-left relative overflow-hidden group">
-              <div className="flex items-center justify-between pb-3 border-b border-white/10">
-                <div className="flex items-center gap-2">
-                  <Rocket className="w-4 h-4 text-[#BA9B70]" />
-                  <span className="text-[11px] font-mono tracking-widest uppercase text-neutral-300">
-                    05 / ENGAGEMENT & COLLABORATION
-                  </span>
-                </div>
-                <span className="font-mono text-[11px] text-emerald-400">
-                  OPEN FOR INQUIRIES
-                </span>
-              </div>
-
-              <div className="my-auto space-y-6">
-                <div>
-                  <span className="text-xs font-mono uppercase tracking-widest text-[#BA9B70] block mb-2">
-                    LET'S ENGINEER SOMETHING MEANINGFUL
-                  </span>
-                  <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight leading-tight">
-                    Have a visionary project in mind? Let's build it together.
-                  </h3>
-                  <p className="text-xs sm:text-sm text-neutral-300 mt-3 leading-relaxed max-w-xl">
-                    Whether you need an end-to-end full stack web application, a high-converting digital platform, or a cutting-edge 3D WebGL experience, I am ready to collaborate.
-                  </p>
-                </div>
-
-                {/* Direct Action Buttons */}
-                <div className="flex flex-wrap items-center gap-4 pt-2">
-                  <a
-                    href="#contact"
-                    className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-[#BA9B70] text-black text-xs sm:text-sm font-semibold hover:bg-[#A88B60] transition-colors shadow-lg shadow-[#BA9B70]/20"
-                  >
-                    <span>Start a Project Inquiry</span>
-                    <ArrowUpRight className="w-4 h-4" />
-                  </a>
-
-                  <a
-                    href="#work"
-                    className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-white/20 text-white text-xs sm:text-sm font-medium hover:bg-white/10 transition-colors"
-                  >
-                    <span>View Selected Projects</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </a>
-                </div>
-
-                {/* Contact Pill */}
-                <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-neutral-400 pt-2">
-                  <div className="flex items-center gap-2">
-                    <Mail className="w-4 h-4 text-[#BA9B70]" />
-                    <a
-                      href="mailto:malikabubakkar523@gmail.com"
-                      className="text-neutral-300 hover:text-white underline underline-offset-4"
-                    >
-                      malikabubakkar523@gmail.com
-                    </a>
-                  </div>
-                  <span className="text-neutral-600">·</span>
-                  <span>Direct Response within 24 Hours</span>
-                </div>
-              </div>
-
-              <div className="flex items-center justify-between pt-3 border-t border-white/10 text-[11px] font-mono text-neutral-400">
-                <span>STAGE 05 OF 05</span>
-                <span className="text-[#BA9B70] flex items-center gap-1">
-                  FINISH · CONTINUE SCROLLING <ArrowRight className="w-3.5 h-3.5" />
-                </span>
-              </div>
-            </article>
-          </div>
+          </svg>
         </div>
 
-        {/* 3. Footer Bar with Kinetic Scroll Status */}
-        <footer className="relative z-30 flex items-center justify-between border-t border-white/10 pt-3 text-[11px] font-mono text-neutral-400">
-          <div className="flex items-center gap-3">
-            <span className="text-white font-semibold tracking-wider">
-              PINNED SCROLL
-            </span>
-            <span className="hidden sm:inline text-neutral-500">|</span>
-            <span className="hidden sm:inline text-neutral-400">
-              Scroll down to slide horizontally
-            </span>
+        {/* CENTERPIECE: Malik's Clean Large Profile Portrait */}
+        <div
+          ref={imageRef}
+          className="relative z-10 flex items-center justify-center will-change-transform pointer-events-none"
+        >
+          <img
+            src="/images/malik-about-profile.png"
+            alt="Malik Abubakkar"
+            className="h-[64vh] sm:h-[74vh] md:h-[80vh] max-h-[760px] w-auto object-contain filter contrast-[1.04] drop-shadow-[0_20px_45px_rgba(0,0,0,0.12)] pointer-events-none"
+            loading="eager"
+            decoding="async"
+          />
+        </div>
+
+        {/* ============================================================== */}
+        {/* ANIMATED TEXT LAYERS DIRECTLY OVER THE CENTER IMAGE (NO BOXES) */}
+        {/* ============================================================== */}
+        <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none p-6 sm:p-12">
+
+          {/* STAGE 1: Name + Tagline */}
+          <div
+            ref={stage1Ref}
+            className="absolute flex flex-col items-center justify-center text-center will-change-transform max-w-4xl px-4"
+          >
+            <h2 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase tracking-tight text-[#121214] drop-shadow-[0_4px_16px_rgba(250,248,245,0.95)] leading-[0.95]">
+              MALIK ABUBAKKAR
+            </h2>
+            <p className="text-lg sm:text-2xl md:text-3xl font-serif italic text-neutral-800 mt-4 sm:mt-6 drop-shadow-[0_2px_12px_rgba(250,248,245,0.95)] leading-relaxed max-w-2xl">
+              “Turning ideas into meaningful digital experiences.”
+            </p>
           </div>
 
-          <div className="flex items-center gap-3">
-            <span className="hidden md:inline text-neutral-500">
-              [ GSAP ScrollTrigger · Scrub: 1 ]
-            </span>
-            <div className="flex items-center gap-1.5 text-[#BA9B70]">
-              <span className="uppercase tracking-widest text-[10px]">SCROLL TO GLIDE</span>
-              <ArrowRight className="w-3.5 h-3.5 animate-pulse" />
+          {/* STAGE 2: Primary Introduction Statement */}
+          <div
+            ref={stage2Ref}
+            style={{ opacity: 0 }}
+            className="absolute flex items-center justify-center text-center will-change-transform max-w-4xl px-4"
+          >
+            <p className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-[#121214] leading-[1.25] drop-shadow-[0_4px_24px_rgba(250,248,245,0.98)]">
+              I am a Software Engineer and Web Developer focused on building scalable applications, modern interfaces, and engaging digital experiences.
+            </p>
+          </div>
+
+          {/* STAGE 3: Experience & Technical Philosophy */}
+          <div
+            ref={stage3Ref}
+            style={{ opacity: 0 }}
+            className="absolute flex items-center justify-center text-center will-change-transform max-w-4xl px-4"
+          >
+            <p className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-medium text-neutral-900 leading-[1.35] drop-shadow-[0_4px_24px_rgba(250,248,245,0.98)]">
+              With experience in <span className="font-bold text-[#121214]">React</span>, <span className="font-bold text-[#121214]">Next.js</span>, and <span className="font-bold text-[#121214]">WebGL</span>, I combine clean architecture, creative design, and problem-solving to build high-performance digital products — from concept to implementation.
+            </p>
+          </div>
+
+          {/* STAGE 4: Clean Tech Badges with Crisp Icons */}
+          <div
+            ref={stage4Ref}
+            style={{ opacity: 0 }}
+            className="absolute flex flex-col items-center justify-center text-center will-change-transform max-w-3xl px-4 pointer-events-auto"
+          >
+            <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+              {/* React */}
+              <div className="inline-flex items-center gap-2.5 px-5 py-3 rounded-full bg-white/95 backdrop-blur-md border border-neutral-300 shadow-lg text-[#121214] font-medium text-sm sm:text-base hover:border-[#BA9B70] transition-all">
+                <svg className="w-5 h-5 text-[#00D8FF]" viewBox="0 0 115.3 100" fill="currentColor">
+                  <ellipse cx="57.65" cy="50" rx="16.7" ry="43.5" fill="none" stroke="currentColor" strokeWidth="5" transform="matrix(0.5 -0.866 0.866 0.5 28.825 50)" />
+                  <ellipse cx="57.65" cy="50" rx="16.7" ry="43.5" fill="none" stroke="currentColor" strokeWidth="5" transform="matrix(0.5 0.866 -0.866 0.5 72.062 -25)" />
+                  <ellipse cx="57.65" cy="50" rx="16.7" ry="43.5" fill="none" stroke="currentColor" strokeWidth="5" />
+                  <circle cx="57.65" cy="50" r="9" fill="currentColor" />
+                </svg>
+                <span>React</span>
+              </div>
+
+              {/* Next.js */}
+              <div className="inline-flex items-center gap-2.5 px-5 py-3 rounded-full bg-white/95 backdrop-blur-md border border-neutral-300 shadow-lg text-[#121214] font-medium text-sm sm:text-base hover:border-[#BA9B70] transition-all">
+                <svg className="w-5 h-5 text-[#121214]" viewBox="0 0 180 180" fill="currentColor">
+                  <mask id="nextMask" maskUnits="userSpaceOnUse" width="180" height="180" x="0" y="0">
+                    <circle cx="90" cy="90" r="90" fill="white" />
+                  </mask>
+                  <g mask="url(#nextMask)">
+                    <circle cx="90" cy="90" r="90" fill="currentColor" />
+                    <path d="M149.508 157.52L69.142 54H54V125.97H66.1136V69.3836L139.999 164.845C143.333 162.614 146.509 160.165 149.508 157.52Z" fill="white" />
+                    <rect x="115" y="54" width="12" height="72" fill="white" />
+                  </g>
+                </svg>
+                <span>Next.js</span>
+              </div>
+
+              {/* Web Design */}
+              <div className="inline-flex items-center gap-2.5 px-5 py-3 rounded-full bg-white/95 backdrop-blur-md border border-neutral-300 shadow-lg text-[#121214] font-medium text-sm sm:text-base hover:border-[#BA9B70] transition-all">
+                <Palette className="w-5 h-5 text-[#BA9B70]" />
+                <span>Web Design</span>
+              </div>
+
+              {/* Figma */}
+              <div className="inline-flex items-center gap-2.5 px-5 py-3 rounded-full bg-white/95 backdrop-blur-md border border-neutral-300 shadow-lg text-[#121214] font-medium text-sm sm:text-base hover:border-[#BA9B70] transition-all">
+                <svg className="w-5 h-5" viewBox="0 0 38 57" fill="none">
+                  <path d="M19 28.5C19 23.2533 23.2533 19 28.5 19C33.7467 19 38 23.2533 38 28.5C38 33.7467 33.7467 38 28.5 38C23.2533 38 19 33.7467 19 28.5Z" fill="#1ABCFE"/>
+                  <path d="M0 47.5C0 42.2533 4.25329 38 9.5 38H19V47.5C19 52.7467 14.7467 57 9.5 57C4.25329 57 0 52.7467 0 47.5Z" fill="#0ACF83"/>
+                  <path d="M19 0V19H28.5C33.7467 19 38 14.7467 38 9.5C38 4.25329 33.7467 0 28.5 0H19Z" fill="#FF7262"/>
+                  <path d="M0 9.5C0 14.7467 4.25329 19 9.5 19H19V0H9.5C4.25329 0 0 4.25329 0 9.5Z" fill="#F24E1E"/>
+                  <path d="M0 28.5C0 33.7467 4.25329 38 9.5 38H19V19H9.5C4.25329 19 0 23.2533 0 28.5Z" fill="#A259FF"/>
+                </svg>
+                <span>Figma</span>
+              </div>
+
+              {/* Node.js */}
+              <div className="inline-flex items-center gap-2.5 px-5 py-3 rounded-full bg-white/95 backdrop-blur-md border border-neutral-300 shadow-lg text-[#121214] font-medium text-sm sm:text-base hover:border-[#BA9B70] transition-all">
+                <svg className="w-5 h-5 text-[#539E43]" viewBox="0 0 32 32" fill="currentColor">
+                  <path d="M16 2.5L3 10v12l13 7.5 13-7.5V10L16 2.5zm0 2.3l11 6.3v10.8L16 27.2 5 21.9V11.1L16 4.8z"/>
+                  <path d="M16 8l7 4v8l-7 4-7-4v-8l7-4z" opacity="0.3" />
+                </svg>
+                <span>Node.js</span>
+              </div>
             </div>
           </div>
-        </footer>
+
+        </div>
       </div>
     </section>
   );

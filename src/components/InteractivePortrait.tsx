@@ -3,18 +3,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useEffect, useRef } from 'react';
-import malikHead from '../assets/images/malik_head.png';
-import malikBody from '../assets/images/malik_body.png';
-import malikCollar from '../assets/images/malik_collar.png';
-import malikPupils from '../assets/images/malik_pupils.png';
-import {
-  calculateNormalizedCursor,
-  calculateTargetPose,
-  updateHeadPose,
-  DEFAULT_HEAD_CONFIG,
-  HeadPose,
-} from '../utils/headTracking';
+import React, { useEffect, useRef, useState } from 'react';
+import malikPortraitCutout from '../assets/images/malik_portrait_cutout.png';
 
 interface InteractivePortraitProps {
   heroRef: React.RefObject<HTMLElement | null>;
@@ -26,207 +16,85 @@ export const InteractivePortrait: React.FC<InteractivePortraitProps> = ({
   className = '',
 }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const headRef = useRef<HTMLDivElement | null>(null);
-  const eyesRef = useRef<HTMLDivElement | null>(null);
+  const portraitRef = useRef<HTMLImageElement | null>(null);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    // Check if user prefers reduced motion or is on mobile
+    // Check reduced motion or touch devices
     const prefersReducedMotion = window.matchMedia(
       '(prefers-reduced-motion: reduce)'
     ).matches;
     const isMobile = window.matchMedia('(max-width: 639px)').matches;
-    const isTouchOnly =
-      window.matchMedia('(pointer: coarse)').matches &&
-      !window.matchMedia('(pointer: fine)').matches;
 
-    if (prefersReducedMotion || isMobile || isTouchOnly) {
-      // Resting natural pose
+    if (prefersReducedMotion || isMobile) {
       return;
     }
 
     let animId: number;
-    const currentPose: HeadPose = {
-      yaw: 0,
-      pitch: 0,
-      roll: 0,
-      neckX: 0,
-      neckY: 0,
-      eyeX: 0,
-      eyeY: 0,
-    };
-
-    let targetU = 0;
-    let targetV = 0;
-    let isIdle = true;
-    let lastMouseMoveTime = performance.now();
+    let currentX = 0;
+    let currentY = 0;
+    let targetX = 0;
+    let targetY = 0;
 
     const handleMouseMove = (e: MouseEvent) => {
-      const heroEl = heroRef.current || document.body;
-      const rect = heroEl.getBoundingClientRect();
-      const norm = calculateNormalizedCursor(e.clientX, e.clientY, rect);
+      if (!heroRef.current) return;
+      const rect = heroRef.current.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+      const y = ((e.clientY - rect.top) / rect.height) * 2 - 1;
 
-      targetU = norm.u;
-      targetV = norm.v;
-      isIdle = false;
-      lastMouseMoveTime = performance.now();
+      // Subtle, high-end 3D parallax tilt range
+      targetX = Math.max(-1, Math.min(1, x)) * 7; // max 7 deg yaw
+      targetY = Math.max(-1, Math.min(1, y)) * -6; // max 6 deg pitch
     };
 
     const handleMouseLeave = () => {
-      targetU = 0;
-      targetV = 0;
-      isIdle = true;
+      targetX = 0;
+      targetY = 0;
     };
 
-    const targetHero = heroRef.current || window;
-    targetHero.addEventListener(
-      'mousemove',
-      handleMouseMove as EventListener,
-      { passive: true }
-    );
-    targetHero.addEventListener(
-      'mouseleave',
-      handleMouseLeave as EventListener
-    );
+    const updateMotion = () => {
+      // Smooth lerp interpolation
+      currentX += (targetX - currentX) * 0.08;
+      currentY += (targetY - currentY) * 0.08;
 
-    let isPortraitVisible = true;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        const wasVisible = isPortraitVisible;
-        isPortraitVisible = entry.isIntersecting;
-        if (!wasVisible && isPortraitVisible) {
-          cancelAnimationFrame(animId);
-          animId = requestAnimationFrame(animate);
-        }
-      },
-      { threshold: 0.02 }
-    );
-
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
-    }
-
-    const animate = (timestamp: number) => {
-      if (!isPortraitVisible) return;
-      const timeSec = timestamp / 1000;
-
-      // If no mouse movement for > 1.8 seconds, enter natural idle breathing
-      if (!isIdle && timestamp - lastMouseMoveTime > 1800) {
-        targetU = targetU * 0.95;
-        targetV = targetV * 0.95;
-        if (Math.hypot(targetU, targetV) < 0.05) {
-          isIdle = true;
-        }
+      if (portraitRef.current) {
+        portraitRef.current.style.transform = `perspective(900px) rotateY(${currentX}deg) rotateX(${currentY}deg) translateZ(10px)`;
       }
 
-      const targetPose = calculateTargetPose(
-        targetU,
-        targetV,
-        timeSec,
-        isIdle,
-        DEFAULT_HEAD_CONFIG
-      );
-
-      const updated = updateHeadPose(
-        currentPose,
-        targetPose,
-        DEFAULT_HEAD_CONFIG
-      );
-      Object.assign(currentPose, updated);
-
-      // Direct DOM update on refs: 60fps butter with zero React re-renders
-      if (headRef.current) {
-        // Transform origin at base of the neck: x=49.61% (508/1024), y=51.27% (525/1024)
-        headRef.current.style.transform = `translate3d(${currentPose.neckX.toFixed(
-          2
-        )}px, ${currentPose.neckY.toFixed(2)}px, 0px) rotateY(${currentPose.yaw.toFixed(
-          2
-        )}deg) rotateX(${currentPose.pitch.toFixed(
-          2
-        )}deg) rotateZ(${currentPose.roll.toFixed(2)}deg)`;
-      }
-
-      if (eyesRef.current) {
-        eyesRef.current.style.transform = `translate3d(${currentPose.eyeX.toFixed(
-          2
-        )}px, ${currentPose.eyeY.toFixed(2)}px, 0px)`;
-      }
-
-      animId = requestAnimationFrame(animate);
+      animId = requestAnimationFrame(updateMotion);
     };
 
-    animId = requestAnimationFrame(animate);
+    const heroEl = heroRef.current || window;
+    heroEl.addEventListener('mousemove', handleMouseMove as EventListener);
+    heroEl.addEventListener('mouseleave', handleMouseLeave);
+    animId = requestAnimationFrame(updateMotion);
 
     return () => {
-      observer.disconnect();
-      targetHero.removeEventListener(
-        'mousemove',
-        handleMouseMove as EventListener
-      );
-      targetHero.removeEventListener(
-        'mouseleave',
-        handleMouseLeave as EventListener
-      );
-      if (animId) {
-        cancelAnimationFrame(animId);
-      }
+      heroEl.removeEventListener('mousemove', handleMouseMove as EventListener);
+      heroEl.removeEventListener('mouseleave', handleMouseLeave);
+      cancelAnimationFrame(animId);
     };
   }, [heroRef]);
 
   return (
     <div
       ref={containerRef}
-      className={`relative h-full w-auto aspect-square select-none pointer-events-none [perspective:1000px] ${className}`}
+      className={`relative h-full w-auto aspect-[3/4] sm:aspect-square select-none pointer-events-none flex items-end justify-center ${className}`}
       data-testid="interactive-portrait-container"
     >
-      {/* 1. Stationary Body Layer: Torso, shoulders, folded arms (never moves) */}
+      {/* Unified High-Performance Portrait with Smooth Fade-in */}
       <img
-        src={malikBody}
-        alt=""
-        aria-hidden="true"
-        className="absolute inset-0 h-full w-full object-contain object-bottom pointer-events-none select-none z-10"
+        ref={portraitRef}
+        src={malikPortraitCutout}
+        alt="Portrait of Malik Abubakkar"
+        onLoad={() => setIsLoaded(true)}
+        className={`h-full w-auto max-h-full object-contain object-bottom pointer-events-none select-none will-change-transform drop-shadow-[0_15px_35px_rgba(0,0,0,0.12)] transition-opacity duration-700 ease-out ${
+          isLoaded ? 'opacity-100' : 'opacity-0'
+        }`}
         loading="eager"
-      />
-
-      {/* 2. Interactive Head & Neck Layer: Pivots naturally from the neck base */}
-      <div
-        ref={headRef}
-        className="absolute inset-0 h-full w-full pointer-events-none select-none z-20 will-change-transform"
-        style={{
-          transformOrigin: '49.61% 51.27%',
-          transformStyle: 'preserve-3d',
-        }}
-        data-testid="interactive-head"
-      >
-        <img
-          src={malikHead}
-          alt="Portrait of Malik Abubakkar"
-          className="absolute inset-0 h-full w-full object-contain object-bottom pointer-events-none select-none"
-          loading="eager"
-        />
-
-        {/* 2b. Interactive Eyes / Pupils: Leads head movement slightly */}
-        <div
-          ref={eyesRef}
-          className="absolute inset-0 h-full w-full pointer-events-none select-none will-change-transform"
-          data-testid="interactive-eyes"
-        >
-          <img
-            src={malikPupils}
-            alt=""
-            aria-hidden="true"
-            className="absolute inset-0 h-full w-full object-contain object-bottom pointer-events-none select-none"
-            loading="eager"
-          />
-        </div>
-      </div>
-
-      {/* 3. Stationary Front Collar Rim Overlay: Anchors neck inside the sweater collar with zero seam */}
-      <img
-        src={malikCollar}
-        alt=""
-        aria-hidden="true"
-        className="absolute inset-0 h-full w-full object-contain object-bottom pointer-events-none select-none z-30"
-        loading="eager"
+        decoding="async"
+        // @ts-expect-error fetchpriority attribute
+        fetchpriority="high"
       />
     </div>
   );
