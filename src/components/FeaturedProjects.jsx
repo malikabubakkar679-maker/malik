@@ -328,7 +328,7 @@ void main() {
   float lineY = 1.0 - smoothstep(0.0, 1.5 * fw.y, gridFract.y);
   float line = max(lineX, lineY);
 
-  vec3 col = vec3(0.12, 0.12, 0.14);
+  vec3 col = vec3(0.0, 0.0, 0.0);
 
   // Reflection on the lines
   vec4 reflCoord = u_reflViewProj * vec4(vWorldPos, 1.0);
@@ -342,14 +342,14 @@ void main() {
     float weight = vFar >= 0.0 ? exp(-6.0 * vFar) : exp(2.2 * vFar);
     float edges = smoothstep(0.0, 0.1, rUv.x) * smoothstep(1.0, 0.9, rUv.x) *
                   smoothstep(0.0, 0.1, rUv.y) * smoothstep(1.0, 0.9, rUv.y);
-    col = mix(col, reflCol.rgb, 0.55 * weight * edges);
+    col = mix(col, reflCol.rgb, 0.35 * weight * edges);
   }
 
   // Contact shadow
   float contactShadow = 1.0 - 0.55 * exp(-14.0 * abs(vFar));
   col *= contactShadow;
 
-  gl_FragColor = vec4(col, u_alpha * fade * line * 0.22);
+  gl_FragColor = vec4(col, u_alpha * fade * line * 0.38);
 }
 `;
 

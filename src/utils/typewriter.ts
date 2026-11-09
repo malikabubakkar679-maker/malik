@@ -4,14 +4,14 @@
  */
 
 export const HERO_ROTATING_PHRASES = [
+  'I am a Web Developer',
   'I am a Software Engineer',
   'I am a Problem Solver',
-  'I am a Web Developer',
   'I am an App Developer',
 ] as const;
 
 export const HERO_STATIC_DESCRIPTION =
-  'I build modern digital experiences by turning complex ideas into simple, functional, and beautiful solutions.';
+  'I design and build scalable, user-centered digital products that solve real problems and deliver measurable results.';
 
 export function getNextPhraseIndex(currentIndex: number, totalPhrases = HERO_ROTATING_PHRASES.length): number {
   if (totalPhrases <= 0) return 0;

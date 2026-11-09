@@ -175,7 +175,7 @@ export const InteractivePortrait: React.FC<InteractivePortraitProps> = ({
   return (
     <div
       ref={containerRef}
-      className={`relative h-[88vh] sm:h-[95vh] w-auto max-w-none aspect-square select-none pointer-events-none [perspective:1000px] ${className}`}
+      className={`relative h-full w-auto aspect-square select-none pointer-events-none [perspective:1000px] ${className}`}
       data-testid="interactive-portrait-container"
     >
       {/* 1. Stationary Body Layer: Torso, shoulders, folded arms (never moves) */}

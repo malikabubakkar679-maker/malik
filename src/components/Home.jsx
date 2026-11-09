@@ -15,17 +15,17 @@ import Footer from "./Footer";
 export default function Home({ isIntroReady, onOpenInquiry }) {
   return (
     <main className="home-editorial-wrap">
-      {/* 1. Hero with Kinetic Typography & Upgraded Studio Portrait */}
-      <Hero isIntroReady={isIntroReady} />
+      {/* 1. Hero with Kinetic Typography & Studio Portrait */}
+      <Hero isIntroReady={isIntroReady} onOpenInquiry={onOpenInquiry} />
 
-      {/* 2. Editorial Statement & Stats */}
+      {/* 2. Editorial Statement & Stats (Count Session) */}
       <IntroStatement />
 
-      {/* 3. Featured Projects with Premium Infinite Gallery Scroll Animation */}
-      <FeaturedProjects />
-
-      {/* 4. About Me (Malik Abubakkar Engineering Profile) */}
+      {/* 3. About Me (Malik Abubakkar Engineering Profile) */}
       <AboutSection />
+
+      {/* 4. Featured Projects with 3D WebGL Horizontal S-Curve Ribbon */}
+      <FeaturedProjects />
 
       {/* 5. Services (Numbered Interactive Rows) */}
       <ServicesSection />
