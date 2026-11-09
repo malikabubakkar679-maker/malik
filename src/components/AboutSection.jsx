@@ -11,7 +11,7 @@ export const RING_PATHS = [
   "M63.82 409.55C63.71 407.98 63.31 403.27 63.17 400.13C63.03 396.99 62.95 393.83 62.98 390.68C63.01 387.53 63.12 384.37 63.33 381.22C63.54 378.07 63.87 374.93 64.26 371.80C64.66 368.67 65.14 365.54 65.70 362.43C66.26 359.32 66.89 356.21 67.62 353.14C68.35 350.06 69.17 347.01 70.08 343.98C70.99 340.95 72.01 337.95 73.09 334.98C74.17 332.01 75.33 329.05 76.57 326.14C77.81 323.23 79.11 320.35 80.51 317.51C81.91 314.67 83.39 311.87 84.95 309.12C86.51 306.37 88.14 303.66 89.85 301.00C91.55 298.34 93.34 295.73 95.18 293.16C97.02 290.59 98.91 288.05 100.87 285.58C102.84 283.11 104.88 280.70 106.97 278.34C109.06 275.98 111.23 273.68 113.44 271.43C115.65 269.18 117.93 266.99 120.25 264.86C122.57 262.73 124.95 260.66 127.38 258.65C129.81 256.64 132.29 254.70 134.82 252.82C137.35 250.94 139.92 249.12 142.54 247.37C145.16 245.62 147.82 243.92 150.51 242.29C153.20 240.66 155.92 239.07 158.69 237.57C161.46 236.07 164.27 234.63 167.11 233.28C169.96 231.93 172.84 230.66 175.76 229.46C178.68 228.26 181.64 227.15 184.61 226.10C187.58 225.05 190.58 224.05 193.60 223.14C196.62 222.23 199.66 221.39 202.73 220.64C205.80 219.89 208.89 219.23 212.00 218.64C215.11 218.05 218.23 217.55 221.36 217.11C224.49 216.67 227.77 216.31 230.79 216.01C233.81 215.71 238.05 215.45 239.50 215.34",
   "M122.52 484.49C121.83 483.37 119.70 480.04 118.37 477.77C117.04 475.50 115.77 473.19 114.54 470.86C113.31 468.53 112.12 466.16 111.02 463.77C109.92 461.38 108.90 458.94 107.93 456.49C106.96 454.04 106.05 451.55 105.20 449.05C104.35 446.55 103.54 444.03 102.82 441.49C102.09 438.95 101.43 436.38 100.85 433.80C100.27 431.22 99.78 428.61 99.34 426.00C98.90 423.39 98.49 420.76 98.18 418.13C97.87 415.50 97.63 412.86 97.48 410.21C97.33 407.56 97.30 404.90 97.30 402.25C97.30 399.60 97.33 396.94 97.47 394.29C97.61 391.64 97.85 389.00 98.15 386.36C98.45 383.73 98.85 381.10 99.29 378.48C99.73 375.87 100.23 373.25 100.81 370.67C101.39 368.09 102.06 365.52 102.78 362.97C103.50 360.42 104.28 357.89 105.13 355.38C105.97 352.87 106.88 350.37 107.85 347.91C108.82 345.45 109.87 343.02 110.97 340.61C112.07 338.20 113.22 335.82 114.44 333.47C115.66 331.12 116.95 328.80 118.29 326.52C119.64 324.24 121.05 322.00 122.51 319.80C123.97 317.60 125.49 315.43 127.06 313.30C128.63 311.17 130.23 309.06 131.91 307.02C133.59 304.98 135.34 303.00 137.14 301.06C138.94 299.12 140.80 297.25 142.70 295.41C144.60 293.57 146.53 291.77 148.52 290.03C150.51 288.29 152.53 286.60 154.61 284.98C156.69 283.36 158.83 281.81 160.99 280.29C163.15 278.77 165.33 277.30 167.55 275.88C169.77 274.46 172.02 273.09 174.31 271.79C176.60 270.49 178.93 269.24 181.28 268.06C183.63 266.88 186.02 265.75 188.43 264.69C190.84 263.63 193.29 262.66 195.75 261.71C198.21 260.76 200.67 259.81 203.17 258.97C205.67 258.13 208.19 257.36 210.73 256.65C213.27 255.94 215.83 255.31 218.41 254.73C220.99 254.14 223.58 253.60 226.18 253.14C228.78 252.68 231.40 252.30 234.03 251.99C236.66 251.69 239.30 251.49 241.94 251.31C244.58 251.13 247.23 250.95 249.88 250.90C252.53 250.85 255.19 250.89 257.84 251.01C260.49 251.13 263.13 251.38 265.77 251.64C268.41 251.90 271.07 252.22 273.68 252.58C276.29 252.94 280.15 253.59 281.44 253.79",
   "M196.72 531.07C195.73 530.51 192.74 528.87 190.79 527.70C188.84 526.53 186.91 525.31 185.03 524.03C183.15 522.75 181.31 521.42 179.51 520.04C177.71 518.66 175.96 517.21 174.24 515.73C172.52 514.25 170.82 512.75 169.17 511.19C167.52 509.63 165.93 508.02 164.36 506.39C162.79 504.76 161.25 503.09 159.75 501.40C158.25 499.70 156.77 497.99 155.36 496.22C153.95 494.45 152.58 492.63 151.27 490.79C149.96 488.95 148.71 487.06 147.48 485.16C146.25 483.26 145.05 481.34 143.90 479.39C142.75 477.44 141.64 475.45 140.60 473.44C139.56 471.43 138.58 469.38 137.66 467.31C136.74 465.24 135.90 463.13 135.09 461.01C134.28 458.89 133.51 456.75 132.80 454.60C132.09 452.45 131.42 450.27 130.83 448.08C130.24 445.89 129.71 443.67 129.25 441.45C128.79 439.23 128.40 436.99 128.06 434.74C127.72 432.50 127.45 430.24 127.21 427.98C126.97 425.72 126.76 423.45 126.64 421.18C126.52 418.91 126.45 416.63 126.48 414.36C126.51 412.09 126.65 409.81 126.83 407.55C127.01 405.29 127.27 403.03 127.55 400.78C127.83 398.53 128.12 396.28 128.49 394.04C128.86 391.80 129.29 389.56 129.79 387.35C130.29 385.14 130.87 382.95 131.49 380.77C132.11 378.59 132.78 376.42 133.51 374.27C134.24 372.12 135.04 369.99 135.88 367.89C136.72 365.79 137.61 363.71 138.55 361.65C139.49 359.59 140.46 357.54 141.51 355.53C142.56 353.52 143.68 351.55 144.84 349.60C146.00 347.65 147.20 345.73 148.45 343.84C149.70 341.95 150.98 340.08 152.32 338.26C153.66 336.44 155.07 334.66 156.51 332.91C157.95 331.16 159.43 329.45 160.96 327.78C162.49 326.11 164.06 324.48 165.67 322.88C167.27 321.28 168.91 319.70 170.59 318.19C172.27 316.68 174.01 315.21 175.77 313.79C177.53 312.37 179.33 310.99 181.17 309.66C183.01 308.33 184.88 307.05 186.79 305.82C188.69 304.59 190.64 303.43 192.60 302.29C194.56 301.16 196.55 300.05 198.57 299.01C200.59 297.97 202.63 296.98 204.71 296.06C206.79 295.14 208.90 294.29 211.02 293.49C213.14 292.69 215.29 291.94 217.45 291.25C219.61 290.56 221.79 289.93 223.99 289.35C226.19 288.78 228.41 288.26 230.63 287.80C232.85 287.34 235.09 286.90 237.33 286.56C239.58 286.22 241.84 285.94 244.10 285.73C246.36 285.52 248.63 285.38 250.90 285.30C253.17 285.22 255.44 285.20 257.71 285.23C259.98 285.26 262.25 285.33 264.51 285.47C266.77 285.61 269.05 285.81 271.30 286.09C273.55 286.37 275.79 286.73 278.02 287.14C280.25 287.55 282.47 288.02 284.67 288.54C286.88 289.06 289.07 289.62 291.25 290.24C293.43 290.86 295.60 291.51 297.74 292.24C299.88 292.97 302.00 293.76 304.10 294.61C306.20 295.46 308.28 296.35 310.33 297.31C312.38 298.27 315.16 299.73 316.39 300.36C317.62 300.99 317.49 300.98 317.71 301.10",
-  "M1032.50 215.26C1034.08 215.36 1038.82 215.57 1041.96 215.85C1045.11 216.13 1048.25 216.49 1051.37 216.93C1054.49 217.37 1057.61 217.88 1060.70 218.48C1063.79 219.08 1066.87 219.78 1069.92 220.56C1072.97 221.34 1076.00 222.21 1079.01 223.13C1082.02 224.05 1085.02 225.01 1087.98 226.07C1090.94 227.12 1093.88 228.25 1096.78 229.46C1099.68 230.67 1102.54 231.98 1105.37 233.34C1108.20 234.70 1111.00 236.13 1113.77 237.62C1116.54 239.11 1119.27 240.65 1121.96 242.27C1124.65 243.89 1127.30 245.59 1129.90 247.35C1132.51 249.10 1135.07 250.92 1137.59 252.80C1140.11 254.68 1142.60 256.61 1145.02 258.61C1147.44 260.61 1149.82 262.68 1152.13 264.81C1154.45 266.94 1156.72 269.12 1158.91 271.38C1161.10 273.63 1163.22 275.97 1165.29 278.34C1167.36 280.71 1169.36 283.15 1171.31 285.62C1173.26 288.09 1175.16 290.61 1176.99 293.17C1178.82 295.74 1180.58 298.35 1182.27 301.01C1183.96 303.67 1185.56 306.39 1187.11 309.14C1188.66 311.89 1190.17 314.67 1191.58 317.49C1192.99 320.31 1194.34 323.17 1195.56 326.08C1196.78 328.99 1197.88 331.95 1198.93 334.93C1199.98 337.91 1200.97 340.91 1201.86 343.94C1202.75 346.97 1203.56 350.02 1204.28 353.09C1205.00 356.16 1205.63 359.25 1206.18 362.35C1206.73 365.45 1207.20 368.57 1207.57 371.70C1207.94 374.83 1208.22 377.97 1208.42 381.11C1208.62 384.25 1208.75 387.40 1208.78 390.54C1208.81 393.68 1208.73 396.96 1208.62 399.96C1208.51 402.96 1208.19 407.11 1208.10 408.54",
+  "M1032.50 215.26C1034.08 215.36 1038.82 215.57 1041.96 215.85C1045.11 216.13 1048.25 216.49 1051.37 216.93C1054.49 217.88 1060.70 218.48 1063.79 219.08 1066.87 219.78 1069.92 220.56C1072.97 221.34 1076.00 222.21 1079.01 223.13C1082.02 224.05 1085.02 225.01 1087.98 226.07C1090.94 227.12 1093.88 228.25 1096.78 229.46C1099.68 230.67 1102.54 231.98 1105.37 233.34C1108.20 234.70 1111.00 236.13 1113.77 237.62C1116.54 239.11 1119.27 240.65 1121.96 242.27C1124.65 243.89 1127.30 245.59 1129.90 247.35C1132.51 249.10 1135.07 250.92 1137.59 252.80C1140.11 254.68 1142.60 256.61 1145.02 258.61C1147.44 260.61 1149.82 262.68 1152.13 264.81C1154.45 266.94 1156.72 269.12 1158.91 271.38C1161.10 273.63 1163.22 275.97 1165.29 278.34C1167.36 280.71 1169.36 283.15 1171.31 285.62C1173.26 288.09 1175.16 290.61 1176.99 293.17C1178.82 295.74 1180.58 298.35 1182.27 301.01C1183.96 303.67 1185.56 306.39 1187.11 309.14C1188.66 311.89 1190.17 314.67 1191.58 317.49C1192.99 320.31 1194.34 323.17 1195.56 326.08C1196.78 328.99 1197.88 331.95 1198.93 334.93C1199.98 337.91 1200.97 340.91 1201.86 343.94C1202.75 346.97 1203.56 350.02 1204.28 353.09C1205.00 356.16 1205.63 359.25 1206.18 362.35C1206.73 365.45 1207.20 368.57 1207.57 371.70C1207.94 374.83 1208.22 377.97 1208.42 381.11C1208.62 384.25 1208.75 387.40 1208.78 390.54C1208.81 393.68 1208.73 396.96 1208.62 399.96C1208.51 402.96 1208.19 407.11 1208.10 408.54",
   "M990.53 253.66C991.84 253.43 995.75 252.69 998.38 252.30C1001.00 251.91 1003.64 251.59 1006.28 251.34C1008.92 251.09 1011.57 250.88 1014.21 250.77C1016.86 250.66 1019.50 250.65 1022.15 250.70C1024.80 250.75 1027.44 250.89 1030.08 251.07C1032.72 251.25 1035.35 251.48 1037.97 251.78C1040.59 252.08 1043.22 252.43 1045.82 252.86C1048.42 253.30 1051.02 253.81 1053.59 254.39C1056.16 254.97 1058.71 255.61 1061.25 256.32C1063.79 257.03 1066.30 257.81 1068.80 258.65C1071.30 259.48 1073.78 260.38 1076.23 261.33C1078.68 262.28 1081.12 263.29 1083.52 264.36C1085.92 265.43 1088.30 266.56 1090.65 267.74C1093.00 268.92 1095.33 270.14 1097.61 271.45C1099.89 272.75 1102.12 274.15 1104.34 275.57C1106.55 276.99 1108.74 278.45 1110.90 279.96C1113.06 281.47 1115.20 283.00 1117.28 284.62C1119.36 286.24 1121.38 287.93 1123.37 289.66C1125.36 291.39 1127.30 293.18 1129.19 295.01C1131.08 296.84 1132.93 298.73 1134.73 300.66C1136.53 302.59 1138.29 304.56 1139.98 306.58C1141.67 308.60 1143.32 310.68 1144.89 312.80C1146.46 314.92 1147.96 317.10 1149.42 319.30C1150.88 321.50 1152.29 323.75 1153.64 326.02C1154.99 328.29 1156.28 330.60 1157.50 332.94C1158.72 335.28 1159.87 337.67 1160.96 340.08C1162.05 342.49 1163.07 344.93 1164.03 347.39C1164.99 349.85 1165.89 352.34 1166.72 354.85C1167.55 357.36 1168.32 359.89 1169.02 362.44C1169.72 364.99 1170.35 367.56 1170.93 370.14C1171.51 372.72 1172.04 375.31 1172.49 377.92C1172.94 380.53 1173.32 383.15 1173.62 385.78C1173.92 388.41 1174.13 391.05 1174.29 393.69C1174.45 396.33 1174.55 398.98 1174.56 401.63C1174.57 404.28 1174.48 406.93 1174.34 409.57C1174.19 412.21 1173.99 414.85 1173.69 417.48C1173.39 420.11 1173.02 422.73 1172.57 425.34C1172.12 427.94 1171.58 430.53 1171.00 433.11C1170.42 435.69 1169.81 438.25 1169.11 440.80C1168.41 443.35 1167.66 445.88 1166.81 448.38C1165.96 450.88 1165.02 453.34 1164.03 455.78C1163.04 458.22 1161.98 460.64 1160.89 463.03C1159.80 465.42 1158.67 467.80 1157.47 470.14C1156.27 472.48 1155.01 474.80 1153.68 477.07C1152.35 479.34 1150.20 482.64 1149.51 483.76",
   "M954.54 300.58C955.55 300.08 958.56 298.51 960.61 297.56C962.66 296.61 964.74 295.72 966.83 294.86C968.92 294.00 971.03 293.19 973.16 292.43C975.29 291.67 977.44 290.95 979.61 290.31C981.78 289.67 983.97 289.10 986.17 288.58C988.37 288.06 990.59 287.59 992.81 287.17C995.03 286.75 997.26 286.34 999.51 286.05C1001.75 285.76 1004.02 285.58 1006.28 285.42C1008.54 285.26 1010.80 285.17 1013.06 285.11C1015.32 285.06 1017.59 285.04 1019.86 285.09C1022.13 285.14 1024.40 285.25 1026.66 285.43C1028.92 285.61 1031.18 285.83 1033.42 286.15C1035.66 286.47 1037.90 286.89 1040.12 287.34C1042.34 287.79 1044.56 288.28 1046.76 288.83C1048.96 289.38 1051.14 289.99 1053.31 290.65C1055.48 291.31 1057.63 292.04 1059.76 292.81C1061.89 293.58 1064.00 294.41 1066.09 295.29C1068.17 296.18 1070.24 297.12 1072.27 298.12C1074.30 299.12 1076.29 300.21 1078.27 301.32C1080.25 302.43 1082.21 303.56 1084.13 304.76C1086.05 305.96 1087.94 307.22 1089.78 308.54C1091.62 309.86 1093.41 311.25 1095.18 312.66C1096.95 314.07 1098.71 315.49 1100.42 316.97C1102.13 318.45 1103.81 319.98 1105.44 321.55C1107.07 323.12 1108.64 324.75 1110.18 326.41C1111.72 328.07 1113.22 329.76 1114.67 331.50C1116.12 333.24 1117.51 335.03 1118.86 336.84C1120.21 338.65 1121.52 340.50 1122.79 342.37C1124.06 344.24 1125.32 346.12 1126.50 348.05C1127.68 349.98 1128.82 351.94 1129.90 353.93C1130.98 355.92 1132.02 357.93 1132.98 359.98C1133.94 362.03 1134.84 364.12 1135.69 366.22C1136.54 368.32 1137.35 370.43 1138.09 372.57C1138.83 374.71 1139.53 376.87 1140.15 379.05C1140.77 381.23 1141.32 383.43 1141.83 385.63C1142.34 387.83 1142.83 390.05 1143.24 392.28C1143.65 394.51 1144.01 396.75 1144.32 398.99C1144.63 401.24 1144.90 403.49 1145.08 405.75C1145.26 408.01 1145.38 410.28 1145.42 412.55C1145.46 414.82 1145.41 417.09 1145.32 419.36C1145.23 421.63 1145.10 423.89 1144.90 426.15C1144.70 428.41 1144.46 430.67 1144.13 432.91C1143.80 435.15 1143.39 437.39 1142.94 439.61C1142.49 441.83 1141.97 444.05 1141.41 446.24C1140.85 448.44 1140.24 450.62 1139.56 452.78C1138.88 454.94 1138.14 457.08 1137.35 459.20C1136.56 461.32 1135.73 463.44 1134.83 465.52C1133.93 467.60 1132.98 469.65 1131.97 471.67C1130.96 473.69 1129.87 475.69 1128.75 477.65C1127.63 479.61 1126.46 481.55 1125.25 483.46C1124.04 485.37 1122.79 487.25 1121.50 489.10C1120.21 490.95 1118.87 492.78 1117.49 494.57C1116.11 496.36 1114.66 498.11 1113.20 499.83C1111.74 501.55 1110.24 503.25 1108.70 504.90C1107.16 506.55 1105.57 508.17 1103.94 509.74C1102.31 511.31 1100.63 512.84 1098.92 514.33C1097.21 515.82 1095.48 517.29 1093.69 518.68C1091.90 520.07 1090.05 521.38 1088.18 522.67C1086.31 523.95 1084.39 525.18 1082.47 526.39C1080.55 527.60 1077.78 529.22 1076.63 529.92C1075.48 530.62 1075.73 530.48 1075.55 530.59",
   "M501.59 510.41C500.50 509.20 497.15 505.62 495.03 503.15C492.90 500.68 490.83 498.16 488.84 495.58C486.85 493.00 484.92 490.36 483.07 487.67C481.22 484.99 479.43 482.25 477.72 479.47C476.01 476.69 474.38 473.86 472.80 471.00C471.23 468.14 469.72 465.24 468.27 462.31C466.81 459.38 465.40 456.44 464.07 453.45C462.74 450.46 461.46 447.43 460.29 444.37C459.12 441.31 458.05 438.20 457.07 435.07C456.09 431.94 455.19 428.77 454.39 425.59C453.59 422.41 452.88 419.19 452.25 415.97C451.62 412.75 451.07 409.51 450.63 406.25C450.19 402.99 449.84 399.71 449.58 396.43C449.32 393.15 449.15 389.87 449.07 386.58C448.99 383.29 449.02 380.00 449.12 376.71C449.22 373.42 449.40 370.14 449.67 366.86C449.94 363.58 450.28 360.31 450.73 357.05C451.18 353.79 451.73 350.54 452.38 347.32C453.03 344.10 453.78 340.90 454.61 337.72C455.44 334.54 456.37 331.39 457.36 328.26C458.35 325.13 459.41 322.02 460.56 318.95C461.71 315.88 462.95 312.84 464.27 309.84C465.59 306.84 467.00 303.88 468.46 300.95C469.92 298.02 471.45 295.12 473.05 292.27C474.65 289.42 476.33 286.60 478.06 283.83C479.79 281.06 481.58 278.32 483.45 275.64C485.31 272.96 487.25 270.32 489.25 267.73C491.25 265.14 493.31 262.60 495.43 260.11C497.55 257.62 499.72 255.18 501.97 252.80C504.22 250.43 506.53 248.10 508.91 245.86C511.29 243.62 513.75 241.46 516.26 239.36C518.77 237.27 521.35 235.25 523.96 233.29C526.57 231.33 529.24 229.43 531.94 227.59C534.65 225.75 537.39 223.97 540.19 222.28C542.99 220.59 545.83 218.99 548.72 217.47C551.61 215.95 554.55 214.51 557.51 213.14C560.47 211.77 563.47 210.47 566.49 209.23C569.51 207.99 572.55 206.80 575.62 205.69C578.69 204.58 581.79 203.54 584.92 202.59C588.04 201.64 591.20 200.76 594.37 199.98C597.54 199.20 600.75 198.53 603.96 197.93C607.17 197.33 610.40 196.82 613.64 196.38C616.88 195.94 620.13 195.56 623.39 195.27C626.65 194.98 629.93 194.77 633.20 194.61C636.47 194.46 639.75 194.34 643.03 194.34C646.31 194.34 649.60 194.42 652.88 194.60C656.16 194.78 659.44 195.08 662.71 195.43C665.98 195.78 669.25 196.18 672.51 196.69C675.76 197.20 680.06 198.10 682.24 198.52C684.42 198.94 685.02 199.09 685.58 199.21",
@@ -35,12 +35,16 @@ export default function AboutSection() {
     if (!section) return;
 
     const ctx = gsap.context(() => {
+      // Pin the section solidly for both Desktop AND Mobile
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
           start: "top top",
-          end: "bottom bottom",
-          scrub: 1, // Smooth momentum
+          end: () => `+=${window.innerHeight * 2.8}`,
+          pin: true,
+          pinSpacing: true,
+          scrub: 0.8, // Smooth momentum
+          anticipatePin: 1,
           invalidateOnRefresh: true,
         },
       });
@@ -49,8 +53,8 @@ export default function AboutSection() {
       tl.to(
         imageRef.current,
         {
-          scale: 1.06,
-          y: -20,
+          scale: 1.05,
+          y: -15,
           ease: "none",
           duration: 12,
         },
@@ -63,7 +67,7 @@ export default function AboutSection() {
         stage1Ref.current,
         {
           opacity: 0,
-          y: -60,
+          y: -50,
           scale: 0.96,
           ease: "power2.inOut",
           duration: 1.2,
@@ -76,7 +80,7 @@ export default function AboutSection() {
         stage2Ref.current,
         {
           opacity: 0,
-          y: 60,
+          y: 50,
           scale: 0.96,
         },
         {
@@ -94,7 +98,7 @@ export default function AboutSection() {
         stage2Ref.current,
         {
           opacity: 0,
-          y: -60,
+          y: -50,
           scale: 0.96,
           ease: "power2.in",
           duration: 1.2,
@@ -107,7 +111,7 @@ export default function AboutSection() {
         stage3Ref.current,
         {
           opacity: 0,
-          y: 60,
+          y: 50,
           scale: 0.96,
         },
         {
@@ -125,7 +129,7 @@ export default function AboutSection() {
         stage3Ref.current,
         {
           opacity: 0,
-          y: -60,
+          y: -50,
           scale: 0.96,
           ease: "power2.in",
           duration: 1.2,
@@ -138,7 +142,7 @@ export default function AboutSection() {
         stage4Ref.current,
         {
           opacity: 0,
-          y: 50,
+          y: 40,
           scale: 0.92,
         },
         {
@@ -158,7 +162,7 @@ export default function AboutSection() {
     // Refresh after DOM layout calculation
     const timer = setTimeout(() => {
       ScrollTrigger.refresh();
-    }, 200);
+    }, 250);
 
     return () => {
       clearTimeout(timer);
@@ -170,154 +174,150 @@ export default function AboutSection() {
     <section
       id="about"
       ref={sectionRef}
-      className="relative w-full h-[380vh] bg-[#FAF8F5] text-[#121214] select-none"
+      className="relative w-full h-screen h-[100dvh] bg-[#FAF8F5] text-[#121214] select-none overflow-hidden flex items-center justify-center px-4 sm:px-8 md:px-12"
     >
-      {/* Pinned 100vh Full-Screen Stage */}
-      <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden px-6 sm:px-12">
-        
-        {/* Soft Ambient Radial Vignette & Warm Glow */}
-        <div
-          className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,rgba(235,224,210,0.55)_0%,transparent_70%)] z-0"
+      {/* Soft Ambient Radial Vignette & Warm Glow */}
+      <div
+        className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,rgba(235,224,210,0.55)_0%,transparent_70%)] z-0"
+        aria-hidden="true"
+      />
+
+      {/* 12 Architectural Ring Lines from PARALLAX template */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 flex items-center justify-center">
+        <svg
+          viewBox="0 0 1280 800"
+          preserveAspectRatio="xMidYMid slice"
+          className="w-full h-full opacity-15 stroke-[#121214]"
           aria-hidden="true"
-        />
-
-        {/* 12 Architectural Ring Lines from PARALLAX template */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 flex items-center justify-center">
-          <svg
-            viewBox="0 0 1280 800"
-            preserveAspectRatio="xMidYMid slice"
-            className="w-full h-full opacity-15 stroke-[#121214]"
-            aria-hidden="true"
-          >
-            {RING_PATHS.map((d, idx) => (
-              <path
-                key={idx}
-                d={d}
-                fill="none"
-                strokeWidth="1.15"
-                strokeLinecap="butt"
-              />
-            ))}
-          </svg>
-        </div>
-
-        {/* CENTERPIECE: Malik's Clean Large Profile Portrait */}
-        <div
-          ref={imageRef}
-          className="relative z-10 flex items-center justify-center will-change-transform pointer-events-none"
         >
-          <img
-            src="/images/malik-about-profile.png"
-            alt="Malik Abubakkar"
-            className="h-[64vh] sm:h-[74vh] md:h-[80vh] max-h-[760px] w-auto object-contain filter contrast-[1.04] drop-shadow-[0_20px_45px_rgba(0,0,0,0.12)] pointer-events-none"
-            loading="eager"
-            decoding="async"
-          />
+          {RING_PATHS.map((d, idx) => (
+            <path
+              key={idx}
+              d={d}
+              fill="none"
+              strokeWidth="1.15"
+              strokeLinecap="butt"
+            />
+          ))}
+        </svg>
+      </div>
+
+      {/* CENTERPIECE: Malik's Clean Large Profile Portrait */}
+      <div
+        ref={imageRef}
+        className="relative z-10 flex items-center justify-center will-change-transform pointer-events-none"
+      >
+        <img
+          src="/images/malik-about-profile.png"
+          alt="Malik Abubakkar"
+          className="h-[62vh] sm:h-[72vh] md:h-[78vh] max-h-[720px] w-auto object-contain filter contrast-[1.04] drop-shadow-[0_20px_45px_rgba(0,0,0,0.12)] pointer-events-none"
+          loading="eager"
+          decoding="async"
+        />
+      </div>
+
+      {/* ============================================================== */}
+      {/* ANIMATED TEXT LAYERS DIRECTLY OVER THE CENTER IMAGE (NO BOXES) */}
+      {/* ============================================================== */}
+      <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none p-4 sm:p-8 md:p-12">
+
+        {/* STAGE 1: Name + Tagline */}
+        <div
+          ref={stage1Ref}
+          className="absolute flex flex-col items-center justify-center text-center will-change-transform max-w-4xl px-4"
+        >
+          <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-8xl font-black uppercase tracking-tight text-[#121214] drop-shadow-[0_4px_16px_rgba(250,248,245,0.95)] leading-[0.95]">
+            MALIK ABUBAKKAR
+          </h2>
+          <p className="text-base sm:text-xl md:text-2xl lg:text-3xl font-serif italic text-neutral-800 mt-3 sm:mt-5 drop-shadow-[0_2px_12px_rgba(250,248,245,0.95)] leading-relaxed max-w-2xl">
+            “Turning ideas into meaningful digital experiences.”
+          </p>
         </div>
 
-        {/* ============================================================== */}
-        {/* ANIMATED TEXT LAYERS DIRECTLY OVER THE CENTER IMAGE (NO BOXES) */}
-        {/* ============================================================== */}
-        <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none p-6 sm:p-12">
+        {/* STAGE 2: Primary Introduction Statement */}
+        <div
+          ref={stage2Ref}
+          style={{ opacity: 0 }}
+          className="absolute flex items-center justify-center text-center will-change-transform max-w-4xl px-4"
+        >
+          <p className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-[#121214] leading-[1.28] drop-shadow-[0_4px_24px_rgba(250,248,245,0.98)]">
+            I am a Software Engineer and Web Developer focused on building scalable applications, modern interfaces, and engaging digital experiences.
+          </p>
+        </div>
 
-          {/* STAGE 1: Name + Tagline */}
-          <div
-            ref={stage1Ref}
-            className="absolute flex flex-col items-center justify-center text-center will-change-transform max-w-4xl px-4"
-          >
-            <h2 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase tracking-tight text-[#121214] drop-shadow-[0_4px_16px_rgba(250,248,245,0.95)] leading-[0.95]">
-              MALIK ABUBAKKAR
-            </h2>
-            <p className="text-lg sm:text-2xl md:text-3xl font-serif italic text-neutral-800 mt-4 sm:mt-6 drop-shadow-[0_2px_12px_rgba(250,248,245,0.95)] leading-relaxed max-w-2xl">
-              “Turning ideas into meaningful digital experiences.”
-            </p>
-          </div>
+        {/* STAGE 3: Experience & Technical Philosophy */}
+        <div
+          ref={stage3Ref}
+          style={{ opacity: 0 }}
+          className="absolute flex items-center justify-center text-center will-change-transform max-w-4xl px-4"
+        >
+          <p className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-medium text-neutral-900 leading-[1.38] drop-shadow-[0_4px_24px_rgba(250,248,245,0.98)]">
+            With experience in <span className="font-bold text-[#121214]">React</span>, <span className="font-bold text-[#121214]">Next.js</span>, and <span className="font-bold text-[#121214]">WebGL</span>, I combine clean architecture, creative design, and problem-solving to build high-performance digital products — from concept to implementation.
+          </p>
+        </div>
 
-          {/* STAGE 2: Primary Introduction Statement */}
-          <div
-            ref={stage2Ref}
-            style={{ opacity: 0 }}
-            className="absolute flex items-center justify-center text-center will-change-transform max-w-4xl px-4"
-          >
-            <p className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-[#121214] leading-[1.25] drop-shadow-[0_4px_24px_rgba(250,248,245,0.98)]">
-              I am a Software Engineer and Web Developer focused on building scalable applications, modern interfaces, and engaging digital experiences.
-            </p>
-          </div>
+        {/* STAGE 4: Clean Tech Badges with Crisp Icons */}
+        <div
+          ref={stage4Ref}
+          style={{ opacity: 0 }}
+          className="absolute flex flex-col items-center justify-center text-center will-change-transform max-w-3xl px-4 pointer-events-auto"
+        >
+          <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-4">
+            {/* React */}
+            <div className="inline-flex items-center gap-2 sm:gap-2.5 px-4 sm:px-5 py-2.5 sm:py-3 rounded-full bg-white/95 backdrop-blur-md border border-neutral-300 shadow-md text-[#121214] font-medium text-xs sm:text-sm md:text-base hover:border-[#BA9B70] transition-all">
+              <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[#00D8FF]" viewBox="0 0 115.3 100" fill="currentColor">
+                <ellipse cx="57.65" cy="50" rx="16.7" ry="43.5" fill="none" stroke="currentColor" strokeWidth="5" transform="matrix(0.5 -0.866 0.866 0.5 28.825 50)" />
+                <ellipse cx="57.65" cy="50" rx="16.7" ry="43.5" fill="none" stroke="currentColor" strokeWidth="5" transform="matrix(0.5 0.866 -0.866 0.5 72.062 -25)" />
+                <ellipse cx="57.65" cy="50" rx="16.7" ry="43.5" fill="none" stroke="currentColor" strokeWidth="5" />
+                <circle cx="57.65" cy="50" r="9" fill="currentColor" />
+              </svg>
+              <span>React</span>
+            </div>
 
-          {/* STAGE 3: Experience & Technical Philosophy */}
-          <div
-            ref={stage3Ref}
-            style={{ opacity: 0 }}
-            className="absolute flex items-center justify-center text-center will-change-transform max-w-4xl px-4"
-          >
-            <p className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-medium text-neutral-900 leading-[1.35] drop-shadow-[0_4px_24px_rgba(250,248,245,0.98)]">
-              With experience in <span className="font-bold text-[#121214]">React</span>, <span className="font-bold text-[#121214]">Next.js</span>, and <span className="font-bold text-[#121214]">WebGL</span>, I combine clean architecture, creative design, and problem-solving to build high-performance digital products — from concept to implementation.
-            </p>
-          </div>
+            {/* Next.js */}
+            <div className="inline-flex items-center gap-2 sm:gap-2.5 px-4 sm:px-5 py-2.5 sm:py-3 rounded-full bg-white/95 backdrop-blur-md border border-neutral-300 shadow-md text-[#121214] font-medium text-xs sm:text-sm md:text-base hover:border-[#BA9B70] transition-all">
+              <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[#121214]" viewBox="0 0 180 180" fill="currentColor">
+                <mask id="nextMask" maskUnits="userSpaceOnUse" width="180" height="180" x="0" y="0">
+                  <circle cx="90" cy="90" r="90" fill="white" />
+                </mask>
+                <g mask="url(#nextMask)">
+                  <circle cx="90" cy="90" r="90" fill="currentColor" />
+                  <path d="M149.508 157.52L69.142 54H54V125.97H66.1136V69.3836L139.999 164.845C143.333 162.614 146.509 160.165 149.508 157.52Z" fill="white" />
+                  <rect x="115" y="54" width="12" height="72" fill="white" />
+                </g>
+              </svg>
+              <span>Next.js</span>
+            </div>
 
-          {/* STAGE 4: Clean Tech Badges with Crisp Icons */}
-          <div
-            ref={stage4Ref}
-            style={{ opacity: 0 }}
-            className="absolute flex flex-col items-center justify-center text-center will-change-transform max-w-3xl px-4 pointer-events-auto"
-          >
-            <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
-              {/* React */}
-              <div className="inline-flex items-center gap-2.5 px-5 py-3 rounded-full bg-white/95 backdrop-blur-md border border-neutral-300 shadow-lg text-[#121214] font-medium text-sm sm:text-base hover:border-[#BA9B70] transition-all">
-                <svg className="w-5 h-5 text-[#00D8FF]" viewBox="0 0 115.3 100" fill="currentColor">
-                  <ellipse cx="57.65" cy="50" rx="16.7" ry="43.5" fill="none" stroke="currentColor" strokeWidth="5" transform="matrix(0.5 -0.866 0.866 0.5 28.825 50)" />
-                  <ellipse cx="57.65" cy="50" rx="16.7" ry="43.5" fill="none" stroke="currentColor" strokeWidth="5" transform="matrix(0.5 0.866 -0.866 0.5 72.062 -25)" />
-                  <ellipse cx="57.65" cy="50" rx="16.7" ry="43.5" fill="none" stroke="currentColor" strokeWidth="5" />
-                  <circle cx="57.65" cy="50" r="9" fill="currentColor" />
-                </svg>
-                <span>React</span>
-              </div>
+            {/* Web Design */}
+            <div className="inline-flex items-center gap-2 sm:gap-2.5 px-4 sm:px-5 py-2.5 sm:py-3 rounded-full bg-white/95 backdrop-blur-md border border-neutral-300 shadow-md text-[#121214] font-medium text-xs sm:text-sm md:text-base hover:border-[#BA9B70] transition-all">
+              <Palette className="w-4 h-4 sm:w-5 sm:h-5 text-[#BA9B70]" />
+              <span>Web Design</span>
+            </div>
 
-              {/* Next.js */}
-              <div className="inline-flex items-center gap-2.5 px-5 py-3 rounded-full bg-white/95 backdrop-blur-md border border-neutral-300 shadow-lg text-[#121214] font-medium text-sm sm:text-base hover:border-[#BA9B70] transition-all">
-                <svg className="w-5 h-5 text-[#121214]" viewBox="0 0 180 180" fill="currentColor">
-                  <mask id="nextMask" maskUnits="userSpaceOnUse" width="180" height="180" x="0" y="0">
-                    <circle cx="90" cy="90" r="90" fill="white" />
-                  </mask>
-                  <g mask="url(#nextMask)">
-                    <circle cx="90" cy="90" r="90" fill="currentColor" />
-                    <path d="M149.508 157.52L69.142 54H54V125.97H66.1136V69.3836L139.999 164.845C143.333 162.614 146.509 160.165 149.508 157.52Z" fill="white" />
-                    <rect x="115" y="54" width="12" height="72" fill="white" />
-                  </g>
-                </svg>
-                <span>Next.js</span>
-              </div>
+            {/* Figma */}
+            <div className="inline-flex items-center gap-2 sm:gap-2.5 px-4 sm:px-5 py-2.5 sm:py-3 rounded-full bg-white/95 backdrop-blur-md border border-neutral-300 shadow-md text-[#121214] font-medium text-xs sm:text-sm md:text-base hover:border-[#BA9B70] transition-all">
+              <svg className="w-4 h-4 sm:w-5 sm:h-5" viewBox="0 0 38 57" fill="none">
+                <path d="M19 28.5C19 23.2533 23.2533 19 28.5 19C33.7467 19 38 23.2533 38 28.5C38 33.7467 33.7467 38 28.5 38C23.2533 38 19 33.7467 19 28.5Z" fill="#1ABCFE"/>
+                <path d="M0 47.5C0 42.2533 4.25329 38 9.5 38H19V47.5C19 52.7467 14.7467 57 9.5 57C4.25329 57 0 52.7467 0 47.5Z" fill="#0ACF83"/>
+                <path d="M19 0V19H28.5C33.7467 19 38 14.7467 38 9.5C38 4.25329 33.7467 0 28.5 0H19Z" fill="#FF7262"/>
+                <path d="M0 9.5C0 14.7467 4.25329 19 9.5 19H19V0H9.5C4.25329 0 0 4.25329 0 9.5Z" fill="#F24E1E"/>
+                <path d="M0 28.5C0 33.7467 4.25329 38 9.5 38H19V19H9.5C4.25329 19 0 23.2533 0 28.5Z" fill="#A259FF"/>
+              </svg>
+              <span>Figma</span>
+            </div>
 
-              {/* Web Design */}
-              <div className="inline-flex items-center gap-2.5 px-5 py-3 rounded-full bg-white/95 backdrop-blur-md border border-neutral-300 shadow-lg text-[#121214] font-medium text-sm sm:text-base hover:border-[#BA9B70] transition-all">
-                <Palette className="w-5 h-5 text-[#BA9B70]" />
-                <span>Web Design</span>
-              </div>
-
-              {/* Figma */}
-              <div className="inline-flex items-center gap-2.5 px-5 py-3 rounded-full bg-white/95 backdrop-blur-md border border-neutral-300 shadow-lg text-[#121214] font-medium text-sm sm:text-base hover:border-[#BA9B70] transition-all">
-                <svg className="w-5 h-5" viewBox="0 0 38 57" fill="none">
-                  <path d="M19 28.5C19 23.2533 23.2533 19 28.5 19C33.7467 19 38 23.2533 38 28.5C38 33.7467 33.7467 38 28.5 38C23.2533 38 19 33.7467 19 28.5Z" fill="#1ABCFE"/>
-                  <path d="M0 47.5C0 42.2533 4.25329 38 9.5 38H19V47.5C19 52.7467 14.7467 57 9.5 57C4.25329 57 0 52.7467 0 47.5Z" fill="#0ACF83"/>
-                  <path d="M19 0V19H28.5C33.7467 19 38 14.7467 38 9.5C38 4.25329 33.7467 0 28.5 0H19Z" fill="#FF7262"/>
-                  <path d="M0 9.5C0 14.7467 4.25329 19 9.5 19H19V0H9.5C4.25329 0 0 4.25329 0 9.5Z" fill="#F24E1E"/>
-                  <path d="M0 28.5C0 33.7467 4.25329 38 9.5 38H19V19H9.5C4.25329 19 0 23.2533 0 28.5Z" fill="#A259FF"/>
-                </svg>
-                <span>Figma</span>
-              </div>
-
-              {/* Node.js */}
-              <div className="inline-flex items-center gap-2.5 px-5 py-3 rounded-full bg-white/95 backdrop-blur-md border border-neutral-300 shadow-lg text-[#121214] font-medium text-sm sm:text-base hover:border-[#BA9B70] transition-all">
-                <svg className="w-5 h-5 text-[#539E43]" viewBox="0 0 32 32" fill="currentColor">
-                  <path d="M16 2.5L3 10v12l13 7.5 13-7.5V10L16 2.5zm0 2.3l11 6.3v10.8L16 27.2 5 21.9V11.1L16 4.8z"/>
-                  <path d="M16 8l7 4v8l-7 4-7-4v-8l7-4z" opacity="0.3" />
-                </svg>
-                <span>Node.js</span>
-              </div>
+            {/* Node.js */}
+            <div className="inline-flex items-center gap-2 sm:gap-2.5 px-4 sm:px-5 py-2.5 sm:py-3 rounded-full bg-white/95 backdrop-blur-md border border-neutral-300 shadow-md text-[#121214] font-medium text-xs sm:text-sm md:text-base hover:border-[#BA9B70] transition-all">
+              <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[#539E43]" viewBox="0 0 32 32" fill="currentColor">
+                <path d="M16 2.5L3 10v12l13 7.5 13-7.5V10L16 2.5zm0 2.3l11 6.3v10.8L16 27.2 5 21.9V11.1L16 4.8z"/>
+                <path d="M16 8l7 4v8l-7 4-7-4v-8l7-4z" opacity="0.3" />
+              </svg>
+              <span>Node.js</span>
             </div>
           </div>
-
         </div>
+
       </div>
     </section>
   );
