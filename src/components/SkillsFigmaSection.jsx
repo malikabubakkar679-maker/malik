@@ -210,25 +210,20 @@ export default function SkillsFigmaSection() {
             style={catIdx !== 0 ? { opacity: 0 } : undefined}
             className="absolute inset-0 w-full flex items-center justify-center will-change-transform"
           >
-            {/* Skills Progress Bar Graphs Grid - Directly on the Page */}
-            <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-x-10 lg:gap-x-16 gap-y-4 sm:gap-y-6 px-4 sm:px-6">
+            {/* Skills Progress Bar Graphs Grid - Perfectly Centered & Inline Side-by-Side */}
+            <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-x-8 lg:gap-x-14 gap-y-3 sm:gap-y-4 px-4 sm:px-6">
               {cat.skills.map((skill, sIdx) => (
-                <div key={sIdx} className="space-y-1.5 sm:space-y-2">
-                  {/* Skill Name & Percentage */}
-                  <div className="flex items-center justify-between text-sm sm:text-base font-medium">
-                    <div className="flex items-center gap-2 text-[#121214]">
-                      <CheckCircle2 className="w-4 h-4 text-[#BA9B70] shrink-0" />
-                      <span className="font-bold tracking-tight text-[#121214]">
-                        {skill.name}
-                      </span>
-                    </div>
-                    <span className="font-mono text-xs sm:text-sm font-bold text-[#BA9B70]">
-                      {skill.level}%
+                <div key={sIdx} className="flex items-center gap-3 sm:gap-4 py-1">
+                  {/* Left: Icon + Technology Name */}
+                  <div className="flex items-center gap-2 w-36 sm:w-44 shrink-0 text-[#121214]">
+                    <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#BA9B70] shrink-0" />
+                    <span className="font-bold text-xs sm:text-sm tracking-tight text-[#121214] truncate">
+                      {skill.name}
                     </span>
                   </div>
 
-                  {/* Progress Bar Graph */}
-                  <div className="h-2 sm:h-2.5 w-full bg-neutral-200/90 rounded-full overflow-hidden p-[1px] shadow-inner">
+                  {/* Center: Inline Bar Graph in front of the name */}
+                  <div className="h-2 sm:h-2.5 flex-1 bg-neutral-200/90 rounded-full overflow-hidden p-[1px] shadow-inner">
                     <div
                       className="h-full rounded-full bg-gradient-to-r from-[#BA9B70] via-[#C9A675] to-[#121214] shadow-sm transition-all duration-1000 ease-out"
                       style={{
@@ -236,6 +231,11 @@ export default function SkillsFigmaSection() {
                       }}
                     />
                   </div>
+
+                  {/* Right: Percentage */}
+                  <span className="font-mono text-xs sm:text-sm font-bold text-[#BA9B70] w-10 text-right shrink-0">
+                    {skill.level}%
+                  </span>
                 </div>
               ))}
             </div>

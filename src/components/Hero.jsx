@@ -4,7 +4,7 @@
  */
 
 import React, { useState, useRef, useEffect } from 'react';
-import { ArrowRight, Mail, ChevronDown } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import Logo from './Logo';
 import { Marquee } from './Marquee';
 import { ParticleBackground } from './ParticleBackground';
@@ -120,63 +120,63 @@ export default function Hero({ isIntroReady, onOpenInquiry }) {
         className="relative h-[100dvh] w-full overflow-hidden bg-[#FAF8F5] select-none flex flex-col justify-between"
       >
         {/* Layer 1: Top Navigation Bar */}
-        <header className="absolute inset-x-0 top-0 z-40 flex items-center justify-between px-6 sm:px-12 md:px-16 pt-6 sm:pt-8 pointer-events-auto">
-          {/* Brand Logo: MA Malik Abubakkar */}
+        <header className="absolute inset-x-0 top-0 z-40 flex items-start md:items-center justify-between px-8 sm:px-12 md:px-16 lg:px-20 pt-6 sm:pt-8 md:pt-10 pointer-events-auto">
+          {/* Brand Logo: MA Malik Abubakkar (Enlarged on PC, intact on mobile, moved inward) */}
           <a
             href="/"
             className="inline-flex items-center group transition-transform duration-300 hover:scale-[1.02] z-50"
             aria-label="Malik Abubakkar Portfolio"
           >
-            <Logo className="w-24 sm:w-28 md:w-32 h-auto" />
+            <Logo className="w-24 sm:w-28 md:w-36 lg:w-44 h-auto" />
           </a>
 
-          {/* Social Icons Row */}
+          {/* Social Icons: Horizontal on PC with larger size, Vertical on Mobile */}
           <div
-            className="flex items-center gap-2 sm:gap-3 text-[#121214] z-50"
+            className="flex flex-col md:flex-row items-center gap-2 sm:gap-2.5 md:gap-3 text-[#121214] z-50"
             aria-label="Social Profiles"
           >
             <a
               href="https://github.com/malikabubakkar523"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 sm:p-2.5 rounded-full hover:bg-neutral-200/60 transition-colors"
+              className="p-2 sm:p-2.5 md:p-3 rounded-full bg-white/70 md:bg-transparent backdrop-blur-sm md:backdrop-blur-none border border-neutral-300/60 md:border-transparent hover:bg-neutral-200/80 transition-all duration-200 shadow-sm md:shadow-none"
               title="GitHub"
               aria-label="GitHub"
             >
-              <GithubIcon className="w-4 h-4 sm:w-5 sm:h-5" />
+              <GithubIcon className="w-4 h-4 sm:w-5 sm:h-5 md:w-5 md:h-5 lg:w-6 lg:h-6" />
             </a>
 
             <a
               href="https://linkedin.com/in/malikabubakkar"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 sm:p-2.5 rounded-full hover:bg-neutral-200/60 transition-colors"
+              className="p-2 sm:p-2.5 md:p-3 rounded-full bg-white/70 md:bg-transparent backdrop-blur-sm md:backdrop-blur-none border border-neutral-300/60 md:border-transparent hover:bg-neutral-200/80 transition-all duration-200 shadow-sm md:shadow-none"
               title="LinkedIn"
               aria-label="LinkedIn"
             >
-              <LinkedinIcon className="w-4 h-4 sm:w-5 sm:h-5" />
+              <LinkedinIcon className="w-4 h-4 sm:w-5 sm:h-5 md:w-5 md:h-5 lg:w-6 lg:h-6" />
             </a>
 
             <a
               href="https://x.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 sm:p-2.5 rounded-full hover:bg-neutral-200/60 transition-colors"
+              className="p-2 sm:p-2.5 md:p-3 rounded-full bg-white/70 md:bg-transparent backdrop-blur-sm md:backdrop-blur-none border border-neutral-300/60 md:border-transparent hover:bg-neutral-200/80 transition-all duration-200 shadow-sm md:shadow-none"
               title="X (Twitter)"
               aria-label="X"
             >
-              <XIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              <XIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-4 md:h-4 lg:w-5 lg:h-5" />
             </a>
 
             <a
               href="https://instagram.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 sm:p-2.5 rounded-full hover:bg-neutral-200/60 transition-colors"
+              className="p-2 sm:p-2.5 md:p-3 rounded-full bg-white/70 md:bg-transparent backdrop-blur-sm md:backdrop-blur-none border border-neutral-300/60 md:border-transparent hover:bg-neutral-200/80 transition-all duration-200 shadow-sm md:shadow-none"
               title="Instagram"
               aria-label="Instagram"
             >
-              <InstagramIcon className="w-4 h-4 sm:w-5 sm:h-5" />
+              <InstagramIcon className="w-4 h-4 sm:w-5 sm:h-5 md:w-5 md:h-5 lg:w-6 lg:h-6" />
             </a>
           </div>
         </header>
@@ -194,27 +194,27 @@ export default function Hero({ isIntroReady, onOpenInquiry }) {
           <ParticleBackground />
         </div>
 
-        {/* Layer 2.8: Warm Beige Organic Backdrop Glow behind Portrait */}
+        {/* Layer 2.8: Warm Beige Organic Backdrop Glow behind Centered Portrait */}
         <div
-          className="absolute right-0 lg:right-[8%] xl:right-[12%] top-[25%] sm:top-[22%] w-[280px] h-[280px] sm:w-[420px] sm:h-[420px] lg:w-[520px] lg:h-[520px] bg-gradient-to-tr from-[#EBE0D2]/80 via-[#F3EBE0]/60 to-[#FAF8F5]/30 rounded-full blur-2xl pointer-events-none z-10"
+          className="absolute left-1/2 -translate-x-1/2 top-[22%] sm:top-[20%] md:top-[18%] w-[280px] h-[280px] sm:w-[420px] sm:h-[420px] lg:w-[540px] lg:h-[540px] bg-gradient-to-tr from-[#EBE0D2]/80 via-[#F3EBE0]/60 to-[#FAF8F5]/30 rounded-full blur-2xl pointer-events-none z-10"
           style={{ opacity: heroParallax.heroOpacity }}
           aria-hidden="true"
         />
 
         {/* Layer 2.9: 4-Point Golden Star Accent */}
         <span
-          className="absolute right-[4%] sm:right-[8%] lg:right-[12%] top-[46%] text-[#BA9B70] text-xl sm:text-2xl select-none pointer-events-none z-10 font-serif"
+          className="absolute left-[54%] sm:left-[58%] md:left-[62%] top-[38%] text-[#BA9B70] text-xl sm:text-2xl select-none pointer-events-none z-10 font-serif"
           style={{ opacity: heroParallax.heroOpacity }}
           aria-hidden="true"
         >
           ✦
         </span>
 
-        {/* Layer 3: Interactive Head-Tracking Portrait */}
+        {/* Layer 3: Interactive Head-Tracking Portrait (Centered on Both PC & Mobile) */}
         <div
-          className="absolute right-0 sm:right-[2%] lg:right-[4%] xl:right-[8%] bottom-0 z-20 h-[46vh] sm:h-[58vh] lg:h-[84vh] xl:h-[88vh] flex items-end justify-center pointer-events-none will-change-transform"
+          className="absolute left-1/2 bottom-0 z-20 h-[50vh] sm:h-[60vh] md:h-[74vh] lg:h-[82vh] xl:h-[86vh] flex items-end justify-center pointer-events-none will-change-transform"
           style={{
-            transform: `translate3d(${parallaxOffset.x}px, ${
+            transform: `translate3d(calc(-50% + ${parallaxOffset.x}px), ${
               parallaxOffset.y + heroParallax.portraitY
             }px, 0) scale(${heroParallax.portraitScale})`,
             opacity: heroParallax.heroOpacity,
@@ -226,11 +226,12 @@ export default function Hero({ isIntroReady, onOpenInquiry }) {
           </div>
         </div>
 
-        {/* Layer 4: Main Content Container (Hero Text Block on Left) */}
-        <div className="relative z-30 flex-1 flex flex-col justify-center px-6 sm:px-12 md:px-16 pointer-events-none max-w-7xl w-full mx-auto">
-          <div className="max-w-xl xl:max-w-2xl pointer-events-auto">
+        {/* Layer 4: Main Content Container (Hero Text Block, Shifted Down, Clean & Balanced) */}
+        <div className="relative z-30 flex-1 flex flex-col justify-between pt-24 sm:pt-28 md:pt-36 pb-12 sm:pb-16 px-8 sm:px-12 md:px-16 lg:px-20 pointer-events-none max-w-7xl w-full mx-auto">
+          {/* Top/Left Text Block */}
+          <div className="max-w-md lg:max-w-lg pointer-events-auto text-left">
             {/* Availability Badge */}
-            <div className="flex items-center gap-2.5 mb-4 sm:mb-6 anim-fade-up">
+            <div className="flex items-center gap-2.5 mb-3 sm:mb-4 anim-fade-up">
               <span className="relative flex h-2 w-2 sm:h-2.5 sm:w-2.5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 sm:h-2.5 sm:w-2.5 bg-emerald-500"></span>
@@ -238,12 +239,12 @@ export default function Hero({ isIntroReady, onOpenInquiry }) {
               <span className="text-[10px] sm:text-xs font-semibold tracking-widest uppercase text-neutral-800">
                 AVAILABLE FOR NEW PROJECTS
               </span>
-              <span className="h-[1px] w-12 sm:w-16 bg-neutral-300 ml-1"></span>
+              <span className="h-[1px] w-10 sm:w-14 bg-neutral-300 ml-1"></span>
             </div>
 
-            {/* Main Typewriter Heading */}
-            <div className="min-h-[3.5rem] sm:min-h-[4.2rem] lg:min-h-[5.2rem] flex items-center anim-fade-up">
-              <h1 className="font-sans text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] xl:text-[3.75rem] font-bold tracking-tight text-[#121214] leading-[1.12]">
+            {/* Main Typewriter Heading (Smaller, refined size, shifted down) */}
+            <div className="min-h-[2.8rem] sm:min-h-[3.2rem] md:min-h-[3.8rem] flex items-center anim-fade-up">
+              <h1 className="font-sans text-xl sm:text-2xl md:text-3xl lg:text-[2.25rem] xl:text-[2.5rem] font-bold tracking-tight text-[#121214] leading-[1.2]">
                 <span>{displayedText}</span>
                 <span
                   className="inline-block w-[3px] h-[0.9em] bg-[#121214] ml-2 align-middle animate-pulse opacity-90"
@@ -252,43 +253,16 @@ export default function Hero({ isIntroReady, onOpenInquiry }) {
               </h1>
             </div>
 
-            {/* Static Description */}
-            <p className="text-neutral-600 text-sm sm:text-base leading-relaxed max-w-md sm:max-w-lg mt-3 sm:mt-4 anim-fade-up">
+            {/* Static Description (Adjusted and positioned downwards cleanly) */}
+            <p className="text-neutral-600 text-xs sm:text-sm md:text-base leading-relaxed max-w-sm sm:max-w-md mt-2.5 sm:mt-3.5 anim-fade-up">
               {HERO_STATIC_DESCRIPTION}
             </p>
-
-            {/* Action Buttons */}
-            <div className="flex items-center gap-3 sm:gap-4 mt-6 sm:mt-8 anim-fade-up">
-              <a
-                href="#work"
-                className="inline-flex items-center gap-2 px-6 sm:px-7 py-3 sm:py-3.5 rounded-full bg-[#BA9B70] text-white text-xs sm:text-sm font-medium hover:bg-[#A88B60] transition-all duration-300 shadow-sm hover:shadow-md cursor-pointer"
-              >
-                <span>Explore Work</span>
-                <ArrowRight className="w-4 h-4" />
-              </a>
-
-              <button
-                type="button"
-                onClick={() => {
-                  if (onOpenInquiry) {
-                    onOpenInquiry();
-                  } else {
-                    const contactEl = document.getElementById('contact');
-                    if (contactEl) contactEl.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
-                className="inline-flex items-center gap-2 px-6 sm:px-7 py-3 sm:py-3.5 rounded-full border border-neutral-400/80 text-neutral-800 text-xs sm:text-sm font-medium hover:bg-neutral-200/50 transition-all duration-300 cursor-pointer"
-              >
-                <span>Contact Me</span>
-                <Mail className="w-4 h-4" />
-              </button>
-            </div>
           </div>
         </div>
 
         {/* Layer 5: Bottom Architectural Chrome Bar */}
         <footer
-          className="relative z-40 flex items-center justify-between px-6 sm:px-12 md:px-16 pb-4 sm:pb-6 pointer-events-auto select-none w-full transition-opacity duration-200"
+          className="relative z-40 flex items-center justify-between px-8 sm:px-12 md:px-16 lg:px-20 pb-4 sm:pb-6 pointer-events-auto select-none w-full transition-opacity duration-200"
           style={{
             opacity: heroParallax.footerOpacity,
             pointerEvents: heroParallax.footerOpacity < 0.1 ? 'none' : 'auto',

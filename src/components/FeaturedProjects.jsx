@@ -349,7 +349,10 @@ void main() {
   float contactShadow = 1.0 - 0.55 * exp(-14.0 * abs(vFar));
   col *= contactShadow;
 
-  gl_FragColor = vec4(col, u_alpha * fade * line * 0.38);
+  // Soft lateral edge fade to constrain floor grid strictly to card width footprint
+  float xFade = smoothstep(0.0, 0.22, vUv.x) * smoothstep(1.0, 0.78, vUv.x);
+
+  gl_FragColor = vec4(col, u_alpha * fade * line * xFade * 0.32);
 }
 `;
 
@@ -706,16 +709,16 @@ export default function FeaturedProjects() {
       loopL = runningOffset;
       loopLeft = -(loopL - vw) / 2;
 
-      // Floor Placement & Reflection - Active for both Desktop and Mobile!
+      // Floor Placement & Reflection - Constrained cleanly to ribbon cards footprint
       floorMesh.visible = true;
       const aFloor = -cardH * k * 0.5 - 0.06 * H;
-      const oFloor = 6 * H;
+      const oFloor = 4.2 * H;
       const nearFloor = Math.min(41.18 * (1 - Math.abs(aFloor) / H) + 0.2 * H, 41.18 * 0.8);
-      floorMesh.scale.set(W * 8, 1, nearFloor + oFloor);
+      floorMesh.scale.set(W * 2.4, 1, nearFloor + oFloor);
       floorMesh.position.set(0, aFloor, (nearFloor - oFloor) / 2);
 
       const cellSize = 0.22 * H;
-      floorMat.uniforms.u_repeat.value.set((W * 8) / cellSize, oFloor / cellSize);
+      floorMat.uniforms.u_repeat.value.set((W * 2.4) / cellSize, oFloor / cellSize);
       floorMat.uniforms.u_o.value = oFloor;
       floorMat.uniforms.u_leanA.value = -0.12 * W;
       floorMat.uniforms.u_leanW.value = W;
@@ -1084,24 +1087,14 @@ export default function FeaturedProjects() {
         className="ui absolute inset-0 z-30 pointer-events-none p-4 sm:p-8 flex flex-col justify-between font-hn"
         aria-label="Ribbon Navigation"
       >
-        {/* Top Bar: Section Title & Selected Project Status */}
-        <div className="flex items-center justify-between text-xs sm:text-sm tracking-wider uppercase text-neutral-900">
-          <div className="flex items-center gap-2.5 sm:gap-3 pointer-events-auto px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-white/90 backdrop-blur-md border border-neutral-300/80 shadow-sm">
-            <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="font-semibold text-neutral-900 tracking-widest text-[10px] sm:text-xs">
-              Selected Projects
-            </span>
-            <span className="hidden sm:inline-block text-neutral-400">·</span>
-            <span className="hidden sm:inline-block text-neutral-600 text-[11px] tracking-normal font-sans">
-              08 Works · 3D Ribbon
-            </span>
-          </div>
-
-          <div className="hidden sm:flex items-center gap-4 px-4 py-2 rounded-full bg-white/90 backdrop-blur-md border border-neutral-300/80 shadow-sm text-[11px] font-mono text-neutral-600 pointer-events-auto">
-            <span>DRAG / SCROLL TO NAVIGATE</span>
-            <span>·</span>
-            <span className="text-neutral-900 font-semibold">CLICK CARD TO OPEN LIVE SITE</span>
-          </div>
+        {/* Top Transition Header: Clean & Elegant Gallery Title (Removed Pill Buttons) */}
+        <div className="flex flex-col items-center justify-center text-center mx-auto pointer-events-none select-none pt-2 sm:pt-4">
+          <span className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.3em] text-[#BA9B70] font-semibold mb-1">
+            SELECTED WORKS · 3D RIBBON
+          </span>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight text-[#121214] uppercase">
+            FEATURED PROJECTS
+          </h2>
         </div>
 
         {/* Bottom Bar: Instructions & Live Project Pill Action */}

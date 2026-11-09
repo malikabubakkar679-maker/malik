@@ -202,7 +202,7 @@ export default function AboutSection() {
         </svg>
       </div>
 
-      {/* CENTERPIECE: Malik's Clean Large Profile Portrait */}
+      {/* CENTERPIECE: Malik's Clean Large Profile Portrait (Full Head Intact) */}
       <div
         ref={imageRef}
         className="relative z-10 flex items-center justify-center will-change-transform pointer-events-none"
@@ -210,7 +210,7 @@ export default function AboutSection() {
         <img
           src="/images/malik-about-profile.png"
           alt="Malik Abubakkar"
-          className="h-[62vh] sm:h-[72vh] md:h-[78vh] max-h-[720px] w-auto object-contain filter contrast-[1.04] drop-shadow-[0_20px_45px_rgba(0,0,0,0.12)] pointer-events-none"
+          className="h-[60vh] sm:h-[70vh] md:h-[78vh] max-h-[720px] w-auto object-contain object-top filter contrast-[1.04] drop-shadow-[0_20px_45px_rgba(0,0,0,0.12)] pointer-events-none pt-2 sm:pt-4"
           loading="eager"
           decoding="async"
         />
@@ -218,18 +218,19 @@ export default function AboutSection() {
 
       {/* ============================================================== */}
       {/* ANIMATED TEXT LAYERS DIRECTLY OVER THE CENTER IMAGE (NO BOXES) */}
+      {/* White on mobile over the dark coat, dark on PC for contrast    */}
       {/* ============================================================== */}
       <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none p-4 sm:p-8 md:p-12">
 
-        {/* STAGE 1: Name + Tagline */}
+        {/* STAGE 1: Name + Tagline (Shifted down slightly on mobile, white on mobile) */}
         <div
           ref={stage1Ref}
-          className="absolute flex flex-col items-center justify-center text-center will-change-transform max-w-4xl px-4"
+          className="absolute flex flex-col items-center justify-center text-center will-change-transform max-w-4xl px-4 mt-8 sm:mt-0"
         >
-          <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-8xl font-black uppercase tracking-tight text-[#121214] drop-shadow-[0_4px_16px_rgba(250,248,245,0.95)] leading-[0.95]">
+          <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-8xl font-black uppercase tracking-tight text-white md:text-[#121214] drop-shadow-[0_2px_16px_rgba(0,0,0,0.9)] md:drop-shadow-[0_4px_16px_rgba(250,248,245,0.95)] leading-[0.95]">
             MALIK ABUBAKKAR
           </h2>
-          <p className="text-base sm:text-xl md:text-2xl lg:text-3xl font-serif italic text-neutral-800 mt-3 sm:mt-5 drop-shadow-[0_2px_12px_rgba(250,248,245,0.95)] leading-relaxed max-w-2xl">
+          <p className="text-base sm:text-xl md:text-2xl lg:text-3xl font-serif italic text-neutral-100 md:text-neutral-800 mt-3 sm:mt-5 drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)] md:drop-shadow-[0_2px_12px_rgba(250,248,245,0.95)] leading-relaxed max-w-2xl">
             “Turning ideas into meaningful digital experiences.”
           </p>
         </div>
@@ -238,9 +239,9 @@ export default function AboutSection() {
         <div
           ref={stage2Ref}
           style={{ opacity: 0 }}
-          className="absolute flex items-center justify-center text-center will-change-transform max-w-4xl px-4"
+          className="absolute flex items-center justify-center text-center will-change-transform max-w-4xl px-4 mt-8 sm:mt-0"
         >
-          <p className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-[#121214] leading-[1.28] drop-shadow-[0_4px_24px_rgba(250,248,245,0.98)]">
+          <p className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-white md:text-[#121214] leading-[1.28] drop-shadow-[0_3px_20px_rgba(0,0,0,0.95)] md:drop-shadow-[0_4px_24px_rgba(250,248,245,0.98)]">
             I am a Software Engineer and Web Developer focused on building scalable applications, modern interfaces, and engaging digital experiences.
           </p>
         </div>
@@ -249,10 +250,10 @@ export default function AboutSection() {
         <div
           ref={stage3Ref}
           style={{ opacity: 0 }}
-          className="absolute flex items-center justify-center text-center will-change-transform max-w-4xl px-4"
+          className="absolute flex items-center justify-center text-center will-change-transform max-w-4xl px-4 mt-8 sm:mt-0"
         >
-          <p className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-medium text-neutral-900 leading-[1.38] drop-shadow-[0_4px_24px_rgba(250,248,245,0.98)]">
-            With experience in <span className="font-bold text-[#121214]">React</span>, <span className="font-bold text-[#121214]">Next.js</span>, and <span className="font-bold text-[#121214]">WebGL</span>, I combine clean architecture, creative design, and problem-solving to build high-performance digital products — from concept to implementation.
+          <p className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-medium text-neutral-100 md:text-neutral-900 leading-[1.38] drop-shadow-[0_3px_20px_rgba(0,0,0,0.95)] md:drop-shadow-[0_4px_24px_rgba(250,248,245,0.98)]">
+            With experience in <span className="font-bold text-white md:text-[#121214] underline decoration-[#BA9B70] decoration-2 underline-offset-4">React</span>, <span className="font-bold text-white md:text-[#121214] underline decoration-[#BA9B70] decoration-2 underline-offset-4">Next.js</span>, and <span className="font-bold text-white md:text-[#121214] underline decoration-[#BA9B70] decoration-2 underline-offset-4">WebGL</span>, I combine clean architecture, creative design, and problem-solving to build high-performance digital products — from concept to implementation.
           </p>
         </div>
 
