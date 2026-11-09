@@ -226,10 +226,10 @@ export default function Hero({ isIntroReady, onOpenInquiry }) {
           </div>
         </div>
 
-        {/* Layer 4: Main Content Container (Hero Details vertically centered alongside the portrait) */}
+        {/* Layer 4: Main Content Container (Hero Details shifted downwards comfortably) */}
         <div className="relative z-30 flex-1 flex flex-col justify-center px-8 sm:px-12 md:px-16 lg:px-20 pointer-events-none max-w-7xl w-full mx-auto">
-          {/* Details Block positioned comfortably alongside image, away from top logo */}
-          <div className="max-w-md lg:max-w-lg xl:max-w-xl pointer-events-auto text-left">
+          {/* Details Block shifted down to lower-middle zone, away from top bar */}
+          <div className="max-w-md lg:max-w-lg xl:max-w-xl pointer-events-auto text-left translate-y-10 sm:translate-y-14 md:translate-y-20 lg:translate-y-24">
             {/* Availability Badge */}
             <div className="flex items-center gap-2.5 mb-3.5 sm:mb-4 anim-fade-up">
               <span className="relative flex h-2 w-2 sm:h-2.5 sm:w-2.5">
