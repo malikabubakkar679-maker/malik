@@ -3,22 +3,24 @@
  * SPDX-License-Identifier: Apache-2.0
  * 
  * Premium Editorial Hero Section
- * Fully responsive, tailored precisely to user specifications:
- * - Viewport-contained height (100dvh) so zero scrolling is required to see full hero contents
- * - Logo with generous padding, enlarged and shifted inward from screen edges for maximum clarity
- * - Top-right social icons (GitHub, LinkedIn, X, Email) prominently styled
- * - Animated kinetic marquee momentum motion for background "Malik — Abubakkar"
- * - Heading & details shifted towards the portrait image and positioned comfortably lower
- * - Interactive typewriter effect cycling: Problem Solver, Software Engineer, Web Developer, App Developer
- * - Handwritten signature positioned along bottom with details towards the portrait
- * - Mobile responsive composition with side-anchored portrait and front-facing bottom details
- * - Warm cream (#F8F4EA) & champagne gold (#C6A66B) aesthetic with layered SVG bottom waves
+ * Faithfully crafted to match Reference Image 1 (Desktop) and Reference Image 2 (Mobile):
+ * - Warm cream (#FAF7F0) & soft ivory (#FFFDF8) background with subtle beige gradients
+ * - Champagne gold (#D6A13D) & deep charcoal (#20232B) typography
+ * - Original MA monogram logo + "Malik Abubakkar / Software Engineer" brand label
+ * - Minimal center navigation on desktop + social icons & "Let's Talk →" button
+ * - Mobile header with social icons & functional hamburger menu
+ * - Desktop 3-part layout:
+ *     Left: Dotted grid, Availability badge, "Hi, I'm", "Malik Abubakkar", "I am a Software Engineer", description, "Explore My Work →" + "Scroll Down ⤓"
+ *     Center: Centered portrait with golden circular outline ring, ambient warm glow, and soft bottom blend
+ *     Right: "Turning Ideas Into Reality", "Build. Innovate. Grow.", curved flourish accent, bottom-right dotted grid
+ * - Mobile vertical flow matching Reference Image 2:
+ *     Dotted pattern, Availability badge, "Hi, I'm", "Malik Abubakkar", "I am a Software Engineer", gold accent bar, description, CTA, prominent portrait with ring/glow, down-chevron and bottom waves
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Logo from './Logo';
 
-// Crisp vector social icons
+// Crisp brand & utility vector icons
 const GithubIcon = ({ className = "w-4 h-4" }) => (
   <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
     <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
@@ -31,9 +33,11 @@ const LinkedinIcon = ({ className = "w-4 h-4" }) => (
   </svg>
 );
 
-const XIcon = ({ className = "w-4 h-4" }) => (
-  <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+const GlobeIcon = ({ className = "w-4 h-4" }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <circle cx="12" cy="12" r="10" />
+    <line x1="2" y1="12" x2="22" y2="12" />
+    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
   </svg>
 );
 
@@ -44,327 +48,517 @@ const MailIcon = ({ className = "w-4 h-4" }) => (
   </svg>
 );
 
+// Subtle golden dotted decorative grid
+const DottedGrid = ({ className = "w-20 h-14" }) => (
+  <svg className={className} viewBox="0 0 100 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <pattern id="dot-pattern" x="0" y="0" width="16" height="15" patternUnits="userSpaceOnUse">
+      <circle cx="3" cy="3" r="1.5" fill="#D6A13D" fillOpacity="0.5" />
+    </pattern>
+    <rect width="100" height="60" fill="url(#dot-pattern)" />
+  </svg>
+);
+
+const NAV_LINKS = [
+  { label: 'About', href: '#about' },
+  { label: 'Work', href: '#projects' },
+  { label: 'Skills', href: '#skills' },
+  { label: 'Services', href: '#services' },
+  { label: 'Contact', href: '#contact' },
+];
+
 const SOCIAL_LINKS = [
   { name: 'GitHub', href: 'https://github.com/malikabubakkar523', icon: GithubIcon },
   { name: 'LinkedIn', href: 'https://linkedin.com/in/malikabubakkar', icon: LinkedinIcon },
-  { name: 'X', href: 'https://x.com', icon: XIcon },
+  { name: 'Web', href: 'https://github.com/malikabubakkar523', icon: GlobeIcon },
   { name: 'Email', href: 'mailto:malikabubakkar523@gmail.com', icon: MailIcon },
 ];
 
-const ROTATING_ROLES = [
-  { prefix: 'I am a', role: 'Problem Solver' },
-  { prefix: 'I am a', role: 'Software Engineer' },
-  { prefix: 'I am a', role: 'Web Developer' },
-  { prefix: 'I am an', role: 'App Developer' },
-];
+export default function Hero({ isIntroReady: _isIntroReady, onOpenInquiry }) {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-export default function Hero({ isIntroReady: _isIntroReady, onOpenInquiry: _onOpenInquiry }) {
-  // Typewriter rotation state
-  const [roleIndex, setRoleIndex] = useState(0);
-  const [currentText, setCurrentText] = useState('Problem Solver');
-  const [isDeleting, setIsDeleting] = useState(false);
-
-  useEffect(() => {
-    const targetTitle = ROTATING_ROLES[roleIndex].role;
-    let timer;
-
-    if (!isDeleting) {
-      if (currentText.length < targetTitle.length) {
-        timer = setTimeout(() => {
-          setCurrentText(targetTitle.slice(0, currentText.length + 1));
-        }, 70);
-      } else {
-        timer = setTimeout(() => {
-          setIsDeleting(true);
-        }, 2100);
-      }
-    } else {
-      if (currentText.length > 0) {
-        timer = setTimeout(() => {
-          setCurrentText(currentText.slice(0, -1));
-        }, 35);
-      } else {
-        timer = setTimeout(() => {
-          setIsDeleting(false);
-          setRoleIndex((prev) => (prev + 1) % ROTATING_ROLES.length);
-        }, 250);
-      }
+  const handleSmoothScroll = (e, targetId) => {
+    e.preventDefault();
+    setIsMobileMenuOpen(false);
+    const element = document.querySelector(targetId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
     }
-
-    return () => clearTimeout(timer);
-  }, [currentText, isDeleting, roleIndex]);
+  };
 
   return (
     <section
       id="hero"
-      className="relative w-full h-[100dvh] max-h-[100dvh] bg-[#F8F4EA] text-[#292C35] select-none overflow-hidden flex flex-col justify-between"
+      className="relative w-full min-h-[100dvh] bg-[#FAF7F0] text-[#20232B] select-none overflow-hidden flex flex-col justify-between"
       style={{
-        background: 'radial-gradient(ellipse at 70% 30%, #FFFDF8 0%, #F8F4EA 60%, #F4EEDF 100%)',
+        background: 'radial-gradient(ellipse at 50% 38%, #FFFDF8 0%, #FAF7F0 52%, #F3E9D8 100%)',
       }}
     >
       {/* =========================================================================
-          LAYER 1: ANIMATED BACKGROUND WATERMARK MARQUEE (Continuous Momentum Motion)
+          BACKGROUND DECORATIVE ELEMENTS (Abstract Circles & Dotted Grids)
           ========================================================================= */}
-      <div
-        className="absolute top-[12%] sm:top-[14%] lg:top-[15%] inset-x-0 z-0 pointer-events-none select-none overflow-hidden opacity-[0.09]"
-        aria-hidden="true"
-      >
-        <div className="marquee flex w-max whitespace-nowrap font-serif text-[14vh] sm:text-[18vh] lg:text-[23vh] font-bold text-[#C6A66B] leading-none tracking-tight">
-          <span className="pr-12">Malik &mdash; Abubakkar&nbsp;&nbsp;&nbsp;&nbsp;&bull;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-          <span className="pr-12">Malik &mdash; Abubakkar&nbsp;&nbsp;&nbsp;&nbsp;&bull;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-          <span className="pr-12">Malik &mdash; Abubakkar&nbsp;&nbsp;&nbsp;&nbsp;&bull;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-          <span className="pr-12">Malik &mdash; Abubakkar&nbsp;&nbsp;&nbsp;&nbsp;&bull;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+      <div className="absolute inset-0 pointer-events-none select-none overflow-hidden z-0" aria-hidden="true">
+        {/* Oversized background curved outlines */}
+        <div className="absolute -top-[120px] -right-[100px] w-[620px] h-[620px] rounded-full border border-[#D6A13D]/15" />
+        <div className="absolute top-[25%] -right-[160px] w-[540px] h-[540px] rounded-full border border-[#D6A13D]/10" />
+        <div className="absolute -bottom-[140px] -left-[120px] w-[580px] h-[580px] rounded-full border border-[#D6A13D]/12" />
+
+        {/* Desktop Dotted Pattern: Top Left */}
+        <div className="hidden lg:block absolute left-8 xl:left-14 top-28 opacity-75">
+          <DottedGrid className="w-24 h-16" />
+        </div>
+
+        {/* Desktop Dotted Pattern: Bottom Right */}
+        <div className="hidden lg:block absolute right-10 xl:right-16 bottom-24 opacity-80">
+          <DottedGrid className="w-24 h-16" />
+        </div>
+
+        {/* Mobile Dotted Pattern: Top Right (Reference Image 2) */}
+        <div className="lg:hidden absolute right-6 top-24 opacity-70">
+          <DottedGrid className="w-20 h-14" />
         </div>
       </div>
 
-      {/* Subtle Golden 4-Point Star Sparkles (✦) */}
-      <div className="absolute inset-0 z-0 pointer-events-none select-none" aria-hidden="true">
-        <span className="absolute left-[7%] sm:left-[9%] top-[19%] text-[#C6A66B] text-xs sm:text-sm font-serif opacity-70 animate-pulse">
-          ✦
-        </span>
-        <span className="absolute left-[44%] lg:left-[48%] top-[34%] text-[#C6A66B] text-sm sm:text-base font-serif opacity-75">
-          ✦
-        </span>
-        <span className="absolute right-[14%] lg:right-[18%] top-[18%] text-[#C6A66B] text-xs sm:text-sm font-serif opacity-60">
-          ✦
-        </span>
-        <span className="absolute right-[6%] sm:right-[8%] top-[40%] text-[#C6A66B] text-sm font-serif opacity-50">
-          ✦
-        </span>
-      </div>
-
       {/* =========================================================================
-          LAYER 2: HEADER (Logo on Left with generous padding, Socials on Right)
+          LAYER 1: HEADER
+          - Desktop: Logo + Identity | Minimal Center Nav | Socials + "Let's Talk →"
+          - Mobile: Logo + Identity | Socials + Hamburger Menu Button
           ========================================================================= */}
-      <header className="relative z-30 w-full px-8 sm:px-12 md:px-16 lg:px-24 pt-6 sm:pt-8 flex items-center justify-between pointer-events-auto shrink-0">
-        {/* Logo: Padded, enlarged and shifted inward from screen edge */}
+      <header className="relative z-40 w-full px-5 sm:px-10 lg:px-16 xl:px-20 pt-4 sm:pt-6 lg:pt-8 flex items-center justify-between pointer-events-auto shrink-0">
+        
+        {/* Brand Identity: Monogram + Divider + Text */}
         <a
           href="/"
-          className="inline-flex items-center group transition-transform duration-300 hover:scale-[1.03]"
-          aria-label="Malik Abubakkar Portfolio"
+          className="flex items-center gap-2.5 sm:gap-3 group transition-transform duration-300 hover:scale-[1.02]"
+          aria-label="Malik Abubakkar — Home"
         >
           <Logo
-            className="w-28 sm:w-32 md:w-36 lg:w-40 h-auto drop-shadow-sm"
-            bgStroke="#F8F4EA"
-            color="#292C35"
+            monogramOnly
+            bgStroke="#FAF7F0"
+            colorM="#20232B"
+            colorA="#D6A13D"
+            className="w-10 sm:w-12 lg:w-13 h-auto drop-shadow-sm"
           />
+          <span className="h-7 sm:h-8 w-[1.5px] bg-[#D6A13D]/70" aria-hidden="true" />
+          <div className="flex flex-col text-left">
+            <span className="text-[13px] sm:text-[14.5px] lg:text-[15px] font-bold text-[#20232B] tracking-tight leading-none">
+              Malik Abubakkar
+            </span>
+            <span className="text-[10px] sm:text-[11.5px] text-[#686868] font-medium tracking-normal mt-1 leading-none">
+              Software Engineer
+            </span>
+          </div>
         </a>
 
-        {/* Social Icons at Top Right as requested in reference annotation */}
-        <div className="flex items-center gap-2 sm:gap-3">
-          {SOCIAL_LINKS.map((item) => (
+        {/* Desktop Center Navigation Links */}
+        <nav className="hidden md:flex items-center gap-7 lg:gap-9" aria-label="Primary Navigation">
+          {NAV_LINKS.map((link) => (
             <a
-              key={item.name}
-              href={item.href}
-              target={item.href.startsWith('mailto:') ? undefined : '_blank'}
-              rel={item.href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
-              className="p-2 sm:p-2.5 lg:p-3 rounded-full border border-[#292C35]/20 bg-white/55 backdrop-blur-sm text-[#292C35] hover:text-[#C6A66B] hover:border-[#C6A66B]/60 hover:bg-white/90 transition-all duration-300 shadow-sm hover:scale-110"
-              aria-label={item.name}
-              title={item.name}
+              key={link.label}
+              href={link.href}
+              onClick={(e) => handleSmoothScroll(e, link.href)}
+              className="text-xs font-semibold uppercase tracking-wider text-[#686868] hover:text-[#20232B] transition-colors relative py-1 group"
             >
-              <item.icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 lg:w-4.5 lg:h-4.5" />
+              {link.label}
+              <span className="absolute bottom-0 left-0 w-0 h-[1.5px] bg-[#D6A13D] transition-all duration-300 group-hover:w-full" />
             </a>
           ))}
-        </div>
-      </header>
+        </nav>
 
-      {/* =========================================================================
-          LAYER 3: MAIN VIEWPORT CONTENT
-          - Desktop (lg:): Shifted towards portrait, lowered position, signature near bottom/image
-          - Mobile (< lg): Portrait anchored to side, heading and details in lower front area
-          ========================================================================= */}
-      
-      {/* ----------------- 3A. DESKTOP VIEWPORT LAYOUT (>= 1024px) ----------------- */}
-      <div className="hidden lg:grid relative z-20 flex-1 w-full max-w-7xl mx-auto px-12 lg:px-20 xl:px-24 grid-cols-12 items-center gap-8 min-h-0 pb-4">
-        
-        {/* Left Column (7 cols): Shifted towards the image and positioned lower */}
-        <div className="col-span-7 flex flex-col justify-center items-start text-left z-20 lg:pl-10 xl:pl-16 translate-y-4 xl:translate-y-8">
-          {/* Small Professional Label */}
-          <div className="flex items-center gap-3 mb-3.5 xl:mb-4">
-            <span className="text-xs font-mono uppercase tracking-[0.24em] font-semibold text-[#292C35]/90">
-              SOFTWARE ENGINEER
-            </span>
-            <span className="h-[1px] w-12 xl:w-16 bg-[#C6A66B]/70" />
+        {/* Right Section: Social Icons + "Let's Talk →" / Mobile Hamburger */}
+        <div className="flex items-center gap-2 sm:gap-3 lg:gap-4">
+          {/* Social Icons (Visible on Desktop and Mobile matching Reference 1 & 2) */}
+          <div className="flex items-center gap-1 sm:gap-1.5 lg:gap-2">
+            {SOCIAL_LINKS.map((item) => (
+              <a
+                key={item.name}
+                href={item.href}
+                target={item.href.startsWith('mailto:') ? undefined : '_blank'}
+                rel={item.href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
+                className="p-1.5 sm:p-2 lg:p-2.5 rounded-full text-[#20232B] hover:text-[#D6A13D] hover:bg-[#D6A13D]/10 transition-all duration-200"
+                aria-label={item.name}
+                title={item.name}
+              >
+                <item.icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 lg:w-4.5 lg:h-4.5" />
+              </a>
+            ))}
           </div>
 
-          {/* Main Name Heading: Malik (Charcoal) / Abubakkar (Champagne Gold) */}
-          <h1 className="font-serif leading-[0.95] tracking-tight">
-            <span className="block text-[4.2rem] lg:text-[5.1rem] xl:text-[6.2rem] font-bold text-[#292C35]">
+          {/* "Let's Talk →" Pill Button (Desktop) */}
+          <button
+            onClick={() => {
+              if (onOpenInquiry) {
+                onOpenInquiry();
+              } else {
+                const el = document.getElementById('contact');
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
+            className="hidden sm:inline-flex items-center gap-1.5 px-4 lg:px-5 py-2 rounded-full border border-[#20232B]/20 bg-white/60 hover:bg-[#20232B] hover:text-white text-[#20232B] text-xs font-semibold tracking-wide transition-all duration-300 shadow-sm hover:shadow-md group"
+          >
+            <span>Let's Talk</span>
+            <span className="text-[#D6A13D] group-hover:text-white group-hover:translate-x-0.5 transition-all">→</span>
+          </button>
+
+          {/* Mobile Hamburger Button */}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden p-1.5 sm:p-2 rounded-lg text-[#20232B] hover:bg-[#20232B]/5 transition-colors focus:outline-none"
+            aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMobileMenuOpen}
+          >
+            <div className="w-5 h-4 flex flex-col justify-between">
+              <span className={`block h-[2px] w-full bg-[#20232B] transition-transform duration-300 ${isMobileMenuOpen ? 'rotate-45 translate-y-[7px]' : ''}`} />
+              <span className={`block h-[2px] w-full bg-[#20232B] transition-opacity duration-300 ${isMobileMenuOpen ? 'opacity-0' : ''}`} />
+              <span className={`block h-[2px] w-full bg-[#20232B] transition-transform duration-300 ${isMobileMenuOpen ? '-rotate-45 -translate-y-[7px]' : ''}`} />
+            </div>
+          </button>
+        </div>
+
+      </header>
+
+      {/* Mobile Drawer Menu Overlay */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden fixed inset-0 top-[60px] z-50 bg-[#FAF7F0]/98 backdrop-blur-md px-8 py-8 flex flex-col justify-between animate-fade-in border-t border-[#D6A13D]/20">
+          <nav className="flex flex-col gap-5">
+            {NAV_LINKS.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                onClick={(e) => handleSmoothScroll(e, link.href)}
+                className="text-lg font-serif font-bold text-[#20232B] hover:text-[#D6A13D] transition-colors py-1 flex items-center justify-between"
+              >
+                <span>{link.label}</span>
+                <span className="text-sm font-sans text-[#D6A13D]">→</span>
+              </a>
+            ))}
+          </nav>
+
+          <div className="flex flex-col gap-5 pt-6 border-t border-[#D6A13D]/20">
+            <button
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                if (onOpenInquiry) {
+                  onOpenInquiry();
+                } else {
+                  const el = document.getElementById('contact');
+                  if (el) el.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+              className="w-full py-3 rounded-full bg-[#20232B] text-white text-sm font-semibold tracking-wide flex items-center justify-center gap-2 hover:bg-[#D6A13D] transition-colors"
+              style={{ color: '#FFFFFF' }}
+            >
+              <span>Let's Talk</span>
+              <span>→</span>
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* =========================================================================
+          LAYER 2: DESKTOP HERO VIEWPORT (3-COLUMN COMPOSITION >= 1024px)
+          - Left: Introduction & CTA Buttons
+          - Center: Main Focus Portrait + Ambient Glow & Golden Ring
+          - Right: Supporting Message ("Turning Ideas Into Reality")
+          ========================================================================= */}
+      <div className="hidden lg:grid relative z-20 flex-1 w-full max-w-7xl mx-auto px-8 lg:px-14 xl:px-18 grid-cols-12 items-center gap-4 xl:gap-8 min-h-0 pt-2 pb-6">
+        
+        {/* ---------- LEFT COLUMN: INTRODUCTION (Cols 1-4) ---------- */}
+        <div className="col-span-4 xl:col-span-4 flex flex-col justify-center items-start text-left z-20">
+          
+          {/* Availability Badge */}
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/80 border border-[#D6A13D]/30 backdrop-blur-sm text-xs font-medium text-[#20232B] shadow-sm mb-4">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+            </span>
+            <span className="text-[11.5px] font-medium text-[#20232B]/90">
+              Available for new opportunities
+            </span>
+          </div>
+
+          {/* Elegant "Hi, I'm" Serif Italic */}
+          <span className="block font-serif italic text-2xl lg:text-[1.75rem] text-[#20232B] leading-none mb-2">
+            Hi, I'm
+          </span>
+
+          {/* Name Display: Malik (Charcoal) / Abubakkar (Champagne Gold) */}
+          <h1 className="font-serif leading-[0.92] tracking-tight mb-3">
+            <span className="block text-[3.8rem] lg:text-[4.8rem] xl:text-[5.8rem] font-bold text-[#20232B]">
               Malik
             </span>
-            <span className="block text-[4.2rem] lg:text-[5.1rem] xl:text-[6.2rem] font-bold text-[#C6A66B]">
+            <span className="block text-[3.8rem] lg:text-[4.8rem] xl:text-[5.8rem] font-bold text-[#D6A13D]">
               Abubakkar
             </span>
           </h1>
 
-          {/* Dynamic Typewriter Role */}
-          <div className="mt-3.5 xl:mt-4 text-2xl lg:text-[1.8rem] xl:text-[2.1rem] font-bold tracking-tight min-h-[2.4rem] flex items-center">
-            <span className="text-[#292C35]">{ROTATING_ROLES[roleIndex].prefix}&nbsp;</span>
-            <span className="text-[#C6A66B]">{currentText}</span>
-            <span
-              className="inline-block w-[2.5px] h-[0.9em] bg-[#C6A66B] ml-1.5 align-middle animate-pulse"
-              aria-hidden="true"
-            />
+          {/* Job Title */}
+          <div className="text-xl lg:text-[1.4rem] xl:text-2xl font-bold tracking-tight mb-3">
+            <span className="text-[#20232B]">I am a </span>
+            <span className="text-[#D6A13D]">Software Engineer</span>
           </div>
 
-          {/* Description */}
-          <p className="text-[#4A4D57] text-sm lg:text-[0.95rem] xl:text-base leading-relaxed max-w-md xl:max-w-lg mt-3 xl:mt-4 font-normal">
-            I design and build scalable, user-centered digital products that solve real problems and deliver measurable results.
+          {/* Short Professional Description */}
+          <p className="text-[#686868] text-sm lg:text-[0.92rem] leading-relaxed max-w-sm mb-6 font-normal">
+            I design and build scalable web solutions that make an impact.
           </p>
 
-          {/* Handwritten Signature: Shifted towards the bottom & image as indicated by arrow */}
-          <div className="mt-5 xl:mt-6 flex items-center justify-start lg:translate-x-14 xl:translate-x-20">
-            <img
-              src="/images/signature.png"
-              alt="Malik Abubakkar Signature"
-              className="h-10 xl:h-12 w-auto object-contain pointer-events-none select-none opacity-95"
-              loading="eager"
-              decoding="async"
-            />
+          {/* Action Area: "Explore My Work →" + "Scroll Down ⤓" */}
+          <div className="flex items-center gap-3">
+            <a
+              href="#projects"
+              onClick={(e) => handleSmoothScroll(e, '#projects')}
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#20232B] hover:bg-[#D6A13D] hover:shadow-lg hover:shadow-[#D6A13D]/25 transition-all duration-300 group cursor-pointer shadow-sm"
+              style={{ color: '#FFFFFF' }}
+            >
+              <span className="text-xs lg:text-[13px] font-semibold tracking-wide" style={{ color: '#FFFFFF' }}>
+                Explore My Work
+              </span>
+              <span style={{ color: '#D6A13D' }} className="group-hover:translate-x-1 transition-transform">
+                →
+              </span>
+            </a>
+
+            <span className="h-6 w-[1px] bg-[#20232B]/15 mx-1" aria-hidden="true" />
+
+            <a
+              href="#statement"
+              onClick={(e) => handleSmoothScroll(e, '#statement')}
+              className="inline-flex items-center gap-2 text-xs font-semibold text-[#686868] hover:text-[#20232B] transition-colors py-2 cursor-pointer"
+            >
+              <span>Scroll Down</span>
+              <span className="w-5 h-5 rounded-full border border-[#20232B]/25 flex items-center justify-center text-[10px] text-[#20232B]">
+                ↓
+              </span>
+            </a>
           </div>
+
         </div>
 
-        {/* Right Column (5 cols): Profile Portrait with Glow & Golden Ring */}
-        <div className="col-span-5 relative flex items-end justify-center h-full min-h-0 pointer-events-none">
-          {/* Warm Circular Glow */}
+        {/* ---------- CENTER COLUMN: MAIN FOCUS PORTRAIT (Cols 5-9) ---------- */}
+        <div className="col-span-5 xl:col-span-5 relative flex items-end justify-center h-full min-h-[480px] xl:min-h-[560px] pointer-events-none">
+          {/* Subtle Warm Circular Ambient Glow */}
           <div
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[360px] h-[360px] xl:w-[460px] xl:h-[460px] rounded-full pointer-events-none z-0"
+            className="absolute top-[48%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[380px] h-[380px] xl:w-[480px] xl:h-[480px] rounded-full pointer-events-none z-0"
             style={{
-              background: 'radial-gradient(circle, rgba(235, 224, 204, 0.9) 0%, rgba(248, 244, 234, 0.35) 60%, transparent 75%)',
+              background: 'radial-gradient(circle, rgba(243, 233, 216, 0.95) 0%, rgba(250, 247, 240, 0.35) 60%, transparent 75%)',
               filter: 'blur(16px)',
             }}
           />
 
-          {/* Golden Circular Outline Ring */}
+          {/* Thin, Soft Golden Circular Outline Ring */}
           <div
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[380px] h-[380px] xl:w-[480px] xl:h-[480px] rounded-full border border-[#C6A66B]/50 pointer-events-none z-10"
+            className="absolute top-[48%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[390px] h-[390px] xl:w-[490px] xl:h-[490px] rounded-full border border-[#D6A13D]/45 pointer-events-none z-10"
             style={{
-              boxShadow: 'inset 0 0 20px rgba(198, 166, 107, 0.08), 0 0 24px rgba(198, 166, 107, 0.1)',
+              boxShadow: 'inset 0 0 20px rgba(214, 161, 61, 0.08), 0 0 24px rgba(214, 161, 61, 0.08)',
             }}
           />
 
-          {/* Portrait: Sized to fit comfortably inside 100vh with no scroll */}
+          {/* Portrait Image with Natural Cutout & Soft Bottom Fade */}
           <img
             src="/images/hero-portrait-cutout.png"
             alt="Malik Abubakkar Portrait"
-            className="relative z-20 h-[58vh] xl:h-[66vh] max-h-[580px] w-auto object-contain object-bottom pointer-events-none select-none drop-shadow-[0_20px_40px_rgba(41,44,53,0.14)]"
+            className="relative z-20 h-[62vh] xl:h-[72vh] max-h-[620px] w-auto object-contain object-bottom pointer-events-none select-none drop-shadow-[0_20px_40px_rgba(32,35,43,0.14)]"
+            style={{
+              maskImage: 'linear-gradient(to bottom, black 82%, transparent 100%)',
+              WebkitMaskImage: 'linear-gradient(to bottom, black 82%, transparent 100%)',
+            }}
             loading="eager"
             decoding="async"
           />
         </div>
 
-      </div>
+        {/* ---------- RIGHT COLUMN: SUPPORTING MESSAGE (Cols 10-12) ---------- */}
+        <div className="col-span-3 xl:col-span-3 flex flex-col justify-center items-start text-left pl-2 xl:pl-6 z-20">
+          {/* Thin Gold Horizontal Accent Rule */}
+          <span className="block w-14 h-[2px] bg-[#D6A13D]/80 mb-4 rounded-full" aria-hidden="true" />
 
-      {/* ----------------- 3B. MOBILE VIEWPORT LAYOUT (< 1024px) ----------------- */}
-      {/* Side-anchored portrait + Lower front-facing details, fitting completely within 100dvh */}
-      <div className="lg:hidden relative z-20 flex-1 w-full min-h-0 flex flex-col justify-between px-5 sm:px-8 pb-3 pt-1 overflow-hidden">
-        
-        {/* Background Portrait Stage: Shifted to the right side */}
-        <div className="absolute -right-10 sm:-right-4 bottom-8 sm:bottom-12 h-[52vh] sm:h-[58vh] max-h-[460px] w-[75%] sm:w-[65%] flex items-end justify-end pointer-events-none z-10 overflow-hidden">
-          {/* Mobile Glow */}
-          <div
-            className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[220px] h-[220px] sm:w-[280px] sm:h-[280px] rounded-full pointer-events-none z-0"
-            style={{
-              background: 'radial-gradient(circle, rgba(235, 224, 204, 0.95) 0%, rgba(248, 244, 234, 0.25) 60%, transparent 75%)',
-              filter: 'blur(14px)',
-            }}
-          />
-          {/* Mobile Golden Outline */}
-          <div
-            className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[240px] h-[240px] sm:w-[300px] sm:h-[300px] rounded-full border border-[#C6A66B]/50 pointer-events-none z-0"
-          />
-          {/* Portrait Cutout Image */}
-          <img
-            src="/images/hero-portrait-cutout.png"
-            alt="Malik Abubakkar Portrait"
-            className="relative z-10 h-full w-auto max-w-none object-contain object-bottom pointer-events-none select-none drop-shadow-[0_16px_32px_rgba(41,44,53,0.18)] translate-x-8 sm:translate-x-4"
-            loading="eager"
-            decoding="async"
-          />
-        </div>
+          {/* Headline: "Turning Ideas Into Reality" */}
+          <h2 className="font-serif text-[2.2rem] lg:text-[2.6rem] xl:text-[3.2rem] font-bold leading-[1.08] tracking-tight text-[#20232B]">
+            Turning Ideas
+            <span className="block text-[#D6A13D]">
+              Into Reality
+            </span>
+          </h2>
 
-        {/* Foreground Content: Heading, Typewriter, Description & Signature */}
-        {/* Anchored at the bottom, directly facing the image with smooth contrast */}
-        <div className="relative z-20 flex-1 flex flex-col justify-end w-full max-w-[70%] sm:max-w-[62%] pb-2 sm:pb-4 pointer-events-auto">
-          {/* Soft scrim backdrop so text is crystal clear */}
-          <div className="bg-gradient-to-r from-[#F8F4EA]/95 via-[#F8F4EA]/85 to-transparent pr-4 py-2 -ml-2 rounded-2xl">
-            {/* Software Engineer Label */}
-            <div className="flex items-center gap-2 mb-1 sm:mb-1.5">
-              <span className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.2em] font-semibold text-[#292C35]/90">
-                SOFTWARE ENGINEER
-              </span>
-              <span className="h-[1px] w-8 sm:w-12 bg-[#C6A66B]/70" />
-            </div>
+          {/* Subtitle: "Build. Innovate. Grow." */}
+          <p className="mt-3.5 text-sm lg:text-[0.95rem] font-medium tracking-wide text-[#686868]">
+            Build. Innovate. Grow.
+          </p>
 
-            {/* Name Display */}
-            <h1 className="font-serif leading-[0.95] tracking-tight">
-              <span className="block text-[2.5rem] sm:text-[3.2rem] font-bold text-[#292C35]">
-                Malik
-              </span>
-              <span className="block text-[2.5rem] sm:text-[3.2rem] font-bold text-[#C6A66B]">
-                Abubakkar
-              </span>
-            </h1>
-
-            {/* Typewriter Role */}
-            <div className="mt-1.5 sm:mt-2 text-sm sm:text-base font-bold tracking-tight min-h-[1.6rem] flex items-center">
-              <span className="text-[#292C35]">{ROTATING_ROLES[roleIndex].prefix}&nbsp;</span>
-              <span className="text-[#C6A66B]">{currentText}</span>
-              <span className="inline-block w-[2px] h-[0.85em] bg-[#C6A66B] ml-1 align-middle animate-pulse" />
-            </div>
-
-            {/* Short Description */}
-            <p className="text-[#3F424C] text-[11px] sm:text-xs leading-relaxed mt-1 sm:mt-1.5 font-normal max-w-[260px] sm:max-w-xs">
-              I design and build scalable, user-centered digital products that solve real problems.
-            </p>
-
-            {/* Signature */}
-            <div className="mt-2.5 sm:mt-3">
-              <img
-                src="/images/signature.png"
-                alt="Malik Abubakkar Signature"
-                className="h-7 sm:h-8.5 w-auto object-contain pointer-events-none select-none opacity-95"
-                loading="eager"
-                decoding="async"
-              />
-            </div>
-          </div>
+          {/* Delicate Curved Flourish Line Underneath */}
+          <svg className="w-28 h-4 text-[#D6A13D]/70 mt-3" viewBox="0 0 120 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M2 12C35 4 75 14 118 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+          </svg>
         </div>
 
       </div>
 
       {/* =========================================================================
-          LAYER 4: LAYERED WARM GOLDEN BOTTOM WAVES
-          Framing the base of the hero without consuming extra viewport height
+          LAYER 3: MOBILE HERO VIEWPORT (< 1024px)
+          Faithful to Reference Image 2:
+          - Availability badge
+          - "Hi, I'm Malik Abubakkar"
+          - "I am a Software Engineer" + Gold bar
+          - Short description
+          - "Explore My Work →" + "Scroll Down"
+          - Prominent portrait with golden circle and ambient glow
+          - Down-chevron and bottom waves
           ========================================================================= */}
-      <div className="relative w-full h-[50px] sm:h-[65px] lg:h-[80px] overflow-hidden pointer-events-none z-10 shrink-0">
-        <svg
-          className="w-full h-full"
-          viewBox="0 0 1440 180"
-          fill="none"
-          preserveAspectRatio="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          {/* Back Wave Layer */}
-          <path
-            d="M0 120 C 320 60, 680 160, 1100 80 C 1260 50, 1380 90, 1440 110 L 1440 180 L 0 180 Z"
-            fill="#F3EDE1"
-            fillOpacity="0.85"
+      <div className="lg:hidden relative z-20 flex-1 w-full flex flex-col justify-between px-6 sm:px-10 pt-4 pb-2">
+        
+        {/* Top Text Content */}
+        <div className="flex flex-col items-start text-left z-20 max-w-md">
+          
+          {/* Availability Badge */}
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/80 border border-[#D6A13D]/30 backdrop-blur-sm text-[11px] font-medium text-[#20232B] shadow-sm mb-3">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+            </span>
+            <span>Available for new opportunities</span>
+          </div>
+
+          {/* "Hi, I'm" */}
+          <span className="block font-serif italic text-xl sm:text-2xl text-[#20232B] leading-none mb-1">
+            Hi, I'm
+          </span>
+
+          {/* Name Display: Malik Abubakkar */}
+          <h1 className="font-serif leading-[0.94] tracking-tight mb-2">
+            <span className="block text-[3.2rem] sm:text-[4.2rem] font-bold text-[#20232B]">
+              Malik
+            </span>
+            <span className="block text-[3.2rem] sm:text-[4.2rem] font-bold text-[#D6A13D]">
+              Abubakkar
+            </span>
+          </h1>
+
+          {/* Role */}
+          <div className="text-lg sm:text-xl font-bold tracking-tight">
+            <span className="text-[#20232B]">I am a </span>
+            <span className="text-[#D6A13D]">Software Engineer</span>
+          </div>
+
+          {/* Gold Accent Rule matching Reference Image 2 */}
+          <span className="block w-12 h-[3px] bg-[#D6A13D] rounded-full my-2.5" aria-hidden="true" />
+
+          {/* Short Description */}
+          <p className="text-[#686868] text-xs sm:text-sm leading-relaxed max-w-xs sm:max-w-sm mb-4 font-normal">
+            I design and build scalable web solutions that make an impact.
+          </p>
+
+          {/* Action Area: Explore My Work button + Scroll Down indicator */}
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
+            <a
+              href="#projects"
+              onClick={(e) => handleSmoothScroll(e, '#projects')}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#20232B] hover:bg-[#D6A13D] transition-colors shadow-sm cursor-pointer"
+              style={{ color: '#FFFFFF' }}
+            >
+              <span className="text-xs font-semibold tracking-wide" style={{ color: '#FFFFFF' }}>
+                Explore My Work
+              </span>
+              <span style={{ color: '#D6A13D' }}>→</span>
+            </a>
+
+            <a
+              href="#statement"
+              onClick={(e) => handleSmoothScroll(e, '#statement')}
+              className="inline-flex items-center gap-2 text-xs font-semibold text-[#686868] hover:text-[#20232B] transition-colors py-1 cursor-pointer"
+            >
+              <span className="w-5 h-5 rounded-full border border-[#20232B]/30 flex items-center justify-center text-[10px]">
+                ▷
+              </span>
+              <span>Scroll Down</span>
+            </a>
+          </div>
+
+        </div>
+
+        {/* Mobile Portrait Stage with Golden Ring & Ambient Glow */}
+        <div className="relative flex items-end justify-center w-full mt-4 sm:mt-6 pointer-events-none">
+          {/* Ambient Circular Glow */}
+          <div
+            className="absolute top-[48%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] h-[280px] sm:w-[340px] sm:h-[340px] rounded-full pointer-events-none z-0"
+            style={{
+              background: 'radial-gradient(circle, rgba(243, 233, 216, 0.95) 0%, rgba(250, 247, 240, 0.3) 60%, transparent 75%)',
+              filter: 'blur(14px)',
+            }}
           />
-          {/* Middle Wave Layer */}
-          <path
-            d="M0 140 C 260 90, 580 170, 940 110 C 1180 70, 1340 130, 1440 135 L 1440 180 L 0 180 Z"
-            fill="#EDE2CE"
-            fillOpacity="0.75"
+
+          {/* Golden Circle Outline */}
+          <div
+            className="absolute top-[48%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[290px] h-[290px] sm:w-[350px] sm:h-[350px] rounded-full border border-[#D6A13D]/45 pointer-events-none z-10"
+            style={{
+              boxShadow: 'inset 0 0 16px rgba(214, 161, 61, 0.08)',
+            }}
           />
-          {/* Foreground Wave Layer */}
-          <path
-            d="M0 165 C 380 130, 820 180, 1220 145 C 1340 135, 1400 155, 1440 160 L 1440 180 L 0 180 Z"
-            fill="#E8DEC8"
-            fillOpacity="0.9"
+
+          {/* Centered Cutout Portrait with Soft Fade */}
+          <img
+            src="/images/hero-portrait-cutout.png"
+            alt="Malik Abubakkar Portrait"
+            className="relative z-20 h-[340px] sm:h-[400px] max-h-[50vh] w-auto object-contain object-bottom pointer-events-none select-none drop-shadow-[0_16px_32px_rgba(32,35,43,0.16)]"
+            style={{
+              maskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)',
+              WebkitMaskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)',
+            }}
+            loading="eager"
+            decoding="async"
           />
-        </svg>
+        </div>
+
       </div>
+
+      {/* =========================================================================
+          LAYER 4: BOTTOM SECTION FRAMING & CHEVRON
+          - Centered down chevron button with thin vertical accent line
+          - Layered warm golden organic wave dunes
+          ========================================================================= */}
+      <div className="relative w-full flex flex-col items-center pointer-events-none z-20 shrink-0">
+        
+        {/* Centered Scroll Down Chevron with Vertical Line (Reference Image 2) */}
+        <div className="flex flex-col items-center mb-1 pointer-events-auto">
+          <span className="h-5 w-[1px] bg-[#D6A13D]/60" aria-hidden="true" />
+          <a
+            href="#statement"
+            onClick={(e) => handleSmoothScroll(e, '#statement')}
+            className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-[#D6A13D]/60 bg-white/80 backdrop-blur-sm flex items-center justify-center text-[#20232B] hover:bg-[#20232B] hover:text-white hover:border-[#20232B] transition-all duration-300 shadow-sm cursor-pointer"
+            aria-label="Scroll down to Next Section"
+          >
+            <span className="text-xs leading-none">⌄</span>
+          </a>
+          <span className="h-4 w-[1px] bg-[#D6A13D]/60" aria-hidden="true" />
+        </div>
+
+        {/* Organic Wave Curves Framing Base */}
+        <div className="w-full h-[45px] sm:h-[60px] lg:h-[75px] overflow-hidden pointer-events-none">
+          <svg
+            className="w-full h-full"
+            viewBox="0 0 1440 180"
+            fill="none"
+            preserveAspectRatio="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M0 120 C 320 60, 680 160, 1100 80 C 1260 50, 1380 90, 1440 110 L 1440 180 L 0 180 Z"
+              fill="#F3EDE1"
+              fillOpacity="0.85"
+            />
+            <path
+              d="M0 140 C 260 90, 580 170, 940 110 C 1180 70, 1340 130, 1440 135 L 1440 180 L 0 180 Z"
+              fill="#EDE2CE"
+              fillOpacity="0.75"
+            />
+            <path
+              d="M0 165 C 380 130, 820 180, 1220 145 C 1340 135, 1400 155, 1440 160 L 1440 180 L 0 180 Z"
+              fill="#E8DEC8"
+              fillOpacity="0.9"
+            />
+          </svg>
+        </div>
+      </div>
+
     </section>
   );
 }

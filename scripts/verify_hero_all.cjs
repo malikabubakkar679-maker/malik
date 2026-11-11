@@ -1,7 +1,7 @@
 const puppeteer = require("puppeteer-core");
 const path = require("path");
 
-const PORT = 4196;
+const PORT = 4198;
 const EDGE = "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe";
 const OUT = "C:\\Users\\abuba\\.gemini\\antigravity\\brain\\40660eb6-75e5-485a-826e-489fc59dd77c";
 
