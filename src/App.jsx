@@ -15,6 +15,10 @@ function AppContent() {
   const location = useLocation();
   const isAdminRoute = location.pathname.startsWith("/admin");
 
+  const handleIntroComplete = React.useCallback(() => {
+    setIsIntroReady(true);
+  }, []);
+
   // Initialize Lenis smooth scroll; locks when modal is open or disabled on admin
   useSmoothScroll(isInquiryOpen || isAdminRoute);
 
@@ -24,7 +28,7 @@ function AppContent() {
       <CustomCursor />
 
       {/* Cinematic Session-Aware Preloader (Disabled on Admin) */}
-      {!isAdminRoute && <Preloader onComplete={() => setIsIntroReady(true)} />}
+      {!isAdminRoute && <Preloader onComplete={handleIntroComplete} />}
 
       {/* Route Switcher */}
       <Routes>

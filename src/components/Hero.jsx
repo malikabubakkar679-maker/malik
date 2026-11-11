@@ -3,37 +3,35 @@
  * SPDX-License-Identifier: Apache-2.0
  * 
  * Premium Editorial Hero Section
- * Faithfully crafted to match Reference Image 1 (Desktop) and Reference Image 2 (Mobile):
- * - Warm cream (#FAF7F0) & soft ivory (#FFFDF8) background with subtle beige gradients
- * - Champagne gold (#D6A13D) & deep charcoal (#20232B) typography
- * - Original MA monogram logo + "Malik Abubakkar / Software Engineer" brand label
- * - Minimal center navigation on desktop + social icons & "Let's Talk →" button
- * - Mobile header with social icons & functional hamburger menu
- * - Desktop 3-part layout:
- *     Left: Dotted grid, Availability badge, "Hi, I'm", "Malik Abubakkar", "I am a Software Engineer", description, "Explore My Work →" + "Scroll Down ⤓"
- *     Center: Centered portrait with golden circular outline ring, ambient warm glow, and soft bottom blend
- *     Right: "Turning Ideas Into Reality", "Build. Innovate. Grow.", curved flourish accent, bottom-right dotted grid
- * - Mobile vertical flow matching Reference Image 2:
- *     Dotted pattern, Availability badge, "Hi, I'm", "Malik Abubakkar", "I am a Software Engineer", gold accent bar, description, CTA, prominent portrait with ring/glow, down-chevron and bottom waves
+ * Fully responsive, tailored precisely to user specifications:
+ * - Top-left: Clean enlarged MA logo only (no extra name text beside it)
+ * - Top-right: Enlarged social icons with rich hover effects & "Let's Talk →" button
+ * - Center desktop navigation: About, Work, Skills, Services, Contact
+ * - "Hi, I'm" refined and well-proportioned
+ * - "Malik Abubakkar" heading size scaled down for balanced, elegant typography
+ * - Dynamic typewriter effect cycling: Software Engineer, Web Developer, Problem Solver, App Developer
+ * - Removed explore and scroll down buttons from the left block
+ * - Mobile responsive: Image anchored to the side, text in its own place, all elements proportionally scaled down
+ * - Warm cream (#FAF7F0) & champagne gold (#D6A13D) palette with ambient glows and layered bottom waves
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Logo from './Logo';
 
-// Crisp brand & utility vector icons
-const GithubIcon = ({ className = "w-4 h-4" }) => (
+// Crisp brand vector icons
+const GithubIcon = ({ className = "w-5 h-5" }) => (
   <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
     <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
   </svg>
 );
 
-const LinkedinIcon = ({ className = "w-4 h-4" }) => (
+const LinkedinIcon = ({ className = "w-5 h-5" }) => (
   <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
     <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.64c-.95 0-1.7.75-1.7 1.7 0 .94.75 1.7 1.7 1.7.94 0 1.7-.76 1.7-1.7 0-.95-.76-1.7-1.7-1.7z" />
   </svg>
 );
 
-const GlobeIcon = ({ className = "w-4 h-4" }) => (
+const GlobeIcon = ({ className = "w-5 h-5" }) => (
   <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
     <circle cx="12" cy="12" r="10" />
     <line x1="2" y1="12" x2="22" y2="12" />
@@ -41,7 +39,7 @@ const GlobeIcon = ({ className = "w-4 h-4" }) => (
   </svg>
 );
 
-const MailIcon = ({ className = "w-4 h-4" }) => (
+const MailIcon = ({ className = "w-5 h-5" }) => (
   <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
     <rect width="20" height="16" x="2" y="4" rx="2" />
     <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
@@ -52,7 +50,7 @@ const MailIcon = ({ className = "w-4 h-4" }) => (
 const DottedGrid = ({ className = "w-20 h-14" }) => (
   <svg className={className} viewBox="0 0 100 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <pattern id="dot-pattern" x="0" y="0" width="16" height="15" patternUnits="userSpaceOnUse">
-      <circle cx="3" cy="3" r="1.5" fill="#D6A13D" fillOpacity="0.5" />
+      <circle cx="3" cy="3" r="1.5" fill="#D6A13D" fillOpacity="0.45" />
     </pattern>
     <rect width="100" height="60" fill="url(#dot-pattern)" />
   </svg>
@@ -73,8 +71,50 @@ const SOCIAL_LINKS = [
   { name: 'Email', href: 'mailto:malikabubakkar523@gmail.com', icon: MailIcon },
 ];
 
+const ROTATING_ROLES = [
+  { prefix: 'I am a', role: 'Software Engineer' },
+  { prefix: 'I am a', role: 'Web Developer' },
+  { prefix: 'I am a', role: 'Problem Solver' },
+  { prefix: 'I am an', role: 'App Developer' },
+];
+
 export default function Hero({ isIntroReady: _isIntroReady, onOpenInquiry }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  // Typewriter rotation state
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [currentText, setCurrentText] = useState('Software Engineer');
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const targetTitle = ROTATING_ROLES[roleIndex].role;
+    let timer;
+
+    if (!isDeleting) {
+      if (currentText.length < targetTitle.length) {
+        timer = setTimeout(() => {
+          setCurrentText(targetTitle.slice(0, currentText.length + 1));
+        }, 70);
+      } else {
+        timer = setTimeout(() => {
+          setIsDeleting(true);
+        }, 2200);
+      }
+    } else {
+      if (currentText.length > 0) {
+        timer = setTimeout(() => {
+          setCurrentText(currentText.slice(0, -1));
+        }, 35);
+      } else {
+        timer = setTimeout(() => {
+          setIsDeleting(false);
+          setRoleIndex((prev) => (prev + 1) % ROTATING_ROLES.length);
+        }, 250);
+      }
+    }
+
+    return () => clearTimeout(timer);
+  }, [currentText, isDeleting, roleIndex]);
 
   const handleSmoothScroll = (e, targetId) => {
     e.preventDefault();
@@ -97,10 +137,10 @@ export default function Hero({ isIntroReady: _isIntroReady, onOpenInquiry }) {
           BACKGROUND DECORATIVE ELEMENTS (Abstract Circles & Dotted Grids)
           ========================================================================= */}
       <div className="absolute inset-0 pointer-events-none select-none overflow-hidden z-0" aria-hidden="true">
-        {/* Oversized background curved outlines */}
-        <div className="absolute -top-[120px] -right-[100px] w-[620px] h-[620px] rounded-full border border-[#D6A13D]/15" />
-        <div className="absolute top-[25%] -right-[160px] w-[540px] h-[540px] rounded-full border border-[#D6A13D]/10" />
-        <div className="absolute -bottom-[140px] -left-[120px] w-[580px] h-[580px] rounded-full border border-[#D6A13D]/12" />
+        {/* Oversized background curved outlines (desktop) */}
+        <div className="hidden lg:block absolute -top-[120px] -right-[100px] w-[620px] h-[620px] rounded-full border border-[#D6A13D]/15" />
+        <div className="hidden lg:block absolute top-[25%] -right-[160px] w-[540px] h-[540px] rounded-full border border-[#D6A13D]/10" />
+        <div className="hidden lg:block absolute -bottom-[140px] -left-[120px] w-[580px] h-[580px] rounded-full border border-[#D6A13D]/12" />
 
         {/* Desktop Dotted Pattern: Top Left */}
         <div className="hidden lg:block absolute left-8 xl:left-14 top-28 opacity-75">
@@ -112,23 +152,24 @@ export default function Hero({ isIntroReady: _isIntroReady, onOpenInquiry }) {
           <DottedGrid className="w-24 h-16" />
         </div>
 
-        {/* Mobile Dotted Pattern: Top Right (Reference Image 2) */}
-        <div className="lg:hidden absolute right-6 top-24 opacity-70">
+        {/* Mobile Dotted Pattern: Top Right */}
+        <div className="lg:hidden absolute right-4 top-16 opacity-60">
           <DottedGrid className="w-20 h-14" />
         </div>
       </div>
 
       {/* =========================================================================
           LAYER 1: HEADER
-          - Desktop: Logo + Identity | Minimal Center Nav | Socials + "Let's Talk →"
-          - Mobile: Logo + Identity | Socials + Hamburger Menu Button
+          - Left: Enlarged Logo ONLY (no text beside it)
+          - Center: Minimal Navigation
+          - Right: Larger Social Icons with Hover Effects + "Let's Talk →"
           ========================================================================= */}
       <header className="relative z-40 w-full px-5 sm:px-10 lg:px-16 xl:px-20 pt-4 sm:pt-6 lg:pt-8 flex items-center justify-between pointer-events-auto shrink-0">
         
-        {/* Brand Identity: Monogram + Divider + Text */}
+        {/* Brand Logo ONLY (Enlarged, no name text beside it) */}
         <a
           href="/"
-          className="flex items-center gap-2.5 sm:gap-3 group transition-transform duration-300 hover:scale-[1.02]"
+          className="inline-flex items-center group transition-transform duration-300 hover:scale-105"
           aria-label="Malik Abubakkar — Home"
         >
           <Logo
@@ -136,17 +177,8 @@ export default function Hero({ isIntroReady: _isIntroReady, onOpenInquiry }) {
             bgStroke="#FAF7F0"
             colorM="#20232B"
             colorA="#D6A13D"
-            className="w-10 sm:w-12 lg:w-13 h-auto drop-shadow-sm"
+            className="w-14 sm:w-16 md:w-20 lg:w-24 h-auto drop-shadow-sm transition-transform duration-300 group-hover:scale-105"
           />
-          <span className="h-7 sm:h-8 w-[1.5px] bg-[#D6A13D]/70" aria-hidden="true" />
-          <div className="flex flex-col text-left">
-            <span className="text-[13px] sm:text-[14.5px] lg:text-[15px] font-bold text-[#20232B] tracking-tight leading-none">
-              Malik Abubakkar
-            </span>
-            <span className="text-[10px] sm:text-[11.5px] text-[#686868] font-medium tracking-normal mt-1 leading-none">
-              Software Engineer
-            </span>
-          </div>
         </a>
 
         {/* Desktop Center Navigation Links */}
@@ -164,21 +196,21 @@ export default function Hero({ isIntroReady: _isIntroReady, onOpenInquiry }) {
           ))}
         </nav>
 
-        {/* Right Section: Social Icons + "Let's Talk →" / Mobile Hamburger */}
+        {/* Right Section: Larger Social Icons with Rich Hover + "Let's Talk →" / Mobile Hamburger */}
         <div className="flex items-center gap-2 sm:gap-3 lg:gap-4">
-          {/* Social Icons (Visible on Desktop and Mobile matching Reference 1 & 2) */}
-          <div className="flex items-center gap-1 sm:gap-1.5 lg:gap-2">
+          {/* Social Icons with Larger Size & Premium Hover Animation */}
+          <div className="flex items-center gap-1.5 sm:gap-2">
             {SOCIAL_LINKS.map((item) => (
               <a
                 key={item.name}
                 href={item.href}
                 target={item.href.startsWith('mailto:') ? undefined : '_blank'}
                 rel={item.href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
-                className="p-1.5 sm:p-2 lg:p-2.5 rounded-full text-[#20232B] hover:text-[#D6A13D] hover:bg-[#D6A13D]/10 transition-all duration-200"
+                className="p-2 sm:p-2.5 lg:p-3 rounded-full border border-[#20232B]/15 bg-white/60 backdrop-blur-sm text-[#20232B] hover:text-[#D6A13D] hover:border-[#D6A13D]/60 hover:bg-white/95 hover:scale-115 hover:shadow-md hover:shadow-[#D6A13D]/20 transition-all duration-300"
                 aria-label={item.name}
                 title={item.name}
               >
-                <item.icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 lg:w-4.5 lg:h-4.5" />
+                <item.icon className="w-4 h-4 sm:w-4.5 sm:h-4.5 lg:w-5 lg:h-5 transition-transform duration-300 group-hover:scale-110" />
               </a>
             ))}
           </div>
@@ -193,7 +225,7 @@ export default function Hero({ isIntroReady: _isIntroReady, onOpenInquiry }) {
                 if (el) el.scrollIntoView({ behavior: 'smooth' });
               }
             }}
-            className="hidden sm:inline-flex items-center gap-1.5 px-4 lg:px-5 py-2 rounded-full border border-[#20232B]/20 bg-white/60 hover:bg-[#20232B] hover:text-white text-[#20232B] text-xs font-semibold tracking-wide transition-all duration-300 shadow-sm hover:shadow-md group"
+            className="hidden sm:inline-flex items-center gap-1.5 px-4 lg:px-5 py-2 rounded-full border border-[#20232B]/20 bg-white/60 hover:bg-[#20232B] hover:text-white text-[#20232B] text-xs font-semibold tracking-wide transition-all duration-300 shadow-sm hover:shadow-md group cursor-pointer"
           >
             <span>Let's Talk</span>
             <span className="text-[#D6A13D] group-hover:text-white group-hover:translate-x-0.5 transition-all">→</span>
@@ -202,7 +234,7 @@ export default function Hero({ isIntroReady: _isIntroReady, onOpenInquiry }) {
           {/* Mobile Hamburger Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-1.5 sm:p-2 rounded-lg text-[#20232B] hover:bg-[#20232B]/5 transition-colors focus:outline-none"
+            className="md:hidden p-2 rounded-lg text-[#20232B] hover:bg-[#20232B]/5 transition-colors focus:outline-none"
             aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
             aria-expanded={isMobileMenuOpen}
           >
@@ -244,7 +276,7 @@ export default function Hero({ isIntroReady: _isIntroReady, onOpenInquiry }) {
                   if (el) el.scrollIntoView({ behavior: 'smooth' });
                 }
               }}
-              className="w-full py-3 rounded-full bg-[#20232B] text-white text-sm font-semibold tracking-wide flex items-center justify-center gap-2 hover:bg-[#D6A13D] transition-colors"
+              className="w-full py-3 rounded-full bg-[#20232B] text-white text-sm font-semibold tracking-wide flex items-center justify-center gap-2 hover:bg-[#D6A13D] transition-colors cursor-pointer"
               style={{ color: '#FFFFFF' }}
             >
               <span>Let's Talk</span>
@@ -256,17 +288,17 @@ export default function Hero({ isIntroReady: _isIntroReady, onOpenInquiry }) {
 
       {/* =========================================================================
           LAYER 2: DESKTOP HERO VIEWPORT (3-COLUMN COMPOSITION >= 1024px)
-          - Left: Introduction & CTA Buttons
+          - Left: Scaled-down name, typewriter role, description (no buttons)
           - Center: Main Focus Portrait + Ambient Glow & Golden Ring
-          - Right: Supporting Message ("Turning Ideas Into Reality")
+          - Right: "Turning Ideas Into Reality"
           ========================================================================= */}
       <div className="hidden lg:grid relative z-20 flex-1 w-full max-w-7xl mx-auto px-8 lg:px-14 xl:px-18 grid-cols-12 items-center gap-4 xl:gap-8 min-h-0 pt-2 pb-6">
         
-        {/* ---------- LEFT COLUMN: INTRODUCTION (Cols 1-4) ---------- */}
+        {/* ---------- LEFT COLUMN: INTRODUCTION (Cols 1-4.5) ---------- */}
         <div className="col-span-4 xl:col-span-4 flex flex-col justify-center items-start text-left z-20">
           
           {/* Availability Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/80 border border-[#D6A13D]/30 backdrop-blur-sm text-xs font-medium text-[#20232B] shadow-sm mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/80 border border-[#D6A13D]/30 backdrop-blur-sm text-xs font-medium text-[#20232B] shadow-sm mb-3.5">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
@@ -276,66 +308,37 @@ export default function Hero({ isIntroReady: _isIntroReady, onOpenInquiry }) {
             </span>
           </div>
 
-          {/* Elegant "Hi, I'm" Serif Italic */}
-          <span className="block font-serif italic text-2xl lg:text-[1.75rem] text-[#20232B] leading-none mb-2">
+          {/* "Hi, I'm" - Refined Italic Serif */}
+          <span className="block font-serif italic text-xl lg:text-2xl text-[#20232B]/90 leading-none mb-1.5">
             Hi, I'm
           </span>
 
-          {/* Name Display: Malik (Charcoal) / Abubakkar (Champagne Gold) */}
-          <h1 className="font-serif leading-[0.92] tracking-tight mb-3">
-            <span className="block text-[3.8rem] lg:text-[4.8rem] xl:text-[5.8rem] font-bold text-[#20232B]">
+          {/* Scaled-down Name: Malik (Charcoal) / Abubakkar (Champagne Gold) */}
+          <h1 className="font-serif leading-[0.96] tracking-tight mb-2.5">
+            <span className="block text-4xl lg:text-5xl xl:text-[3.5rem] font-bold text-[#20232B]">
               Malik
             </span>
-            <span className="block text-[3.8rem] lg:text-[4.8rem] xl:text-[5.8rem] font-bold text-[#D6A13D]">
+            <span className="block text-4xl lg:text-5xl xl:text-[3.5rem] font-bold text-[#D6A13D]">
               Abubakkar
             </span>
           </h1>
 
-          {/* Job Title */}
-          <div className="text-xl lg:text-[1.4rem] xl:text-2xl font-bold tracking-tight mb-3">
-            <span className="text-[#20232B]">I am a </span>
-            <span className="text-[#D6A13D]">Software Engineer</span>
+          {/* Dynamic Typewriter Role */}
+          <div className="text-lg lg:text-xl xl:text-2xl font-bold tracking-tight mb-2.5 flex items-center min-h-[2rem]">
+            <span className="text-[#20232B]">{ROTATING_ROLES[roleIndex].prefix}&nbsp;</span>
+            <span className="text-[#D6A13D]">{currentText}</span>
+            <span className="inline-block w-[2px] h-[0.85em] bg-[#D6A13D] ml-1.5 align-middle animate-pulse" />
           </div>
 
           {/* Short Professional Description */}
-          <p className="text-[#686868] text-sm lg:text-[0.92rem] leading-relaxed max-w-sm mb-6 font-normal">
+          <p className="text-[#686868] text-sm lg:text-[0.92rem] leading-relaxed max-w-sm font-normal">
             I design and build scalable web solutions that make an impact.
           </p>
-
-          {/* Action Area: "Explore My Work →" + "Scroll Down ⤓" */}
-          <div className="flex items-center gap-3">
-            <a
-              href="#projects"
-              onClick={(e) => handleSmoothScroll(e, '#projects')}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#20232B] hover:bg-[#D6A13D] hover:shadow-lg hover:shadow-[#D6A13D]/25 transition-all duration-300 group cursor-pointer shadow-sm"
-              style={{ color: '#FFFFFF' }}
-            >
-              <span className="text-xs lg:text-[13px] font-semibold tracking-wide" style={{ color: '#FFFFFF' }}>
-                Explore My Work
-              </span>
-              <span style={{ color: '#D6A13D' }} className="group-hover:translate-x-1 transition-transform">
-                →
-              </span>
-            </a>
-
-            <span className="h-6 w-[1px] bg-[#20232B]/15 mx-1" aria-hidden="true" />
-
-            <a
-              href="#statement"
-              onClick={(e) => handleSmoothScroll(e, '#statement')}
-              className="inline-flex items-center gap-2 text-xs font-semibold text-[#686868] hover:text-[#20232B] transition-colors py-2 cursor-pointer"
-            >
-              <span>Scroll Down</span>
-              <span className="w-5 h-5 rounded-full border border-[#20232B]/25 flex items-center justify-center text-[10px] text-[#20232B]">
-                ↓
-              </span>
-            </a>
-          </div>
 
         </div>
 
         {/* ---------- CENTER COLUMN: MAIN FOCUS PORTRAIT (Cols 5-9) ---------- */}
-        <div className="col-span-5 xl:col-span-5 relative flex items-end justify-center h-full min-h-[480px] xl:min-h-[560px] pointer-events-none">
+        <div className="col-span-5 xl:col-span-5 relative flex items-end justify-center h-full min-h-[460px] xl:min-h-[540px] pointer-events-none">
           {/* Subtle Warm Circular Ambient Glow */}
           <div
             className="absolute top-[48%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[380px] h-[380px] xl:w-[480px] xl:h-[480px] rounded-full pointer-events-none z-0"
@@ -357,7 +360,7 @@ export default function Hero({ isIntroReady: _isIntroReady, onOpenInquiry }) {
           <img
             src="/images/hero-portrait-cutout.png"
             alt="Malik Abubakkar Portrait"
-            className="relative z-20 h-[62vh] xl:h-[72vh] max-h-[620px] w-auto object-contain object-bottom pointer-events-none select-none drop-shadow-[0_20px_40px_rgba(32,35,43,0.14)]"
+            className="relative z-20 h-[60vh] xl:h-[70vh] max-h-[600px] w-auto object-contain object-bottom pointer-events-none select-none drop-shadow-[0_20px_40px_rgba(32,35,43,0.14)]"
             style={{
               maskImage: 'linear-gradient(to bottom, black 82%, transparent 100%)',
               WebkitMaskImage: 'linear-gradient(to bottom, black 82%, transparent 100%)',
@@ -395,113 +398,81 @@ export default function Hero({ isIntroReady: _isIntroReady, onOpenInquiry }) {
 
       {/* =========================================================================
           LAYER 3: MOBILE HERO VIEWPORT (< 1024px)
-          Faithful to Reference Image 2:
-          - Availability badge
-          - "Hi, I'm Malik Abubakkar"
-          - "I am a Software Engineer" + Gold bar
-          - Short description
-          - "Explore My Work →" + "Scroll Down"
-          - Prominent portrait with golden circle and ambient glow
-          - Down-chevron and bottom waves
+          Side-by-side balanced composition with scaled-down text and side portrait
           ========================================================================= */}
-      <div className="lg:hidden relative z-20 flex-1 w-full flex flex-col justify-between px-6 sm:px-10 pt-4 pb-2">
+      <div className="lg:hidden relative z-20 flex-1 w-full min-h-0 flex items-center justify-between px-4 sm:px-8 py-3 overflow-hidden">
         
-        {/* Top Text Content */}
-        <div className="flex flex-col items-start text-left z-20 max-w-md">
+        {/* Left Side Content Block (~54% width, cleanly proportioned) */}
+        <div className="relative z-30 w-[54%] sm:w-[50%] flex flex-col justify-center items-start text-left pl-1 sm:pl-3">
           
           {/* Availability Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/80 border border-[#D6A13D]/30 backdrop-blur-sm text-[11px] font-medium text-[#20232B] shadow-sm mb-3">
-            <span className="relative flex h-2 w-2">
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/80 border border-[#D6A13D]/30 backdrop-blur-sm text-[10px] sm:text-xs font-medium text-[#20232B] shadow-sm mb-2.5">
+            <span className="relative flex h-1.5 w-1.5">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
             </span>
-            <span>Available for new opportunities</span>
+            <span className="text-[10px] sm:text-xs font-medium text-[#20232B]/90 whitespace-nowrap">Available for opportunities</span>
           </div>
 
           {/* "Hi, I'm" */}
-          <span className="block font-serif italic text-xl sm:text-2xl text-[#20232B] leading-none mb-1">
+          <span className="block font-serif italic text-base sm:text-lg text-[#20232B]/90 leading-none mb-1">
             Hi, I'm
           </span>
 
-          {/* Name Display: Malik Abubakkar */}
-          <h1 className="font-serif leading-[0.94] tracking-tight mb-2">
-            <span className="block text-[3.2rem] sm:text-[4.2rem] font-bold text-[#20232B]">
+          {/* Scaled-down Name: Malik Abubakkar */}
+          <h1 className="font-serif leading-[0.96] tracking-tight mb-2">
+            <span className="block text-2xl sm:text-3xl md:text-4xl font-bold text-[#20232B]">
               Malik
             </span>
-            <span className="block text-[3.2rem] sm:text-[4.2rem] font-bold text-[#D6A13D]">
+            <span className="block text-2xl sm:text-3xl md:text-4xl font-bold text-[#D6A13D]">
               Abubakkar
             </span>
           </h1>
 
-          {/* Role */}
-          <div className="text-lg sm:text-xl font-bold tracking-tight">
-            <span className="text-[#20232B]">I am a </span>
-            <span className="text-[#D6A13D]">Software Engineer</span>
+          {/* Dynamic Typewriter Role */}
+          <div className="text-xs sm:text-sm md:text-base font-bold tracking-tight mb-1 flex items-center min-h-[1.5rem]">
+            <span className="text-[#20232B]">{ROTATING_ROLES[roleIndex].prefix}&nbsp;</span>
+            <span className="text-[#D6A13D]">{currentText}</span>
+            <span className="inline-block w-[1.5px] h-[0.8em] bg-[#D6A13D] ml-1 align-middle animate-pulse" />
           </div>
 
-          {/* Gold Accent Rule matching Reference Image 2 */}
-          <span className="block w-12 h-[3px] bg-[#D6A13D] rounded-full my-2.5" aria-hidden="true" />
+          {/* Gold Accent Rule */}
+          <span className="block w-10 sm:w-12 h-[2px] bg-[#D6A13D] rounded-full my-2" aria-hidden="true" />
 
           {/* Short Description */}
-          <p className="text-[#686868] text-xs sm:text-sm leading-relaxed max-w-xs sm:max-w-sm mb-4 font-normal">
+          <p className="text-[#686868] text-[10.5px] sm:text-xs md:text-sm leading-relaxed max-w-[200px] sm:max-w-[240px] font-normal">
             I design and build scalable web solutions that make an impact.
           </p>
 
-          {/* Action Area: Explore My Work button + Scroll Down indicator */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
-            <a
-              href="#projects"
-              onClick={(e) => handleSmoothScroll(e, '#projects')}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#20232B] hover:bg-[#D6A13D] transition-colors shadow-sm cursor-pointer"
-              style={{ color: '#FFFFFF' }}
-            >
-              <span className="text-xs font-semibold tracking-wide" style={{ color: '#FFFFFF' }}>
-                Explore My Work
-              </span>
-              <span style={{ color: '#D6A13D' }}>→</span>
-            </a>
-
-            <a
-              href="#statement"
-              onClick={(e) => handleSmoothScroll(e, '#statement')}
-              className="inline-flex items-center gap-2 text-xs font-semibold text-[#686868] hover:text-[#20232B] transition-colors py-1 cursor-pointer"
-            >
-              <span className="w-5 h-5 rounded-full border border-[#20232B]/30 flex items-center justify-center text-[10px]">
-                ▷
-              </span>
-              <span>Scroll Down</span>
-            </a>
-          </div>
-
         </div>
 
-        {/* Mobile Portrait Stage with Golden Ring & Ambient Glow */}
-        <div className="relative flex items-end justify-center w-full mt-4 sm:mt-6 pointer-events-none">
-          {/* Ambient Circular Glow */}
+        {/* Right Side Portrait (Vertically aligned with text block, surrounded by golden circle halo) */}
+        <div className="relative z-20 w-[46%] sm:w-[50%] h-full max-h-[480px] flex items-center justify-center">
+          {/* Mobile Ambient Glow centered right behind head & chest */}
           <div
-            className="absolute top-[48%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] h-[280px] sm:w-[340px] sm:h-[340px] rounded-full pointer-events-none z-0"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[210px] h-[210px] sm:w-[260px] sm:h-[260px] rounded-full pointer-events-none z-0"
             style={{
-              background: 'radial-gradient(circle, rgba(243, 233, 216, 0.95) 0%, rgba(250, 247, 240, 0.3) 60%, transparent 75%)',
+              background: 'radial-gradient(circle, rgba(243, 233, 216, 0.95) 0%, rgba(250, 247, 240, 0.35) 60%, transparent 75%)',
               filter: 'blur(14px)',
             }}
           />
 
-          {/* Golden Circle Outline */}
+          {/* Mobile Golden Circle Outline centered right behind head & chest */}
           <div
-            className="absolute top-[48%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[290px] h-[290px] sm:w-[350px] sm:h-[350px] rounded-full border border-[#D6A13D]/45 pointer-events-none z-10"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[220px] h-[220px] sm:w-[270px] sm:h-[270px] rounded-full border border-[#D6A13D]/45 pointer-events-none z-10"
             style={{
-              boxShadow: 'inset 0 0 16px rgba(214, 161, 61, 0.08)',
+              boxShadow: 'inset 0 0 16px rgba(214, 161, 61, 0.1), 0 0 20px rgba(214, 161, 61, 0.1)',
             }}
           />
 
-          {/* Centered Cutout Portrait with Soft Fade */}
+          {/* Portrait Image */}
           <img
             src="/images/hero-portrait-cutout.png"
             alt="Malik Abubakkar Portrait"
-            className="relative z-20 h-[340px] sm:h-[400px] max-h-[50vh] w-auto object-contain object-bottom pointer-events-none select-none drop-shadow-[0_16px_32px_rgba(32,35,43,0.16)]"
+            className="relative z-20 w-full max-w-[260px] sm:max-w-[320px] max-h-[420px] sm:max-h-[460px] h-auto object-contain pointer-events-none select-none drop-shadow-[0_16px_32px_rgba(32,35,43,0.18)]"
             style={{
-              maskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)',
-              WebkitMaskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)',
+              maskImage: 'linear-gradient(to bottom, black 84%, transparent 100%)',
+              WebkitMaskImage: 'linear-gradient(to bottom, black 84%, transparent 100%)',
             }}
             loading="eager"
             decoding="async"
@@ -517,9 +488,9 @@ export default function Hero({ isIntroReady: _isIntroReady, onOpenInquiry }) {
           ========================================================================= */}
       <div className="relative w-full flex flex-col items-center pointer-events-none z-20 shrink-0">
         
-        {/* Centered Scroll Down Chevron with Vertical Line (Reference Image 2) */}
+        {/* Centered Scroll Down Chevron with Vertical Line */}
         <div className="flex flex-col items-center mb-1 pointer-events-auto">
-          <span className="h-5 w-[1px] bg-[#D6A13D]/60" aria-hidden="true" />
+          <span className="h-4 sm:h-5 w-[1px] bg-[#D6A13D]/60" aria-hidden="true" />
           <a
             href="#statement"
             onClick={(e) => handleSmoothScroll(e, '#statement')}
@@ -528,11 +499,11 @@ export default function Hero({ isIntroReady: _isIntroReady, onOpenInquiry }) {
           >
             <span className="text-xs leading-none">⌄</span>
           </a>
-          <span className="h-4 w-[1px] bg-[#D6A13D]/60" aria-hidden="true" />
+          <span className="h-3 sm:h-4 w-[1px] bg-[#D6A13D]/60" aria-hidden="true" />
         </div>
 
         {/* Organic Wave Curves Framing Base */}
-        <div className="w-full h-[45px] sm:h-[60px] lg:h-[75px] overflow-hidden pointer-events-none">
+        <div className="w-full h-[40px] sm:h-[55px] lg:h-[70px] overflow-hidden pointer-events-none">
           <svg
             className="w-full h-full"
             viewBox="0 0 1440 180"

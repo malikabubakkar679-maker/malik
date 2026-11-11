@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { soundEngine } from "../utils/audioUtils";
 import { PERSONAL_INFO } from "../data/portfolioData";
 
@@ -6,6 +6,10 @@ export default function Preloader({ onComplete }) {
   const [percent, setPercent] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
   const [isRemoved, setIsRemoved] = useState(false);
+  const onCompleteRef = useRef(onComplete);
+  useEffect(() => {
+    onCompleteRef.current = onComplete;
+  }, [onComplete]);
 
   useEffect(() => {
     let current = 0;
@@ -23,7 +27,7 @@ export default function Preloader({ onComplete }) {
         setTimeout(() => {
           setIsFinished(true);
           soundEngine.playWhoosh("open");
-          onComplete?.();
+          onCompleteRef.current?.();
 
           // Fully unmount from DOM after transition
           setTimeout(() => {
@@ -36,7 +40,7 @@ export default function Preloader({ onComplete }) {
     }, 55);
 
     return () => clearInterval(interval);
-  }, [onComplete]);
+  }, []); // Run only once on initial mount
 
   if (isRemoved) return null;
 
