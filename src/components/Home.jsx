@@ -9,7 +9,6 @@ import SkillsFigmaSection from "./SkillsFigmaSection";
 import ExperienceTimeline from "./ExperienceTimeline";
 import CreativeProcess from "./CreativeProcess";
 import MotionShowcase from "./MotionShowcase";
-import ContactSection from "./ContactSection";
 import Footer from "./Footer";
 
 export default function Home({ isIntroReady, onOpenInquiry }) {
@@ -45,10 +44,7 @@ export default function Home({ isIntroReady, onOpenInquiry }) {
       {/* 10. Motion & Kinetic Typography Lab */}
       <MotionShowcase />
 
-      {/* 11. Contact (Let's Work Together) */}
-      <ContactSection onOpenInquiry={onOpenInquiry} />
-
-      {/* 12. Editorial Footer */}
+      {/* 11. Editorial Footer */}
       <Footer />
     </main>
   );

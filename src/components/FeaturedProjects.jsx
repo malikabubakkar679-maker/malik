@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
-import { PROJECTS } from "../data/portfolioData";
 
 // Eight Ribbon Cards mapping directly to Malik's real projects and exact reference media
 const RIBBON_PROJECTS = [
@@ -356,11 +355,16 @@ void main() {
 }
 `;
 
+const PROJECT_FILTERS = ["ALL", "FULL-STACK", "MOBILE APPS", "UI/UX & DESIGN", "CREATIVE TECH"];
+
 export default function FeaturedProjects() {
   const containerRef = useRef(null);
   const canvasRef = useRef(null);
   const [isReady, setIsReady] = useState(false);
   const [activeProject, setActiveProject] = useState(RIBBON_PROJECTS[0]);
+  const [selectedFilter, setSelectedFilter] = useState("ALL");
+  const [stageIndex, setStageIndex] = useState(1);
+  const controlsRef = useRef({ next: () => {}, prev: () => {} });
 
   useEffect(() => {
     const container = containerRef.current;
@@ -673,7 +677,7 @@ export default function FeaturedProjects() {
       let runningOffset = 0;
 
       // Unify horizontal ribbon layout for BOTH Desktop and Mobile view
-      cardH = isPhone ? Math.min(0.38 * vh, 230) : Math.min(0.435 * vh, 550 * U);
+      cardH = isPhone ? Math.min(0.55 * vh, 240) : Math.min(0.55 * vh, 300);
 
       cards.forEach((card) => {
         card.height = cardH;
@@ -732,6 +736,23 @@ export default function FeaturedProjects() {
 
     computeLayout();
     setIsReady(true);
+
+    controlsRef.current = {
+      next: () => {
+        pending += (isPhone ? 280 : 420);
+      },
+      prev: () => {
+        pending -= (isPhone ? 280 : 420);
+      },
+      gotoFilter: (filterName) => {
+        const foundIdx = RIBBON_PROJECTS.findIndex((p) =>
+          filterName === "ALL" ? true : p.tag.toUpperCase().includes(filterName) || p.category.toUpperCase().includes(filterName)
+        );
+        if (foundIdx >= 0 && cards[foundIdx]) {
+          target = cards[foundIdx].baseX;
+        }
+      },
+    };
 
     // Event Handlers for Virtual Scroll & Inertia
     const handleWheel = (e) => {
@@ -975,7 +996,7 @@ export default function FeaturedProjects() {
         x = ((((shifted % loopL) + loopL) % loopL) + loopLeft);
 
         const screenX = x;
-        const screenY = (vh - card.height) / 2;
+        const screenY = isPhone ? (vh - card.height) * 0.42 : (vh - card.height) * 0.44;
 
         // Convert to world space
         const worldX = (screenX + card.width / 2 - vw / 2) * k;
@@ -1002,6 +1023,11 @@ export default function FeaturedProjects() {
 
       // 7. Reflection Pass (Desktop only, throttled when moving to maximize FPS)
       frameCount++;
+      if (frameCount % 10 === 0 && loopL > 0) {
+        const norm = ((((current % loopL) + loopL) % loopL) / loopL);
+        const st = Math.min(3, Math.max(0, Math.floor(norm * 4)));
+        setStageIndex(st);
+      }
       const shouldReflect = !isPhone && floorMesh.visible && (
         Math.abs(vel) > 0.0005 || isDragging || Math.abs(pending) > 0.01 || frameCount % 3 === 0
       );
@@ -1055,21 +1081,168 @@ export default function FeaturedProjects() {
     };
   }, []);
 
+  const handlePrev = () => {
+    controlsRef.current?.prev?.();
+  };
+
+  const handleNext = () => {
+    controlsRef.current?.next?.();
+  };
+
+  const handleFilterSelect = (cat) => {
+    setSelectedFilter(cat);
+    controlsRef.current?.gotoFilter?.(cat);
+  };
+
   return (
     <section
-      id="work"
-      ref={containerRef}
-      className="relative w-full h-[100dvh] overflow-hidden bg-[#FAF8F5] text-neutral-900 select-none"
+      id="projects"
+      className="relative w-full py-12 md:py-16 bg-[#FAF8F5] text-neutral-900 select-none overflow-hidden flex flex-col items-center"
     >
-      {/* Three.js Full-Viewport WebGL Canvas */}
-      <canvas
-        ref={canvasRef}
-        id="gl"
-        className="absolute inset-0 w-full h-full block z-10 touch-none"
-        aria-hidden="true"
-      />
+      {/* 1. Centered Header & Category Filter Pills (§2 Reference Design Spec) */}
+      <div className="flex flex-col items-center justify-center text-center mx-auto mb-5 sm:mb-6 px-4 z-20">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-[#121214] uppercase font-sans">
+          FEATURED PROJECTS
+        </h2>
 
-      {/* Screen-reader list (§2 Accessibility Spec) */}
+        {/* Category Filter Pills (matching image) */}
+        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 mt-3 sm:mt-4">
+          {PROJECT_FILTERS.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => handleFilterSelect(cat)}
+              className={`px-3.5 sm:px-4 py-1.5 rounded-full text-[11px] sm:text-xs font-semibold tracking-wider uppercase transition-all duration-300 cursor-pointer ${
+                selectedFilter === cat
+                  ? "bg-[#121214] text-white shadow-sm ring-1 ring-neutral-400"
+                  : "bg-transparent text-neutral-600 border border-[#BA9B70]/50 hover:border-[#BA9B70] hover:text-neutral-900"
+              }`}
+            >
+              {cat === "ALL" ? "[ ALL ]" : cat}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* 2. 3D Curved Carousel Canvas Stage (Compact Height: h-[460px] md:h-[540px]) */}
+      <div
+        ref={containerRef}
+        className="relative w-full h-[460px] md:h-[540px] overflow-hidden"
+      >
+        {/* Three.js Canvas */}
+        <canvas
+          ref={canvasRef}
+          id="gl"
+          className="absolute inset-0 w-full h-full block z-10 touch-none cursor-grab active:cursor-grabbing"
+          aria-hidden="true"
+        />
+
+        {/* Loader: Three Dashes */}
+        <div
+          className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 flex items-center gap-1.5 pointer-events-none transition-opacity duration-700 ${
+            isReady ? "opacity-0" : "opacity-100"
+          }`}
+          aria-hidden="true"
+        >
+          <i className="inline-block h-0.5 w-11 bg-neutral-800 animate-pulse" />
+          <i
+            className="inline-block h-0.5 w-11 bg-neutral-800 animate-pulse"
+            style={{ animationDelay: "120ms" }}
+          />
+          <i
+            className="inline-block h-0.5 w-9 bg-neutral-800 animate-pulse"
+            style={{ animationDelay: "240ms" }}
+          />
+        </div>
+      </div>
+
+      {/* 3. Carousel Navigation Controls (Directly beneath grid floor with tight spacing mt-5 sm:mt-6) */}
+      <div className="w-full max-w-4xl mx-auto px-4 sm:px-8 flex items-center justify-between gap-3 mt-4 sm:mt-6 z-20">
+        {/* Previous Button */}
+        <button
+          onClick={handlePrev}
+          className="px-4 sm:px-6 py-2 sm:py-2.5 rounded-full bg-[#BA9B70] hover:bg-[#a88a5f] text-[#121214] text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-sm flex items-center gap-1.5 cursor-pointer hover:scale-105 active:scale-95"
+          aria-label="Previous Project"
+        >
+          <span>←</span>
+          <span>PREVIOUS</span>
+        </button>
+
+        {/* Center Progress Pill */}
+        <div className="flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-neutral-200/90 border border-neutral-300 shadow-inner">
+          <button
+            onClick={handlePrev}
+            className="p-1 text-neutral-700 hover:text-neutral-950 text-xs font-bold transition-transform active:scale-90 cursor-pointer"
+            aria-label="Previous step"
+          >
+            ←
+          </button>
+
+          {/* Progress Bar Track */}
+          <div className="w-20 sm:w-36 h-1.5 bg-neutral-300 rounded-full overflow-hidden">
+            <div
+              className="h-full bg-[#BA9B70] rounded-full transition-all duration-300"
+              style={{ width: `${((stageIndex + 1) / 4) * 100}%` }}
+            />
+          </div>
+
+          {/* Pagination Dots */}
+          <div className="flex items-center gap-1.5 px-1">
+            {[0, 1, 2, 3].map((dot) => (
+              <div
+                key={dot}
+                className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
+                  stageIndex === dot ? "bg-[#121214] scale-125" : "bg-neutral-400"
+                }`}
+              />
+            ))}
+          </div>
+
+          <button
+            onClick={handleNext}
+            className="p-1 text-neutral-700 hover:text-neutral-950 text-xs font-bold transition-transform active:scale-90 cursor-pointer"
+            aria-label="Next step"
+          >
+            →
+          </button>
+        </div>
+
+        {/* Next Button */}
+        <button
+          onClick={handleNext}
+          className="px-4 sm:px-6 py-2 sm:py-2.5 rounded-full bg-[#121214] hover:bg-neutral-800 text-white text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-sm flex items-center gap-1.5 cursor-pointer hover:scale-105 active:scale-95"
+          aria-label="Next Project"
+        >
+          <span>NEXT</span>
+          <span>→</span>
+        </button>
+      </div>
+
+      {/* 4. Stage Status Bar (matching Image 1) */}
+      <div className="w-full max-w-5xl mx-auto px-4 sm:px-8 flex items-center justify-between text-[10px] sm:text-xs font-mono text-neutral-500 mt-5 pt-3 border-t border-neutral-300/60 z-20">
+        <span className="uppercase font-semibold tracking-wider text-neutral-700">
+          STAGE 0{stageIndex + 1} OF 04
+        </span>
+        <span className="hidden sm:inline-block tracking-wider uppercase text-neutral-500">
+          DRAG OR SWIPE TO EXPLORE • INTERACTIVE STAGE
+        </span>
+        {activeProject ? (
+          <a
+            href={activeProject.liveUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="text-neutral-800 hover:text-[#BA9B70] font-semibold tracking-wider uppercase transition-colors cursor-pointer flex items-center gap-1"
+          >
+            <span>LET'S TALK</span>
+            <span>↗</span>
+          </a>
+        ) : (
+          <span className="text-neutral-700 font-semibold tracking-wider uppercase">
+            LET'S TALK ↗
+          </span>
+        )}
+      </div>
+
+      {/* Screen-reader list */}
       <main className="sr-only" id="list" aria-label="Featured work">
         {RIBBON_PROJECTS.map((item) => (
           <article key={item.caption}>
@@ -1081,64 +1254,6 @@ export default function FeaturedProjects() {
           </article>
         ))}
       </main>
-
-      {/* Minimal Corner HUD & Navigation Elements */}
-      <nav
-        className="ui absolute inset-0 z-30 pointer-events-none p-4 sm:p-8 flex flex-col justify-between font-hn"
-        aria-label="Ribbon Navigation"
-      >
-        {/* Top Transition Header: Clean & Elegant Gallery Title (Removed Pill Buttons) */}
-        <div className="flex flex-col items-center justify-center text-center mx-auto pointer-events-none select-none pt-2 sm:pt-4">
-          <span className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.3em] text-[#BA9B70] font-semibold mb-1">
-            SELECTED WORKS · 3D RIBBON
-          </span>
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight text-[#121214] uppercase">
-            FEATURED PROJECTS
-          </h2>
-        </div>
-
-        {/* Bottom Bar: Instructions & Live Project Pill Action */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-3 pointer-events-none">
-          <div className="hidden sm:flex flex-col gap-1 pointer-events-auto max-w-xs px-4 py-2.5 rounded-2xl bg-white/90 backdrop-blur-md border border-neutral-300/80 shadow-sm">
-            <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-400">
-              Interactive Stage
-            </span>
-            <span className="text-xs text-neutral-700">
-              Virtual smooth inertia, velocity bend & mirror reflection
-            </span>
-          </div>
-
-          {activeProject && (
-            <a
-              href={activeProject.liveUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="pointer-events-auto inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 rounded-full bg-[#121214] text-white hover:bg-neutral-800 text-[11px] sm:text-xs font-semibold tracking-wide transition-all transform hover:scale-105 shadow-md cursor-pointer self-end sm:self-auto"
-            >
-              <span>View {activeProject.caption} Live</span>
-              <span className="text-sm font-mono">↗</span>
-            </a>
-          )}
-        </div>
-      </nav>
-
-      {/* Loader: Three Dashes (§2 Loader Spec) */}
-      <div
-        className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 flex items-center gap-1.5 pointer-events-none transition-opacity duration-700 ${
-          isReady ? "opacity-0" : "opacity-100"
-        }`}
-        aria-hidden="true"
-      >
-        <i className="inline-block h-0.5 w-11 bg-neutral-800 animate-pulse" />
-        <i
-          className="inline-block h-0.5 w-11 bg-neutral-800 animate-pulse"
-          style={{ animationDelay: "120ms" }}
-        />
-        <i
-          className="inline-block h-0.5 w-9 bg-neutral-800 animate-pulse"
-          style={{ animationDelay: "240ms" }}
-        />
-      </div>
     </section>
   );
 }

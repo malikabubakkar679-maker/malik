@@ -61,7 +61,6 @@ const NAV_LINKS = [
   { label: 'Work', href: '#projects' },
   { label: 'Skills', href: '#skills' },
   { label: 'Services', href: '#services' },
-  { label: 'Contact', href: '#contact' },
 ];
 
 const SOCIAL_LINKS = [
@@ -221,7 +220,7 @@ export default function Hero({ isIntroReady: _isIntroReady, onOpenInquiry }) {
               if (onOpenInquiry) {
                 onOpenInquiry();
               } else {
-                const el = document.getElementById('contact');
+                const el = document.getElementById('projects');
                 if (el) el.scrollIntoView({ behavior: 'smooth' });
               }
             }}
@@ -272,7 +271,7 @@ export default function Hero({ isIntroReady: _isIntroReady, onOpenInquiry }) {
                 if (onOpenInquiry) {
                   onOpenInquiry();
                 } else {
-                  const el = document.getElementById('contact');
+                  const el = document.getElementById('projects');
                   if (el) el.scrollIntoView({ behavior: 'smooth' });
                 }
               }}
@@ -292,10 +291,10 @@ export default function Hero({ isIntroReady: _isIntroReady, onOpenInquiry }) {
           - Center: Main Focus Portrait + Ambient Glow & Golden Ring
           - Right: "Turning Ideas Into Reality"
           ========================================================================= */}
-      <div className="hidden lg:grid relative z-20 flex-1 w-full max-w-7xl mx-auto px-8 lg:px-14 xl:px-18 grid-cols-12 items-center gap-4 xl:gap-8 min-h-0 pt-2 pb-6">
+      <div className="hidden lg:grid relative z-20 flex-1 w-full max-w-6xl mx-auto px-6 grid-cols-12 items-center gap-6 xl:gap-8 min-h-0 pt-1 pb-4">
         
-        {/* ---------- LEFT COLUMN: INTRODUCTION (Cols 1-4.5) ---------- */}
-        <div className="col-span-4 xl:col-span-4 flex flex-col justify-center items-start text-left z-20">
+        {/* ---------- LEFT COLUMN: INTRODUCTION (Cols 1-4) ---------- */}
+        <div className="col-span-4 lg:col-span-4 flex flex-col justify-center items-start text-left z-20 pr-2">
           
           {/* Availability Badge */}
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/80 border border-[#D6A13D]/30 backdrop-blur-sm text-xs font-medium text-[#20232B] shadow-sm mb-3.5">
@@ -315,16 +314,16 @@ export default function Hero({ isIntroReady: _isIntroReady, onOpenInquiry }) {
 
           {/* Scaled-down Name: Malik (Charcoal) / Abubakkar (Champagne Gold) */}
           <h1 className="font-serif leading-[0.96] tracking-tight mb-2.5">
-            <span className="block text-4xl lg:text-5xl xl:text-[3.5rem] font-bold text-[#20232B]">
+            <span className="block text-4xl lg:text-[2.75rem] font-bold text-[#20232B]">
               Malik
             </span>
-            <span className="block text-4xl lg:text-5xl xl:text-[3.5rem] font-bold text-[#D6A13D]">
+            <span className="block text-4xl lg:text-[2.75rem] font-bold text-[#D6A13D]">
               Abubakkar
             </span>
           </h1>
 
           {/* Dynamic Typewriter Role */}
-          <div className="text-lg lg:text-xl xl:text-2xl font-bold tracking-tight mb-2.5 flex items-center min-h-[2rem]">
+          <div className="text-lg lg:text-xl font-bold tracking-tight mb-2.5 flex items-center min-h-[2rem]">
             <span className="text-[#20232B]">{ROTATING_ROLES[roleIndex].prefix}&nbsp;</span>
             <span className="text-[#D6A13D]">{currentText}</span>
             <span className="inline-block w-[2px] h-[0.85em] bg-[#D6A13D] ml-1.5 align-middle animate-pulse" />
@@ -337,30 +336,30 @@ export default function Hero({ isIntroReady: _isIntroReady, onOpenInquiry }) {
 
         </div>
 
-        {/* ---------- CENTER COLUMN: MAIN FOCUS PORTRAIT (Cols 5-9) ---------- */}
-        <div className="col-span-5 xl:col-span-5 relative flex items-end justify-center h-full min-h-[460px] xl:min-h-[540px] pointer-events-none">
+        {/* ---------- CENTER COLUMN: MAIN FOCUS PORTRAIT (Cols 5-8) ---------- */}
+        <div className="col-span-4 lg:col-span-4 relative flex items-center justify-center h-full min-h-[500px] xl:min-h-[560px] pointer-events-none">
           {/* Subtle Warm Circular Ambient Glow */}
           <div
-            className="absolute top-[48%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[380px] h-[380px] xl:w-[480px] xl:h-[480px] rounded-full pointer-events-none z-0"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[420px] h-[420px] xl:w-[480px] xl:h-[480px] rounded-full pointer-events-none z-0"
             style={{
               background: 'radial-gradient(circle, rgba(243, 233, 216, 0.95) 0%, rgba(250, 247, 240, 0.35) 60%, transparent 75%)',
-              filter: 'blur(16px)',
+              filter: 'blur(20px)',
             }}
           />
 
           {/* Thin, Soft Golden Circular Outline Ring */}
           <div
-            className="absolute top-[48%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[390px] h-[390px] xl:w-[490px] xl:h-[490px] rounded-full border border-[#D6A13D]/45 pointer-events-none z-10"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[430px] h-[430px] xl:w-[490px] xl:h-[490px] rounded-full border border-[#D6A13D]/45 pointer-events-none z-10"
             style={{
               boxShadow: 'inset 0 0 20px rgba(214, 161, 61, 0.08), 0 0 24px rgba(214, 161, 61, 0.08)',
             }}
           />
 
-          {/* Portrait Image with Natural Cutout & Soft Bottom Fade */}
+          {/* Portrait Image with Natural Cutout & Soft Bottom Fade - Perfectly Scaled & Centered */}
           <img
             src="/images/hero-portrait-cutout.png"
             alt="Malik Abubakkar Portrait"
-            className="relative z-20 h-[60vh] xl:h-[70vh] max-h-[600px] w-auto object-contain object-bottom pointer-events-none select-none drop-shadow-[0_20px_40px_rgba(32,35,43,0.14)]"
+            className="relative z-20 w-[460px] xl:w-[520px] max-w-none h-auto object-contain pointer-events-none select-none drop-shadow-[0_20px_40px_rgba(32,35,43,0.16)] translate-y-2"
             style={{
               maskImage: 'linear-gradient(to bottom, black 82%, transparent 100%)',
               WebkitMaskImage: 'linear-gradient(to bottom, black 82%, transparent 100%)',
@@ -370,13 +369,13 @@ export default function Hero({ isIntroReady: _isIntroReady, onOpenInquiry }) {
           />
         </div>
 
-        {/* ---------- RIGHT COLUMN: SUPPORTING MESSAGE (Cols 10-12) ---------- */}
-        <div className="col-span-3 xl:col-span-3 flex flex-col justify-center items-start text-left pl-2 xl:pl-6 z-20">
+        {/* ---------- RIGHT COLUMN: SUPPORTING MESSAGE (Cols 9-12) ---------- */}
+        <div className="col-span-4 lg:col-span-4 flex flex-col justify-center items-start text-left pl-2 xl:pl-4 z-20">
           {/* Thin Gold Horizontal Accent Rule */}
           <span className="block w-14 h-[2px] bg-[#D6A13D]/80 mb-4 rounded-full" aria-hidden="true" />
 
           {/* Headline: "Turning Ideas Into Reality" */}
-          <h2 className="font-serif text-[2.2rem] lg:text-[2.6rem] xl:text-[3.2rem] font-bold leading-[1.08] tracking-tight text-[#20232B]">
+          <h2 className="font-serif text-[2.2rem] lg:text-[2.5rem] xl:text-[2.8rem] font-bold leading-[1.08] tracking-tight text-[#20232B]">
             Turning Ideas
             <span className="block text-[#D6A13D]">
               Into Reality
